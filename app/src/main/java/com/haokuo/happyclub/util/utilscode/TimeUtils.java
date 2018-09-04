@@ -1,6 +1,6 @@
 package com.haokuo.happyclub.util.utilscode;
 
-import com.haokuo.wenyanoa.util.utilscode.constant.TimeConstants;
+import com.haokuo.happyclub.util.utilscode.constant.TimeConstants;
 
 import java.text.DateFormat;
 import java.text.ParseException;

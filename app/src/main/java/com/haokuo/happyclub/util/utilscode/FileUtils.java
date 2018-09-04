@@ -2,7 +2,7 @@ package com.haokuo.happyclub.util.utilscode;
 
 import android.annotation.SuppressLint;
 
-import com.haokuo.wenyanoa.util.utilscode.constant.MemoryConstants;
+import com.haokuo.happyclub.util.utilscode.constant.MemoryConstants;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;

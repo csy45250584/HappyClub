@@ -10,8 +10,8 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 
-import com.haokuo.wenyanoa.util.utilscode.constant.MemoryConstants;
-import com.haokuo.wenyanoa.util.utilscode.constant.TimeConstants;
+import com.haokuo.happyclub.util.utilscode.constant.MemoryConstants;
+import com.haokuo.happyclub.util.utilscode.constant.TimeConstants;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

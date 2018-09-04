@@ -1,6 +1,6 @@
 package com.haokuo.happyclub.util.utilscode;
 
-import com.haokuo.wenyanoa.util.utilscode.constant.RegexConstants;
+import com.haokuo.happyclub.util.utilscode.constant.RegexConstants;
 
 import java.util.ArrayList;
 import java.util.List;
