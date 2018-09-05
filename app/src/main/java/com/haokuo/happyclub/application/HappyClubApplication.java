@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.haokuo.happyclub.R;
+import com.haokuo.happyclub.util.DirUtil;
 import com.haokuo.happyclub.util.utilscode.Utils;
 import com.scwang.smartrefresh.header.MaterialHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -46,33 +47,34 @@ public class HappyClubApplication extends Application {
         //创建文件夹
         createDirs();
         //初始化全局Loading样式
-//        initLoadingStyle();
+        //        initLoadingStyle();
         //初始化ToolBar样式
-//        initBarStyle();
+        //        initBarStyle();
         //数据库初始化
-//        LitePal.initialize(this);
+        //        LitePal.initialize(this);
     }
 
-//    private void initBarStyle() {
-//        Resources resources = getResources();
-//        BarStyle barStyle = new BarStyle.Builder()
-//                .setBackgroundColor(resources.getColor(R.color.colorPrimary))
-//                .setTitleColor(resources.getColor(R.color.colorBarTitle))
-//                .setTitleSize(resources.getDimension(R.dimen.sp_19))
-//                .setHasBackArrow(true)
-//                .setNavigationIconId(R.drawable.fanhui1)
-//                .build();
-//        MidTitleBar.initStyle(barStyle);
-//    }
-//
-//    private void initLoadingStyle() {
-//        StyleManager styleManager = new StyleManager();
-//        styleManager.loadText("提交中...").successText("提交成功").failedText("提交失败")
-//                .loadingColor(getResources().getColor(R.color.colorPrimary))
-//                .speed(LoadingDialog.Speed.SPEED_FAST).showSuccessTime(500).showFailedTime(800).finishSuccess(true);
-//        LoadingDialog.initStyle(styleManager);
-//    }
+    //    private void initBarStyle() {
+    //        Resources resources = getResources();
+    //        BarStyle barStyle = new BarStyle.Builder()
+    //                .setBackgroundColor(resources.getColor(R.color.colorPrimary))
+    //                .setTitleColor(resources.getColor(R.color.colorBarTitle))
+    //                .setTitleSize(resources.getDimension(R.dimen.sp_19))
+    //                .setHasBackArrow(true)
+    //                .setNavigationIconId(R.drawable.fanhui1)
+    //                .build();
+    //        MidTitleBar.initStyle(barStyle);
+    //    }
+    //
+    //    private void initLoadingStyle() {
+    //        StyleManager styleManager = new StyleManager();
+    //        styleManager.loadText("提交中...").successText("提交成功").failedText("提交失败")
+    //                .loadingColor(getResources().getColor(R.color.colorPrimary))
+    //                .speed(LoadingDialog.Speed.SPEED_FAST).showSuccessTime(500).showFailedTime(800).finishSuccess(true);
+    //        LoadingDialog.initStyle(styleManager);
+    //    }
 
     private void createDirs() {
+        DirUtil.createDir();
     }
 }
