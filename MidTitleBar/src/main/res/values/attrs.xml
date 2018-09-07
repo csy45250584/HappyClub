@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="MidTitleBar">
+        <attr name="midTitle" format="string"/>
+        <attr name="hasBackArrow" format="boolean"/>
+        <attr name="titleColor" format="color"/>
+        <attr name="titleSize" format="dimension"/>
+        <attr name="navigationIcon" format="reference"/>
+    </declare-styleable>
+
+</resources>

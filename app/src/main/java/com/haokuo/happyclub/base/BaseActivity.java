@@ -10,7 +10,9 @@ import android.text.InputFilter;
 import android.text.Spanned;
 import android.widget.EditText;
 
+import com.haokuo.happyclub.R;
 import com.haokuo.happyclub.util.SafeHandler;
+import com.haokuo.midtitlebar.MidTitleBar;
 import com.xiasuhuei321.loadingdialog.view.LoadingDialog;
 
 import butterknife.ButterKnife;
@@ -50,10 +52,21 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(initContentLayout());
         ButterKnife.bind(this);
-        initView();
+        initToolbar();
         initData();
         initListener();
         loadData();
+    }
+
+    protected void initToolbar() {
+        MidTitleBar midTitleBar = findViewById(R.id.mid_title_bar);
+        if (midTitleBar == null) {
+            return;
+        }
+        setSupportActionBar(midTitleBar);
+        if (midTitleBar.hasBackArrow()) {
+            midTitleBar.addBackArrow(this);
+        }
     }
 
     protected void loadData() {
@@ -116,7 +129,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     public void loadClose() {
-      loadClose(false);
+        loadClose(false);
     }
 
     public void loadClose(boolean isFinish) {
@@ -129,13 +142,10 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected abstract int initContentLayout();
 
-    protected void initView() {
-
-    }
-
     protected abstract void initData();
 
-    protected abstract void initListener();
+    protected void initListener() {
+    }
 
     public LoadingDialog getLoadingDialog() {
         if (mLoadingDialog == null) {
@@ -174,5 +184,4 @@ public abstract class BaseActivity extends AppCompatActivity {
             }
         }
     }
-
 }
