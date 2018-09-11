@@ -66,7 +66,7 @@ public class HappyClubApplication extends Application {
                 .setTitleColor(resources.getColor(R.color.colorWhite))
                 .setTitleSize(resources.getDimension(R.dimen.sp_19))
                 .setHasBackArrow(true)
-                .setNavigationIconId(R.mipmap.ic_launcher)
+                .setNavigationIconId(R.drawable.t1)
                 .build();
         MidTitleBar.initStyle(barStyle);
     }

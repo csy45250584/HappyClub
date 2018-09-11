@@ -15,13 +15,15 @@ import com.haokuo.happyclub.network.bean.RegisterParams;
 import com.haokuo.happyclub.network.bean.ResetPasswordParams;
 import com.haokuo.happyclub.network.bean.UpdatePasswordParams;
 import com.haokuo.happyclub.network.bean.base.IGetParamsMap;
-import com.haokuo.happyclub.network.bean.base.TelphoneParams;
+import com.haokuo.happyclub.network.bean.base.TelPhoneParams;
 import com.haokuo.happyclub.network.bean.base.UserIdTokenParams;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 
 import okhttp3.Call;
@@ -214,12 +216,18 @@ public class HttpHelper {
     @NonNull
     private FormBody buildFormBody(Object object) {
         FormBody.Builder builder = new FormBody.Builder();
-        Field[] fields = object.getClass().getDeclaredFields();
+        //        Field[] fields = object.getClass().getDeclaredFields();
+        ArrayList<Field> fields = new ArrayList<>();
+        Class<?> tempClass = object.getClass();
+        while (tempClass != null && tempClass != Object.class) {//当父类为null的时候说明到达了最上层的父类(Object类).
+            fields.addAll(Arrays.asList(tempClass.getDeclaredFields()));
+            tempClass = tempClass.getSuperclass(); //得到父类,然后赋给自己
+        }
         for (Field field : fields) {
             field.setAccessible(true);
             //返回输出指定对象a上此 Field表示的字段名和字段值
             try {
-                if (!field.isSynthetic()) { //android studio如果开启的话编译器就会对所有类都添加$change成员变量
+                if (!field.isSynthetic()&&!field.getName().equals("serialVersionUID")) { //android studio如果开启的话编译器就会对所有类都添加$change成员变量
                     builder.add(field.getName(), field.get(object).toString());
                 }
             } catch (IllegalAccessException e) {
@@ -256,8 +264,13 @@ public class HttpHelper {
     }
 
     /** 获取登录验证码 **/
-    public void getLoginVerifyCode(TelphoneParams params, NetworkCallback callback) {
+    public void getLoginVerifyCode(TelPhoneParams params, NetworkCallback callback) {
         doPost(params, UrlConfig.GET_LOGIN_VERIFY_CODE_URL, callback);
+    }
+
+    /** 获取登录验证码 **/
+    public void getRegisterVerifyCode(TelPhoneParams params, NetworkCallback callback) {
+        doPost(params, UrlConfig.GET_REGISTER_VERIFY_CODE_URL, callback);
     }
 
     /** 手机验证码登录 **/
@@ -271,7 +284,7 @@ public class HttpHelper {
     }
 
     /** 获取重置密码验证码 **/
-    public void getResetVerifyCode(TelphoneParams params, NetworkCallback callback) {
+    public void getResetVerifyCode(TelPhoneParams params, NetworkCallback callback) {
         doPost(params, UrlConfig.GET_RESET_VERIFY_CODE_URL, callback);
     }
 

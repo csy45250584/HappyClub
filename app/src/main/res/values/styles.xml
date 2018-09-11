@@ -8,4 +8,20 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="MyRippleWaveStyle" parent="Material.Drawable.Ripple.Wave">
+        <item name="rd_rippleAnimDuration">300</item>
+        <item name="rd_rippleColor">@color/colorRipple</item>
+        <item name="rd_delayClick">none</item>
+    </style>
+
+    <style name="MyColorRippleWaveStyle" parent="Material.Drawable.Ripple.Wave">
+        <item name="rd_rippleAnimDuration">300</item>
+        <item name="rd_rippleColor">@color/colorColorRipple</item>
+        <item name="rd_delayClick">none</item>
+    </style>
+
+    <style name="LoginButtonStyle" parent="MyRippleWaveStyle">
+        <item name="rd_cornerRadius">@dimen/button_corners</item>
+        <item name="android:textAppearance">@style/Base.TextAppearance.AppCompat.Button</item>
+    </style>
 </resources>

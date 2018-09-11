@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    <!-- Your custom size defind by references, can be writted in anywhere, any module, any values/*.xml, for example: -->
     <!-- dp and sp values, must be defind in this file! -->
     <!-- view size,you can add if there is no one -->
     <dimen name="dp_m_60">-60dp</dimen>
@@ -403,12 +403,19 @@
     <dimen name="sp_11">11sp</dimen>
     <dimen name="sp_12">12sp</dimen>
     <dimen name="sp_13">13sp</dimen>
+    <dimen name="sp_13_2">13.2sp</dimen>
     <dimen name="sp_14">14sp</dimen>
+    <dimen name="sp_14_3">14.3sp</dimen>
     <dimen name="sp_15">15sp</dimen>
+    <dimen name="sp_15_4">15.4sp</dimen>
     <dimen name="sp_16">16sp</dimen>
+    <dimen name="sp_16_5">16.5sp</dimen>
     <dimen name="sp_17">17sp</dimen>
+    <dimen name="sp_17_6">17.6sp</dimen>
     <dimen name="sp_18">18sp</dimen>
+    <dimen name="sp_18_7">18.7sp</dimen>
     <dimen name="sp_19">19sp</dimen>
+    <dimen name="sp_19_8">19.8sp</dimen>
     <dimen name="sp_20">20sp</dimen>
     <dimen name="sp_21">21sp</dimen>
     <dimen name="sp_22">22sp</dimen>
@@ -424,5 +431,15 @@
     <dimen name="sp_40">40sp</dimen>
     <dimen name="sp_42">42sp</dimen>
     <dimen name="sp_48">48sp</dimen>
+    <dimen name="sp_70">70sp</dimen>
 
+    <dimen name="text_36px">@dimen/sp_19_8</dimen>
+    <dimen name="text_34px">@dimen/sp_18_7</dimen>
+    <dimen name="text_32px">@dimen/sp_17_6</dimen>
+    <dimen name="text_30px">@dimen/sp_16_5</dimen>
+    <dimen name="text_28px">@dimen/sp_15_4</dimen>
+    <dimen name="text_26px">@dimen/sp_14_3</dimen>
+    <dimen name="text_24px">@dimen/sp_13_2</dimen>
+    <dimen name="button_corners">@dimen/dp_4</dimen>
+    <dimen name="button_height">@dimen/dp_50</dimen>
 </resources>

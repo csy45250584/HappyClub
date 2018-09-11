@@ -58,6 +58,10 @@ public abstract class BaseActivity extends AppCompatActivity {
         loadData();
     }
 
+    protected void loadData() {
+
+    }
+
     protected void initToolbar() {
         MidTitleBar midTitleBar = findViewById(R.id.mid_title_bar);
         if (midTitleBar == null) {
@@ -69,8 +73,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     }
 
-    protected void loadData() {
-    }
 
     public void showLoading() {
         getLoadingDialog().show();

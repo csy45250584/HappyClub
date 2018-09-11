@@ -68,6 +68,11 @@ public abstract class BaseFragment extends Fragment {
         initListener();
     }
 
+    protected void initListener() {
+    }
+
+    protected abstract void initData();
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -78,9 +83,7 @@ public abstract class BaseFragment extends Fragment {
 
     protected abstract int initContentLayout();
 
-    protected abstract void initData();
 
-    protected abstract void initListener();
 
     /**
      * 是否启用懒加载，此方法仅对BaseLazyLoadFragment有效

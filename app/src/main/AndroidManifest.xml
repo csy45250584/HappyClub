@@ -22,16 +22,23 @@
             android:value="868"/>
 
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.MainActivity"
             android:launchMode="singleTask">
+        </activity>
+        <activity
+            android:name=".activity.RegisterActivity"
+            android:launchMode="singleTop"/>
+        <activity
+            android:name=".activity.ForgetPasswordActivity"
+            android:launchMode="singleTop"/>
+        <activity
+            android:name=".activity.LoginActivity"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity
-            android:name=".account.LoginActivity"
-            android:launchMode="singleTop"/>
     </application>
 
 </manifest>

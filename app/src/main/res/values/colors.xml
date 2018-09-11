@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#009688</color>
+    <color name="colorPrimaryDark">#00796b</color>
+    <color name="colorAccent">#00796b</color>
     <color name="colorDefBg">#fafafa</color>
     <color name="colorDivider">#1e000000</color>
     <color name="colorWhite">#FFFFFF</color>
@@ -12,6 +12,8 @@
     <color name="textDarkScrims">#66000000</color>
     <color name="textLightScrims">#33000000</color>
     <color name="colorRipple">#1f000000</color>
+    <color name="colorColorRipple">#40009688</color>
+    <color name="colorText0">#FF000000</color>
     <color name="colorText1">#DD000000</color>
     <color name="colorText2">#88000000</color>
     <color name="colorText3">#42000000</color>
