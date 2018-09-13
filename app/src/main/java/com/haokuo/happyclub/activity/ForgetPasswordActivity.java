@@ -69,6 +69,12 @@ public class ForgetPasswordActivity extends BaseActivity {
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        countDownTimer.cancel();
+    }
+
+    @Override
     protected int initContentLayout() {
         return R.layout.activity_forget_password;
     }

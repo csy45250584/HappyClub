@@ -10,6 +10,10 @@ public class SpConsts {
 
     public static final String KEY_USER_ID = "user_id";
     public static final String KEY_TOKEN = "token";
-
-
+    public static final String KEY_USER_NAME = "user_name";
+    public static final String KEY_BIRTHDAY = "birthday";
+    public static final String KEY_HEAD_PHOTO = "head_photo";
+    public static final String KEY_ID_CARD = "id_card";
+    public static final String KEY_REAL_NAME = "real_name";
+    public static final String KEY_SEX = "sex";
 }

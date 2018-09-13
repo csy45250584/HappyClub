@@ -6,30 +6,37 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
+import com.haokuo.happyclub.bean.AddressResultBean;
 import com.haokuo.happyclub.bean.SuccessBean;
+import com.haokuo.happyclub.bean.UserInfoBean;
 import com.haokuo.happyclub.network.bean.CheckIsNextParams;
-import com.haokuo.happyclub.network.bean.GetAddressInfoParams;
+import com.haokuo.happyclub.network.bean.base.IdParams;
 import com.haokuo.happyclub.network.bean.LoginByTelParams;
 import com.haokuo.happyclub.network.bean.LoginParams;
 import com.haokuo.happyclub.network.bean.RegisterParams;
 import com.haokuo.happyclub.network.bean.ResetPasswordParams;
 import com.haokuo.happyclub.network.bean.UpdatePasswordParams;
+import com.haokuo.happyclub.network.bean.UploadFileParams;
 import com.haokuo.happyclub.network.bean.base.IGetParamsMap;
 import com.haokuo.happyclub.network.bean.base.TelPhoneParams;
 import com.haokuo.happyclub.network.bean.base.UserIdTokenParams;
+import com.haokuo.happyclub.util.MySpUtil;
 
+import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
 import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -120,24 +127,24 @@ public class HttpHelper {
         }
     }
 
-    //    private void doPost(IGetParamsMap iGetParamsMap, String url, NetworkCallback callback) {
-    //        String jsonString = JSON.toJSONString(iGetParamsMap);
-    //        Log.i(TAG, "doPost: " + "jsonString = " + jsonString);
-    //        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), jsonString);
-    //        MultipartBody.Builder builder = new MultipartBody.Builder()
-    //                .setType(MultipartBody.FORM);
-    //        if (iGetParamsMap.getParamsMap().entrySet().contains(UserIdApikeyParams.PARAM_APIKEY)) {
-    //            FormBody.Builder builder2 = new FormBody.Builder();
-    //            builder2.add(UserIdApikeyParams.PARAM_APIKEY, iGetParamsMap.getParamsMap().get(UserIdApikeyParams.PARAM_APIKEY));
-    //            builder.addPart(builder2.build());
+    //        private void doPost(IGetParamsMap iGetParamsMap, String url, NetworkCallback callback) {
+    //            String jsonString = JSON.toJSONString(iGetParamsMap);
+    //            Log.i(TAG, "doPost: " + "jsonString = " + jsonString);
+    //            RequestBody requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), jsonString);
+    //            MultipartBody.Builder builder = new MultipartBody.Builder()
+    //                    .setType(MultipartBody.FORM);
+    //            if (iGetParamsMap.getParamsMap().entrySet().contains(UserIdApikeyParams.PARAM_APIKEY)) {
+    //                FormBody.Builder builder2 = new FormBody.Builder();
+    //                builder2.add(UserIdApikeyParams.PARAM_APIKEY, iGetParamsMap.getParamsMap().get(UserIdApikeyParams.PARAM_APIKEY));
+    //                builder.addPart(builder2.build());
+    //            }
+    //            builder.addPart(requestBody);
+    //            Request request = new Request.Builder()
+    //                    .post(requestBody)
+    //                    .url(url)
+    //                    .build();//创建Request 对象
+    //            mClient.newCall(request).enqueue(new OkHttpCallBack(callback));
     //        }
-    //        builder.addPart(requestBody);
-    //        Request request = new Request.Builder()
-    //                .post(requestBody)
-    //                .url(url)
-    //                .build();//创建Request 对象
-    //        mClient.newCall(request).enqueue(new OkHttpCallBack(callback));
-    //    }
 
     private void doPost(Object entity, String url, NetworkCallback callback) {
         if (entity == null) {
@@ -147,6 +154,16 @@ public class HttpHelper {
         Request request = new Request.Builder()
                 .post(buildFormBody(entity))
                 .url(UrlConfig.BASE_URL + url)
+                .build();//创建Request 对象
+        mClient.newCall(request).enqueue(new OkHttpCallBack(callback));
+    }
+
+    private void doPostWithJson(Object json, String url, NetworkCallback callback) {
+        Log.i(TAG, "doPostWithJson: " + "jsonString = " + JSON.toJSONString(json));
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), JSON.toJSONString(json));
+        Request request = new Request.Builder()
+                .post(requestBody)
+                .url(UrlConfig.BASE_URL + url + "?" + "userId=" + MySpUtil.getInstance().getUserId() + "&token=" + MySpUtil.getInstance().getToken())
                 .build();//创建Request 对象
         mClient.newCall(request).enqueue(new OkHttpCallBack(callback));
     }
@@ -161,23 +178,25 @@ public class HttpHelper {
                 .build();//创建Request 对象
         mClient.newCall(request).enqueue(new OkHttpCallBack(callback));
     }
-    //
-    //        private void doPostUploadFile(UploadFileParams uploadFileParams, String url, Object tag, NetworkCallback callback) {
-    //            List<File> files = uploadFileParams.getFile();
-    //            MultipartBody.Builder builder = new MultipartBody.Builder()
-    //                    .setType(MultipartBody.FORM);
-    //            for (File file : files) {
-    //                RequestBody fileBody = RequestBody.create(MediaType.parse(uploadFileParams.getType()), file);
-    //                builder.addFormDataPart("file", file.getName(), fileBody);
-    //            }
-    //            MultipartBody requestBody = builder.build();
-    //            Request request = new Request.Builder()
-    //                    .post(requestBody)
-    //                    .url(url)
-    //                    .tag(tag)
-    //                    .build();//创建Request 对象
-    //            mClient.newCall(request).enqueue(new OkHttpCallBack(callback));
-    //        }
+
+    private void doPostUploadFile(UploadFileParams uploadFileParams, String url, Object tag, NetworkCallback callback) {
+        List<File> files = uploadFileParams.getFile();
+        MultipartBody.Builder builder = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM);
+        builder.addFormDataPart("userId", String.valueOf(MySpUtil.getInstance().getUserId()));
+        builder.addFormDataPart("token", MySpUtil.getInstance().getToken());
+        for (File file : files) {
+            RequestBody fileBody = RequestBody.create(MediaType.parse(uploadFileParams.getType()), file);
+            builder.addFormDataPart("file", file.getName(), fileBody);
+        }
+        MultipartBody requestBody = builder.build();
+        Request request = new Request.Builder()
+                .post(requestBody)
+                .url(UrlConfig.BASE_URL + url)
+                .tag(tag)
+                .build();//创建Request 对象
+        mClient.newCall(request).enqueue(new OkHttpCallBack(callback));
+    }
 
     public void cancelRequest(Object tag) {
         if (tag == null)
@@ -227,7 +246,7 @@ public class HttpHelper {
             field.setAccessible(true);
             //返回输出指定对象a上此 Field表示的字段名和字段值
             try {
-                if (!field.isSynthetic()&&!field.getName().equals("serialVersionUID")) { //android studio如果开启的话编译器就会对所有类都添加$change成员变量
+                if (!field.isSynthetic() && !field.getName().equals("serialVersionUID")) { //android studio如果开启的话编译器就会对所有类都添加$change成员变量
                     builder.add(field.getName(), field.get(object).toString());
                 }
             } catch (IllegalAccessException e) {
@@ -309,8 +328,8 @@ public class HttpHelper {
     }
 
     /** 头像上传 **/
-    public void uploadPic(NetworkCallback callback) {
-        doPost(null, UrlConfig.UPLOAD_PIC_URL, callback);
+    public void uploadPic(UploadFileParams params, Object tag, NetworkCallback callback) {
+        doPostUploadFile(params, UrlConfig.UPLOAD_PIC_URL, tag, callback);
     }
 
     /** 获取收货地址列表 **/
@@ -319,7 +338,27 @@ public class HttpHelper {
     }
 
     /** 获取收货地址列表 **/
-    public void getAddressInfo(GetAddressInfoParams params, NetworkCallback callback) {
+    public void getAddressInfo(IdParams params, NetworkCallback callback) {
         doPost(params, UrlConfig.GET_ADDRESS_INFO_URL, callback);
+    }
+
+    /** 新建收货地址 **/
+    public void insertAddress(AddressResultBean json, NetworkCallback callback) {
+        doPostWithJson(json, UrlConfig.INSERT_ADDRESS_URL, callback);
+    }
+
+    /** 删除收货地址 **/
+    public void deleteAddress(IdParams params, NetworkCallback callback) {
+        doPost(params, UrlConfig.DELETE_ADDRESS_URL, callback);
+    }
+
+    /** 修改收货地址 **/
+    public void updateAddress(AddressResultBean json, NetworkCallback callback) {
+        doPostWithJson(json, UrlConfig.UPDATE_ADDRESS_URL, callback);
+    }
+
+    /** 更新个人信息 **/
+    public void updateUserInfo(UserInfoBean json, NetworkCallback callback) {
+        doPostWithJson(json, UrlConfig.UPDATE_USER_INFO_URL, callback);
     }
 }

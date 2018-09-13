@@ -9,7 +9,7 @@ import com.haokuo.happyclub.base.BaseLazyLoadFragment;
 public class HomeFragment extends BaseLazyLoadFragment {
     @Override
     protected int initContentLayout() {
-        return R.layout.fragment_me;
+        return R.layout.fragment_home;
     }
 
     @Override

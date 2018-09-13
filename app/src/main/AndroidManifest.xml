@@ -32,13 +32,43 @@
             android:name=".activity.ForgetPasswordActivity"
             android:launchMode="singleTop"/>
         <activity
-            android:name=".activity.LoginActivity"
+            android:name=".activity.BindTelActivity"
+            android:launchMode="singleTop"/>
+        <activity
+            android:name=".activity.SafetySettingActivity"
+            android:launchMode="singleTop"/>
+        <activity
+            android:name=".activity.SystemSettingActivity"
+            android:launchMode="singleTop"/>
+
+        <activity
+            android:name=".activity.SplashActivity"
             android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity
+            android:name=".activity.ChangePasswordActivity"
+            android:launchMode="singleTop"/>
+        <activity
+            android:name=".activity.LoginActivity"
+            android:launchMode="singleTop"/>
+        <activity
+            android:name=".activity.AboutActivity"
+            android:launchMode="singleTop"/>
+        <activity
+            android:name=".activity.PersonalInfoActivity"
+            android:launchMode="singleTop"/>     <activity
+            android:name=".activity.DeliverAddressActivity"
+            android:launchMode="singleTop"/>  <activity
+            android:name=".activity.DeliverAddressDetailActivity"
+            android:launchMode="singleTop"/>
+  <activity
+            android:name=".activity.SetPersonalInfoActivity"
+            android:launchMode="singleTop"/>
+
     </application>
 
 </manifest>

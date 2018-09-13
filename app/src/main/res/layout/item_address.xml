@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.guanaj.easyswipemenulibrary.EasySwipeMenuLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp_80"
+    app:contentView="@+id/rl_content"
+    app:rightMenuView="@+id/ll_right_menu">
+
+    <RelativeLayout
+        android:id="@+id/rl_content"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite"
+        android:padding="@dimen/dp_16">
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="胡海"
+            android:textColor="@color/colorText1"
+            android:textSize="@dimen/text_30px"/>
+
+        <TextView
+            android:id="@+id/tv_tel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_12"
+            android:layout_toRightOf="@id/tv_name"
+            android:text="1345949161564"
+            android:textColor="@color/colorText1"
+            android:textSize="@dimen/text_30px"/>
+
+        <TextView
+            android:id="@+id/tv_default_flag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="[默认]"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/text_26px"/>
+
+        <TextView
+            android:id="@+id/tv_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="@dimen/dp_6"
+            android:layout_toRightOf="@id/tv_default_flag"
+            android:text="fdfdfdfdfdfdfdf"
+            android:textColor="@color/colorText2"
+            android:textSize="@dimen/text_26px"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/v"/>
+    </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/ll_right_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <com.rey.material.widget.Button
+            android:id="@+id/btn_modify"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:text="修改"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/text_30px"
+            app:rd_style="@style/MyRippleWaveStyle"/>
+
+        <com.rey.material.widget.Button
+            android:id="@+id/btn_delete"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/holo_red_light"
+            android:gravity="center"
+            android:text="删除"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/text_30px"
+            app:rd_style="@style/MyRippleWaveStyle"/>
+    </LinearLayout>
+</com.guanaj.easyswipemenulibrary.EasySwipeMenuLayout>

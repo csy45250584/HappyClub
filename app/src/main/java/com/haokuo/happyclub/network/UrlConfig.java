@@ -18,7 +18,11 @@ public class UrlConfig {
     public static final String RESET_PASSWORD_URL = "/custom/resetPassword.do";
     public static final String UPDATE_PASSWORD_URL = "/custom/app/updatePassword.do";
     public static final String GET_USER_INFO_URL = "/custom/app/getUserInfo.do";
+    public static final String UPDATE_USER_INFO_URL = "/custom/app/updateUserInfo.do";
     public static final String UPLOAD_PIC_URL = "/custom/app/uploadPic.do";
     public static final String GET_ADDRESS_URL = "/custom/app/getAddress.do";
     public static final String GET_ADDRESS_INFO_URL = "/custom/app/getAddressInfoById.do";
+    public static final String INSERT_ADDRESS_URL = "/custom/app/insertAddress.do";
+    public static final String DELETE_ADDRESS_URL = "/custom/app/delAddress.do";
+    public static final String UPDATE_ADDRESS_URL = "/custom/app/updateAddress.do";
 }

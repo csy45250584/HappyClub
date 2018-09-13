@@ -10,12 +10,16 @@ import android.widget.TextView;
 
 import com.haokuo.happyclub.R;
 import com.haokuo.happyclub.base.BaseActivity;
+import com.haokuo.happyclub.bean.LoginResultBean;
+import com.haokuo.happyclub.consts.SpConsts;
+import com.haokuo.happyclub.network.EntityCallback;
 import com.haokuo.happyclub.network.HttpHelper;
 import com.haokuo.happyclub.network.NetworkCallback;
 import com.haokuo.happyclub.network.bean.LoginByTelParams;
 import com.haokuo.happyclub.network.bean.LoginParams;
 import com.haokuo.happyclub.network.bean.base.TelPhoneParams;
 import com.haokuo.happyclub.util.utilscode.RegexUtils;
+import com.haokuo.happyclub.util.utilscode.SPUtils;
 import com.haokuo.happyclub.util.utilscode.ToastUtils;
 import com.rey.material.widget.Button;
 import com.xiasuhuei321.loadingdialog.view.LoadingDialog;
@@ -87,9 +91,17 @@ public class LoginActivity extends BaseActivity {
         applyUiByState();
         canGetCode = true;
         mEtCode.setFilters(new InputFilter[]{new InputFilter.LengthFilter(CODE_NUM)});
-        mLoginCallback = new NetworkCallback() {
+        mLoginCallback = new EntityCallback<LoginResultBean>() {
             @Override
-            public void onSuccess(Call call, String json) {
+            public void onFailure(Call call, String message) {
+                loadFailed("登录失败，" + message);
+            }
+
+            @Override
+            public void onSuccess(Call call, LoginResultBean result) {
+                SPUtils spUtils = SPUtils.getInstance(SpConsts.FILE_PERSONAL_INFORMATION);
+                spUtils.put(SpConsts.KEY_USER_ID, result.getUserId());
+                spUtils.put(SpConsts.KEY_TOKEN, result.getToken());
                 loadSuccess("登录成功", new LoadingDialog.OnFinishListener() {
                     @Override
                     public void onFinish() {
@@ -98,14 +110,25 @@ public class LoginActivity extends BaseActivity {
                     }
                 });
             }
-
-            @Override
-            public void onFailure(Call call, String message) {
-                loadFailed("登录失败，" + message);
-            }
         };
     }
 
+    //        @Override
+    //        public void onSuccess(Call call, String json) {
+    //            loadSuccess("登录成功", new LoadingDialog.OnFinishListener() {
+    //                @Override
+    //                public void onFinish() {
+    //                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+    //                    finish();
+    //                }
+    //            });
+    //        }
+    //
+    //        @Override
+    //        public void onFailure(Call call, String message) {
+    //            loadFailed("登录失败，" + message);
+    //        }
+    //    }
     @OnClick({R.id.btn_register, R.id.tv_get_code, R.id.btn_login, R.id.tv_login_by_password, R.id.tv_login_by_tel, R.id.tv_forget_password})
     public void onViewClicked(View view) {
         switch (view.getId()) {

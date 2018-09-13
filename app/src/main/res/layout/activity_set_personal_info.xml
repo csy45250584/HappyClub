@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.haokuo.midtitlebar.MidTitleBar
+        android:id="@+id/mid_title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_56"
+        android:layout_marginBottom="@dimen/dp_8"
+        />
+
+    <EditText
+        android:id="@+id/et_info"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_54"
+        android:background="@color/colorWhite"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/dp_8"
+        android:textColor="@color/colorText1"
+        android:textSize="@dimen/text_28px"/>
+
+    <com.haokuo.happyclub.view.SettingItemView
+        android:id="@+id/siv_birthday"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_54"
+        app:leftText="请选择您的生日"
+        app:leftTextColor="@color/colorText1"
+        app:rightIcon="@drawable/v"/>
+
+    <LinearLayout
+        android:id="@+id/ll_sex_select"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.haokuo.happyclub.view.SexRadioButton
+            android:id="@+id/siv_sex_male"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_54"
+            android:layout_marginBottom="@dimen/dp_1"
+            app:leftText="男"
+            app:rightIcon="@drawable/d12"
+            />
+
+        <com.haokuo.happyclub.view.SexRadioButton
+            android:id="@+id/siv_sex_female"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_54"
+            app:leftText="女"
+            app:rightIcon="@drawable/d12"/>
+    </LinearLayout>
+</LinearLayout>

@@ -1,22 +1,32 @@
 package com.haokuo.happyclub.activity;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.haokuo.happyclub.R;
 import com.haokuo.happyclub.adapter.MainFragmentPagerAdapter;
 import com.haokuo.happyclub.base.BaseActivity;
+import com.haokuo.happyclub.eventbus.LogoutEvent;
+import com.haokuo.happyclub.fragment.ActivityFragment;
 import com.haokuo.happyclub.fragment.HomeFragment;
 import com.haokuo.happyclub.fragment.MeFragment;
+import com.haokuo.happyclub.fragment.NearbyFragment;
+import com.haokuo.happyclub.fragment.OrderFragment;
 import com.haokuo.midtitlebar.MidTitleBar;
+
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClickListener {
     private static final int DEFAULT_TAB_POSITION = 0;
     @BindView(R.id.mid_title_bar)
     MidTitleBar mMidTitleBar;
@@ -36,14 +46,19 @@ public class MainActivity extends BaseActivity {
         ArrayList<Fragment> fragments = new ArrayList<>();
         //        fragments.add(new IMFragment());
         fragments.add(new HomeFragment());
-        fragments.add(new MeFragment());
-        fragments.add(new MeFragment());
-        fragments.add(new MeFragment());
+        fragments.add(new ActivityFragment());
+        fragments.add(new NearbyFragment());
+        fragments.add(new OrderFragment());
         fragments.add(new MeFragment());
         MainFragmentPagerAdapter adapter = new MainFragmentPagerAdapter(getSupportFragmentManager(), fragments);
         mViewPager.setAdapter(adapter);
         mViewPager.setOffscreenPageLimit(fragments.size()); //设置缓存fragment数量，防止fragment生命周期多次调用
         mViewPager.setCurrentItem(DEFAULT_TAB_POSITION); //设置初始化的位置
+    }
+
+    @Override
+    protected boolean getRegisterEventBus() {
+        return true;
     }
 
     private void initBottomNaviBar() {
@@ -64,8 +79,30 @@ public class MainActivity extends BaseActivity {
                 .initialise();//所有的设置需在调用该方法前完成
     }
 
+    @Subscribe
+    public void onLogoutEvent(LogoutEvent event) {
+        finish();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main_toolbar, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
+            case R.id.item_edit_info:
+                startActivity(new Intent(MainActivity.this, PersonalInfoActivity.class));
+                break;
+        }
+        return true;
+    }
+
     @Override
     protected void initListener() {
+        mMidTitleBar.setOnMenuItemClickListener(this);
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -77,18 +114,24 @@ public class MainActivity extends BaseActivity {
                 switch (position) {
                     case 0:
                         mMidTitleBar.setMidTitle("首页");
+                        mMidTitleBar.getMenu().clear();
                         break;
                     case 1:
                         mMidTitleBar.setMidTitle("活动");
+                        mMidTitleBar.getMenu().clear();
                         break;
                     case 2:
                         mMidTitleBar.setMidTitle("附近");
+                        mMidTitleBar.getMenu().clear();
                         break;
                     case 3:
                         mMidTitleBar.setMidTitle("订单");
+                        mMidTitleBar.getMenu().clear();
                         break;
                     case 4:
                         mMidTitleBar.setMidTitle("我的");
+                        mMidTitleBar.getMenu().clear();
+                        mMidTitleBar.getMenu().add(0, R.id.item_edit_info, 0, null).setIcon(R.drawable.xx1).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
                         break;
                 }
             }

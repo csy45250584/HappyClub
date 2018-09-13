@@ -15,6 +15,8 @@ import com.haokuo.happyclub.util.SafeHandler;
 import com.haokuo.midtitlebar.MidTitleBar;
 import com.xiasuhuei321.loadingdialog.view.LoadingDialog;
 
+import org.greenrobot.eventbus.EventBus;
+
 import butterknife.ButterKnife;
 
 /**
@@ -30,6 +32,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     };
     private LoadingDialog mLoadingDialog;
+    private boolean mRegisterEventBus;
 
     /**
      * handler的信息处理，如果使用handler必须重写该方法。
@@ -53,6 +56,10 @@ public abstract class BaseActivity extends AppCompatActivity {
         setContentView(initContentLayout());
         ButterKnife.bind(this);
         initToolbar();
+        mRegisterEventBus = getRegisterEventBus();
+        if (mRegisterEventBus) {
+            EventBus.getDefault().register(this);
+        }
         initData();
         initListener();
         loadData();
@@ -60,6 +67,18 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected void loadData() {
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mRegisterEventBus) {
+            EventBus.getDefault().unregister(this);
+        }
+    }
+
+    protected boolean getRegisterEventBus() {
+        return false;
     }
 
     protected void initToolbar() {
@@ -72,7 +91,6 @@ public abstract class BaseActivity extends AppCompatActivity {
             midTitleBar.addBackArrow(this);
         }
     }
-
 
     public void showLoading() {
         getLoadingDialog().show();

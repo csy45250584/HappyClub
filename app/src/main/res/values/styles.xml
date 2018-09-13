@@ -6,6 +6,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:actionMenuTextColor">@android:color/white</item>
     </style>
 
     <style name="MyRippleWaveStyle" parent="Material.Drawable.Ripple.Wave">
@@ -23,5 +24,18 @@
     <style name="LoginButtonStyle" parent="MyRippleWaveStyle">
         <item name="rd_cornerRadius">@dimen/button_corners</item>
         <item name="android:textAppearance">@style/Base.TextAppearance.AppCompat.Button</item>
+    </style>
+    <style name="BottomSheetDialog">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="bsd_inDuration">100</item>
+        <item name="bsd_outDuration">100</item>
+        <item name="bsd_cancelable">true</item>
+        <item name="bsd_canceledOnTouchOutside">true</item>
+        <item name="bsd_dimAmount">0.5</item>
+    </style>
+    <style name="MyCheckBoxDrawable" parent="Material.Drawable.CheckBox">
+        <item name="cbd_strokeColor">@color/colorPrimary</item>
+        <item name="cbd_animDuration">200</item>
     </style>
 </resources>

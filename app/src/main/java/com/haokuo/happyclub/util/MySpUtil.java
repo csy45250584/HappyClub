@@ -1,5 +1,6 @@
 package com.haokuo.happyclub.util;
 
+import com.haokuo.happyclub.bean.UserInfoBean;
 import com.haokuo.happyclub.consts.SpConsts;
 import com.haokuo.happyclub.util.utilscode.SPUtils;
 
@@ -31,5 +32,33 @@ public class MySpUtil {
 
     public String getToken() {
         return mPersonInfoSp.getString(SpConsts.KEY_TOKEN);
+    }
+
+    public void logout() {
+        mPersonInfoSp.clear();
+    }
+
+    public void saveUserInfo(UserInfoBean userInfoBean) {
+        mPersonInfoSp.put(SpConsts.KEY_USER_NAME, userInfoBean.getUserName());
+        mPersonInfoSp.put(SpConsts.KEY_BIRTHDAY, userInfoBean.getBirthday());
+        mPersonInfoSp.put(SpConsts.KEY_HEAD_PHOTO, userInfoBean.getHeadPhoto());
+        mPersonInfoSp.put(SpConsts.KEY_ID_CARD, userInfoBean.getIdCard());
+        mPersonInfoSp.put(SpConsts.KEY_REAL_NAME, userInfoBean.getRealname());
+        mPersonInfoSp.put(SpConsts.KEY_SEX, userInfoBean.getSex());
+    }
+
+    public UserInfoBean getUserInfo() {
+        UserInfoBean userInfoBean = new UserInfoBean();
+        userInfoBean.setUserName(mPersonInfoSp.getString(SpConsts.KEY_USER_NAME));
+        userInfoBean.setBirthday(mPersonInfoSp.getString(SpConsts.KEY_BIRTHDAY));
+        userInfoBean.setHeadPhoto(mPersonInfoSp.getString(SpConsts.KEY_HEAD_PHOTO));
+        userInfoBean.setIdCard(mPersonInfoSp.getString(SpConsts.KEY_ID_CARD));
+        userInfoBean.setRealname(mPersonInfoSp.getString(SpConsts.KEY_REAL_NAME));
+        userInfoBean.setSex(mPersonInfoSp.getString(SpConsts.KEY_SEX));
+        return userInfoBean;
+    }
+
+    public void saveAvatar(String src) {
+        mPersonInfoSp.put(SpConsts.KEY_HEAD_PHOTO, src);
     }
 }

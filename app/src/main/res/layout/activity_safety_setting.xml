@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.haokuo.midtitlebar.MidTitleBar
+        android:id="@+id/mid_title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_56"
+        app:midTitle="安全设置"/>
+
+    <com.haokuo.happyclub.view.SettingItemView
+        android:id="@+id/siv_change_password"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_54"
+        android:layout_marginTop="@dimen/dp_8"
+        app:leftText="密码设置"
+        app:rightIcon="@drawable/v"
+        app:rightText="修改"/>
+
+    <com.haokuo.happyclub.view.SettingItemView
+        android:id="@+id/siv_bind_tel"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_54"
+        android:layout_marginTop="@dimen/dp_8"
+        app:leftText="手机绑定"
+        app:rightIcon="@drawable/v"
+        />
+</LinearLayout>

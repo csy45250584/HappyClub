@@ -50,7 +50,11 @@ public class RegisterActivity extends BaseActivity {
             resetGetVerifyCode();
         }
     };
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        countDownTimer.cancel();
+    }
     private void resetGetVerifyCode() {
         canGetCode = true;
         mTvGetCode.setText("重新获取");

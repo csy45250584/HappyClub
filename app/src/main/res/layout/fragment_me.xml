@@ -1,7 +1,201 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<android.support.v4.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_170">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_me_top"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/iv_user_avatar"
+                    android:layout_width="@dimen/dp_80"
+                    android:layout_height="@dimen/dp_80"
+                    android:layout_marginTop="@dimen/dp_26"
+                    android:src="@mipmap/ic_launcher"
+                    app:civ_border_color="@color/colorPrimary"
+                    app:civ_border_width="@dimen/dp_7"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_user_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_9"
+                    android:textColor="@color/colorWhiteText1"
+                    android:textSize="@dimen/text_34px"/>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_recommend"
+                android:layout_width="@dimen/dp_62"
+                android:layout_height="@dimen/dp_32"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="@dimen/dp_34"
+                android:background="@drawable/bg_me_recommend"
+                android:gravity="center"
+                android:text="推荐"
+                android:textColor="@color/colorWhiteText1"
+                android:textSize="@dimen/text_24px"/>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_70"
+            android:background="@color/colorWhite"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <android.support.v4.widget.Space
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+            <LinearLayout
+                android:id="@+id/ll_collection"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/dp_6"
+                android:paddingRight="@dimen/dp_6">
+
+                <ImageView
+                    android:layout_width="@dimen/dp_22"
+                    android:layout_height="@dimen/dp_22"
+                    android:src="@drawable/wd"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:text="收藏"
+                    android:textColor="@color/colorText2"
+                    android:textSize="@dimen/text_24px"/>
+            </LinearLayout>
+
+            <android.support.v4.widget.Space
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+            <LinearLayout
+                android:id="@+id/ll_evaluation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/dp_6"
+                android:paddingRight="@dimen/dp_6">
+
+                <ImageView
+                    android:layout_width="@dimen/dp_22"
+                    android:layout_height="@dimen/dp_22"
+                    android:src="@drawable/wd1"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:text="评价"
+                    android:textColor="@color/colorText2"
+                    android:textSize="@dimen/text_24px"/>
+            </LinearLayout>
+
+            <android.support.v4.widget.Space
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+            <LinearLayout
+                android:id="@+id/ll_coupon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/dp_6"
+                android:paddingRight="@dimen/dp_6">
+
+                <ImageView
+                    android:layout_width="@dimen/dp_22"
+                    android:layout_height="@dimen/dp_22"
+                    android:src="@drawable/wd2"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:text="优惠券"
+                    android:textColor="@color/colorText2"
+                    android:textSize="@dimen/text_24px"/>
+            </LinearLayout>
+
+            <android.support.v4.widget.Space
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
+        <com.haokuo.happyclub.view.SettingItemView
+            android:id="@+id/siv_points"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_54"
+            android:layout_marginTop="@dimen/dp_8"
+            app:leftText="我的积分"
+            app:rightIcon="@drawable/v"/>
+
+        <com.haokuo.happyclub.view.SettingItemView
+            android:id="@+id/siv_service"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_54"
+            android:layout_marginTop="@dimen/dp_1"
+            app:leftText="我的服务"
+            app:rightIcon="@drawable/v"/>
+
+        <com.haokuo.happyclub.view.SettingItemView
+            android:id="@+id/siv_help"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_54"
+            android:layout_marginTop="@dimen/dp_1"
+            app:leftText="我的求助"
+            app:rightIcon="@drawable/v"/>
+
+        <com.haokuo.happyclub.view.SettingItemView
+            android:id="@+id/siv_activity"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_54"
+            android:layout_marginTop="@dimen/dp_1"
+            app:leftText="我的活动"
+            app:rightIcon="@drawable/v"/>
+
+        <com.haokuo.happyclub.view.SettingItemView
+            android:id="@+id/siv_safety_setting"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_54"
+            android:layout_marginTop="@dimen/dp_8"
+            app:leftText="安全设置"
+            app:rightIcon="@drawable/v"/>
+
+        <com.haokuo.happyclub.view.SettingItemView
+            android:id="@+id/siv_system_setting"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_54"
+            android:layout_marginTop="@dimen/dp_1"
+            app:leftText="系统设置"
+            app:rightIcon="@drawable/v"/>
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>
