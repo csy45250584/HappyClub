@@ -10,7 +10,7 @@ import com.haokuo.happyclub.bean.AddressResultBean;
 import com.haokuo.happyclub.bean.SuccessBean;
 import com.haokuo.happyclub.bean.UserInfoBean;
 import com.haokuo.happyclub.network.bean.CheckIsNextParams;
-import com.haokuo.happyclub.network.bean.base.IdParams;
+import com.haokuo.happyclub.network.bean.GetRecourseListParams;
 import com.haokuo.happyclub.network.bean.LoginByTelParams;
 import com.haokuo.happyclub.network.bean.LoginParams;
 import com.haokuo.happyclub.network.bean.RegisterParams;
@@ -18,6 +18,7 @@ import com.haokuo.happyclub.network.bean.ResetPasswordParams;
 import com.haokuo.happyclub.network.bean.UpdatePasswordParams;
 import com.haokuo.happyclub.network.bean.UploadFileParams;
 import com.haokuo.happyclub.network.bean.base.IGetParamsMap;
+import com.haokuo.happyclub.network.bean.base.IdParams;
 import com.haokuo.happyclub.network.bean.base.TelPhoneParams;
 import com.haokuo.happyclub.network.bean.base.UserIdTokenParams;
 import com.haokuo.happyclub.util.MySpUtil;
@@ -337,7 +338,7 @@ public class HttpHelper {
         doPost(null, UrlConfig.GET_ADDRESS_URL, callback);
     }
 
-    /** 获取收货地址列表 **/
+    /** 获取收货地址详情 **/
     public void getAddressInfo(IdParams params, NetworkCallback callback) {
         doPost(params, UrlConfig.GET_ADDRESS_INFO_URL, callback);
     }
@@ -360,5 +361,10 @@ public class HttpHelper {
     /** 更新个人信息 **/
     public void updateUserInfo(UserInfoBean json, NetworkCallback callback) {
         doPostWithJson(json, UrlConfig.UPDATE_USER_INFO_URL, callback);
+    }
+
+    /** 获取我的求助列表 **/
+    public void getRecourseList(GetRecourseListParams entity, NetworkCallback callback) {
+        doPost(entity, UrlConfig.GET_RECOURSE_LIST_URL, callback);
     }
 }

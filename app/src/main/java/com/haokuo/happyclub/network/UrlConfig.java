@@ -25,4 +25,11 @@ public class UrlConfig {
     public static final String INSERT_ADDRESS_URL = "/custom/app/insertAddress.do";
     public static final String DELETE_ADDRESS_URL = "/custom/app/delAddress.do";
     public static final String UPDATE_ADDRESS_URL = "/custom/app/updateAddress.do";
+    //志愿者
+    public static final String GET_RECOURSE_LIST_URL = "/custom/app/myPopServe.do";
+    public static final String MY__SERVE_URL = "/custom/app/myPushServe.do";
+    public static final String DELETE_SERVE_URL = "/custom/app/deletedMyServe.do";
+    public static final String REPUBLISH_SERVE_URL = "/custom/app/updateResetServe.do";
+    public static final String VOLUNTEER_SERVE_LIST_URL = "/custom/app/volunteerServer.do";
+
 }
