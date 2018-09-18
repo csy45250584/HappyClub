@@ -21,5 +21,11 @@ public class PageParams extends UserIdTokenParams {
         this.pageSize = DEFAULT_PAGE_SIZE;
     }
 
+    public void resetPageIndex() {
+        pageIndex = 0;
+    }
 
+    public void increasePageIndex() {
+        pageIndex++;
+    }
 }

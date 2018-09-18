@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -18,6 +19,7 @@ import com.haokuo.happyclub.fragment.HomeFragment;
 import com.haokuo.happyclub.fragment.MeFragment;
 import com.haokuo.happyclub.fragment.NearbyFragment;
 import com.haokuo.happyclub.fragment.OrderFragment;
+import com.haokuo.happyclub.util.GetSHA1Util;
 import com.haokuo.midtitlebar.MidTitleBar;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -42,6 +44,8 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
 
     @Override
     protected void initData() {
+        String s = GetSHA1Util.sHA1(this);
+        Log.v("MY_CUSTOM_TAG", "MainActivity initData()-->" + s);
         initBottomNaviBar();
         ArrayList<Fragment> fragments = new ArrayList<>();
         //        fragments.add(new IMFragment());

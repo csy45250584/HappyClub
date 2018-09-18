@@ -38,6 +38,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation(name: 'LoadingDialog-debug', ext: 'aar')
     implementation project(':MidTitleBar')
+    implementation(name: 'AMap3DMap_6.4.1_AMapSearch_6.1.0_20180910', ext: 'aar')
     implementation "com.android.support:appcompat-v7:${libSupportVersion}"
     implementation "com.android.support:recyclerview-v7:${libSupportVersion}"
     implementation "com.android.support:design:${libSupportVersion}"
@@ -63,4 +64,9 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:2.2.0'
     implementation 'com.jph.takephoto:takephoto_library:4.0.3'
     implementation 'com.github.anzaizai:EasySwipeMenuLayout:1.1.2'
+    implementation('com.github.hotchemi:permissionsdispatcher:3.1.0') {
+        exclude module: 'support-v13'
+    }
+    annotationProcessor 'com.github.hotchemi:permissionsdispatcher-processor:3.1.0'
+
 }

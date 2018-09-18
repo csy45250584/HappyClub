@@ -441,5 +441,5 @@
     <dimen name="text_26px">@dimen/sp_14_3</dimen>
     <dimen name="text_24px">@dimen/sp_13_2</dimen>
     <dimen name="button_corners">@dimen/dp_4</dimen>
-    <dimen name="button_height">@dimen/dp_50</dimen>
+    <dimen name="button_height">@dimen/dp_52</dimen>
 </resources>

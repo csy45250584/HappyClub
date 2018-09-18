@@ -7,8 +7,11 @@ import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
 import com.haokuo.happyclub.bean.AddressResultBean;
+import com.haokuo.happyclub.bean.EvaluationBean;
+import com.haokuo.happyclub.bean.RecourseBean;
 import com.haokuo.happyclub.bean.SuccessBean;
 import com.haokuo.happyclub.bean.UserInfoBean;
+import com.haokuo.happyclub.network.bean.ChangeServeStatusParams;
 import com.haokuo.happyclub.network.bean.CheckIsNextParams;
 import com.haokuo.happyclub.network.bean.GetRecourseListParams;
 import com.haokuo.happyclub.network.bean.LoginByTelParams;
@@ -366,5 +369,33 @@ public class HttpHelper {
     /** 获取我的求助列表 **/
     public void getRecourseList(GetRecourseListParams entity, NetworkCallback callback) {
         doPost(entity, UrlConfig.GET_RECOURSE_LIST_URL, callback);
+    }
+
+    /** 新建求助 **/
+    public void newRecourse(RecourseBean json, NetworkCallback callback) {
+        doPostWithJson(json, UrlConfig.NEW_RECOURSE_URL, callback);
+    }
+
+    /** 删除我的求助 **/
+    public void deleteRecourse(IdParams entity, NetworkCallback callback) {
+        doPost(entity, UrlConfig.DELETE_SERVE_URL, callback);
+    }
+
+    /** 重新发布我的求助 **/
+    public void republishRecourse(RecourseBean json, NetworkCallback callback) {
+        doPostWithJson(json, UrlConfig.REPUBLISH_SERVE_URL, callback);
+    }
+
+    /** 评价求助 **/
+    public void evaluateRecourse(EvaluationBean json, NetworkCallback callback) {
+        doPostWithJson(json, UrlConfig.EVALUATE_SERVE_URL, callback);
+    }
+
+    /** 志愿者及用户状态操作(status见详细说明)
+     *  用户:完成:44
+     *  志愿者:放弃求助:88,去服务:22,完成服务:33
+     * **/
+    public void changeServeStatus(ChangeServeStatusParams entity, NetworkCallback callback) {
+        doPost(entity, UrlConfig.CHANGE_SERVE_STATUS_URL, callback);
     }
 }

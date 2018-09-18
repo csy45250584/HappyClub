@@ -8,7 +8,7 @@ import lombok.Data;
  * Created by zjf on 2018/9/13.
  */
 @Data
-public class AddressResultBean implements Serializable{
+public class AddressResultBean implements Serializable {
     private long id;
     private String name;
     private String telphone;

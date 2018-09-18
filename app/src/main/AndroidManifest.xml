@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
           package="com.haokuo.happyclub">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
-
+    <!--允许程序获取网络状态-->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!--允许程序访问WiFi网络信息-->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!--允许程序读写手机状态和身份-->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!--允许程序访问CellID或WiFi热点来获取粗略的位置-->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <application
         android:name=".application.HappyClubApplication"
         android:allowBackup="true"
@@ -13,14 +22,21 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:replace="android:icon,android:allowBackup,android:label,android:name,android:theme"
+        >
         <meta-data
             android:name="design_width_in_dp"
             android:value="411"/>
         <meta-data
             android:name="design_height_in_dp"
             android:value="868"/>
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="b340068d64d0ab4b2ea7c0ab65aa80c6"
+            tools:replace="android:value"/>
 
+        <service android:name="com.amap.api.location.APSService"/>
         <activity
             android:name=".activity.MainActivity"
             android:launchMode="singleTask">
@@ -60,13 +76,24 @@
             android:launchMode="singleTop"/>
         <activity
             android:name=".activity.PersonalInfoActivity"
-            android:launchMode="singleTop"/>     <activity
+            android:launchMode="singleTop"/>
+        <activity
             android:name=".activity.DeliverAddressActivity"
-            android:launchMode="singleTop"/>  <activity
+            android:launchMode="singleTop"/>
+        <activity
             android:name=".activity.DeliverAddressDetailActivity"
             android:launchMode="singleTop"/>
-  <activity
+        <activity
             android:name=".activity.SetPersonalInfoActivity"
+            android:launchMode="singleTop"/>
+        <activity
+            android:name=".activity.MyRecourseActivity"
+            android:launchMode="singleTop"/>
+        <activity
+            android:name=".activity.NewRecourseActivity"
+            android:launchMode="singleTop"/>
+  <activity
+            android:name=".activity.ChooseLocationActivity"
             android:launchMode="singleTop"/>
 
     </application>

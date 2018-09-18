@@ -20,4 +20,8 @@
     <color name="colorWhiteText1">#FFFFFFFF</color>
     <color name="colorWhiteText2">#B2FFFFFF</color>
     <color name="colorWhiteText3">#4CFFFFFF</color>
+    <color name="colorOrange">#F19203</color>
+    <color name="colorBlue">#2196F3</color>
+    <color name="color25Blue">#402196f3</color>
+
 </resources>

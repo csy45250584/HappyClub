@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.haokuo.happyclub.R;
+import com.haokuo.happyclub.activity.MyRecourseActivity;
 import com.haokuo.happyclub.activity.SafetySettingActivity;
 import com.haokuo.happyclub.activity.SystemSettingActivity;
 import com.haokuo.happyclub.base.BaseLazyLoadFragment;
@@ -97,6 +98,7 @@ public class MeFragment extends BaseLazyLoadFragment {
             case R.id.siv_service:
                 break;
             case R.id.siv_help:
+                startActivity(new Intent(mContext, MyRecourseActivity.class));
                 break;
             case R.id.siv_activity:
                 break;

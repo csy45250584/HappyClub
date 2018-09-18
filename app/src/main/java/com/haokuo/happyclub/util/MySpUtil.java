@@ -61,4 +61,8 @@ public class MySpUtil {
     public void saveAvatar(String src) {
         mPersonInfoSp.put(SpConsts.KEY_HEAD_PHOTO, src);
     }
+
+    public String geTel() {
+        return mPersonInfoSp.getString(SpConsts.KEY_TEL);
+    }
 }

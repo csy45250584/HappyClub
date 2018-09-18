@@ -15,5 +15,14 @@
         <attr name="rightIcon" format="reference"/>
         <attr name="hasRightArrow" format="boolean"/>
     </declare-styleable>
-
+    <declare-styleable name="TitleEditorView">
+        <attr name="titleText"/>
+        <attr name="editorHint"/>
+        <attr name="selectText" format="string"/>
+        <attr name="type" format="enum">
+            <enum name="editor" value="0"/>
+            <enum name="dateSelector" value="1"/>
+            <enum name="selector" value="2"/>
+        </attr>
+    </declare-styleable>
 </resources>

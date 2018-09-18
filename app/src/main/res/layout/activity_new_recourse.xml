@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.haokuo.midtitlebar.MidTitleBar
+        android:id="@+id/mid_title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_56"
+        app:midTitle="我的求助"/>
+
+    <com.haokuo.happyclub.view.TitleEditorView
+        android:id="@+id/et_serve_name"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:layout_marginTop="@dimen/dp_8"
+        app:editorHint="请填写服务名称"
+        app:titleText="服务名称"
+        app:type="editor"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50">
+
+        <com.haokuo.happyclub.view.TitleEditorView
+            android:id="@+id/et_serve_address"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_50"
+            android:layout_marginTop="@dimen/dp_1"
+            app:selectText="请选择服务地点"
+            app:titleText="服务地点"
+            app:type="selector"/>
+
+        <ImageView
+            android:id="@+id/iv_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|end"
+            android:layout_marginRight="@dimen/dp_25"
+            android:padding="@dimen/dp_13"
+            android:src="@drawable/fw1"/>
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_1"
+        android:background="@color/colorWhite"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/dp_8"
+        android:paddingLeft="@dimen/dp_25"
+        android:paddingRight="@dimen/dp_25"
+        android:paddingTop="@dimen/dp_14">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="服务内容"
+            android:textColor="@color/colorText1"
+            android:textSize="@dimen/text_28px"/>
+
+        <EditText
+            android:id="@+id/et_serve_content"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_80"
+            android:layout_marginTop="@dimen/dp_8"
+            android:background="@color/colorWhite"
+            android:gravity="left|top"
+            android:hint="请填写服务内容"
+            android:padding="@dimen/dp_2"
+            android:textColor="@color/colorText2"
+            android:textSize="@dimen/text_28px"/>
+    </LinearLayout>
+
+    <com.haokuo.happyclub.view.TitleEditorView
+        android:id="@+id/et_request"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:layout_marginTop="@dimen/dp_1"
+        app:editorHint="请填写服务要求"
+        app:titleText="服务要求"
+        app:type="editor"/>
+
+    <com.haokuo.happyclub.view.TitleEditorView
+        android:id="@+id/et_begin_date"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:layout_marginTop="@dimen/dp_1"
+        app:selectText="请选择开始时间"
+        app:titleText="开始时间"
+        app:type="dateSelector"/>
+
+    <com.haokuo.happyclub.view.TitleEditorView
+        android:id="@+id/et_end_date"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:layout_marginTop="@dimen/dp_1"
+        app:selectText="请选择结束时间"
+        app:titleText="结束时间"
+        app:type="dateSelector"/>
+
+    <com.haokuo.happyclub.view.TitleEditorView
+        android:id="@+id/et_serve_score"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:layout_marginTop="@dimen/dp_1"
+        app:editorHint="请填写服务积分"
+        app:titleText="服务积分"
+        app:type="editor"/>
+</LinearLayout>
