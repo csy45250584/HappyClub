@@ -5,4 +5,56 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <com.youth.banner.Banner
+        android:id="@+id/banner_home"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_200"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_action"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dp_1"
+        android:background="@color/colorWhite"
+        android:overScrollMode="never"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_6"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_40"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/dp_1"
+            android:background="@color/colorWhite"
+            android:gravity="center"
+            android:text="志愿者服务"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/text_28px"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_volunteer_action"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_1"
+            android:background="@color/colorWhite"
+            android:overScrollMode="never"/>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_6"
+        android:background="@color/colorWhite"
+        android:orientation="vertical">
+
+        <ImageView
+            android:src="@color/colorWhite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
 </LinearLayout>
