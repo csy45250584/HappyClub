@@ -102,7 +102,8 @@ public class LoginActivity extends BaseActivity {
                 SPUtils spUtils = SPUtils.getInstance(SpConsts.FILE_PERSONAL_INFORMATION);
                 spUtils.put(SpConsts.KEY_USER_ID, result.getUserId());
                 spUtils.put(SpConsts.KEY_TOKEN, result.getToken());
-                spUtils.put(SpConsts.KEY_TEL, mEtTel.getEditableText().toString().trim());
+                String tel = mIsTelLogin ? mEtTel.getEditableText().toString().trim() : mEtAccount.getEditableText().toString().trim();
+                spUtils.put(SpConsts.KEY_TEL,tel );
                 loadSuccess("登录成功", new LoadingDialog.OnFinishListener() {
                     @Override
                     public void onFinish() {

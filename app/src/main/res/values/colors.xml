@@ -12,7 +12,8 @@
     <color name="textDarkScrims">#66000000</color>
     <color name="textLightScrims">#33000000</color>
     <color name="colorRipple">#1f000000</color>
-    <color name="colorColorRipple">#40009688</color>
+    <color name="colorColorRipple">@color/color25Primary</color>
+    <color name="color25Primary">#40009688</color>
     <color name="colorText0">#FF000000</color>
     <color name="colorText1">#DD000000</color>
     <color name="colorText2">#88000000</color>
@@ -21,6 +22,7 @@
     <color name="colorWhiteText2">#B2FFFFFF</color>
     <color name="colorWhiteText3">#4CFFFFFF</color>
     <color name="colorOrange">#F19203</color>
+    <color name="colorDarkOrange">#ED6C30</color>
     <color name="colorBlue">#2196F3</color>
     <color name="color25Blue">#402196f3</color>
 

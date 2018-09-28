@@ -18,6 +18,7 @@ public class AddressAdapter extends BaseQuickAdapter<AddressResultBean, BaseView
     protected void convert(final BaseViewHolder helper, final AddressResultBean item) {
         helper.addOnClickListener(R.id.btn_modify);
         helper.addOnClickListener(R.id.btn_delete);
+        helper.addOnClickListener(R.id.rl_content);
         helper.setText(R.id.tv_name, item.getName());
         helper.setText(R.id.tv_tel, item.getTelphone());
         helper.setText(R.id.tv_address, item.getArea() + " " + item.getAddress());

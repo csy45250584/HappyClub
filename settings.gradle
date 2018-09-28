@@ -1,1 +1,1 @@
-include ':app','MidTitleBar'
+include ':app','MidTitleBar','labels'

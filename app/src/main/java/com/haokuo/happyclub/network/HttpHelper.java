@@ -8,11 +8,13 @@ import android.util.Log;
 import com.alibaba.fastjson.JSON;
 import com.haokuo.happyclub.bean.AddressResultBean;
 import com.haokuo.happyclub.bean.EvaluationBean;
+import com.haokuo.happyclub.bean.FoodOrderBean;
 import com.haokuo.happyclub.bean.RecourseBean;
 import com.haokuo.happyclub.bean.SuccessBean;
 import com.haokuo.happyclub.bean.UserInfoBean;
 import com.haokuo.happyclub.network.bean.ChangeServeStatusParams;
 import com.haokuo.happyclub.network.bean.CheckIsNextParams;
+import com.haokuo.happyclub.network.bean.GetAcceptedServeParams;
 import com.haokuo.happyclub.network.bean.GetRecourseListParams;
 import com.haokuo.happyclub.network.bean.LoginByTelParams;
 import com.haokuo.happyclub.network.bean.LoginParams;
@@ -391,11 +393,29 @@ public class HttpHelper {
         doPostWithJson(json, UrlConfig.EVALUATE_SERVE_URL, callback);
     }
 
-    /** 志愿者及用户状态操作(status见详细说明)
-     *  用户:完成:44
-     *  志愿者:放弃求助:88,去服务:22,完成服务:33
-     * **/
+    /** 获取我接的志愿单 **/
+    public void getAcceptedServe(GetAcceptedServeParams entity, NetworkCallback callback) {
+        doPost(entity, UrlConfig.GET_ACCEPTED_SERVE_URL, callback);
+    }
+
+    /**
+     * 志愿者及用户状态操作(status见详细说明)
+     * 用户:完成:44
+     * 志愿者:放弃求助:88,去服务:22,完成服务:33
+     **/
     public void changeServeStatus(ChangeServeStatusParams entity, NetworkCallback callback) {
         doPost(entity, UrlConfig.CHANGE_SERVE_STATUS_URL, callback);
     }
+
+    /** 获取食堂全部菜品分类 **/
+    public void getAllFoodList(NetworkCallback callback) {
+        doPost(null, UrlConfig.GET_ALL_FOOD_LIST_URL, callback);
+    }
+
+    /** 食堂下单 **/
+    public void insertFoodOrder(FoodOrderBean json, NetworkCallback callback) {
+        doPostWithJson(json, UrlConfig.INSERT_FOOD_ORDER_URL, callback);
+    }
+
+
 }

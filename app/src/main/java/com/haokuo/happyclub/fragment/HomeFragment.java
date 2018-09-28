@@ -1,10 +1,14 @@
 package com.haokuo.happyclub.fragment;
 
+import android.content.Intent;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.haokuo.happyclub.R;
+import com.haokuo.happyclub.activity.CanteenActivity;
 import com.haokuo.happyclub.adapter.ActionAdapter;
 import com.haokuo.happyclub.base.BaseLazyLoadFragment;
 import com.haokuo.happyclub.bean.ActionBean;
@@ -63,10 +67,24 @@ public class HomeFragment extends BaseLazyLoadFragment {
         actionBeans.add(new ActionBean("会所服务", R.drawable.q2));
         actionBeans.add(new ActionBean("活动公开", R.drawable.q3));
         actionBeans.add(new ActionBean("幸福积分", R.drawable.q4));
-        actionBeans.add(new ActionBean("幸福食堂", R.drawable.q5));
+        actionBeans.add(new ActionBean("幸福食堂", R.drawable.q5, CanteenActivity.class));
         actionBeans.add(new ActionBean("幸福养老", R.drawable.q6));
         actionBeans.add(new ActionBean("幸福教育", R.drawable.q7));
         actionBeans.add(new ActionBean("更多", R.drawable.q8));
         mActionAdapter.setNewData(actionBeans);
+    }
+
+    @Override
+    protected void initListener() {
+        mActionAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                ActionBean item = mActionAdapter.getItem(position);
+                if (item != null && item.getClz() != null) {
+                    Intent intent = new Intent(mContext, item.getClz());
+                    startActivity(intent);
+                }
+            }
+        });
     }
 }

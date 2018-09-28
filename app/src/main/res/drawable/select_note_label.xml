@@ -1,0 +1,20 @@
+<!-- 标签的背景 label_bg -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 标签选中时的背景 -->
+    <item android:state_selected="true">
+        <shape android:shape="rectangle">
+            <stroke android:width="@dimen/dp_1" android:color="@color/colorPrimary"/>
+            <corners android:radius="@dimen/dp_3"/>
+            <solid android:color="@color/color25Primary"/>
+        </shape>
+    </item>
+    <!-- 标签的正常背景 -->
+    <item>
+        <shape android:shape="rectangle">
+            <stroke android:width="@dimen/dp_1" android:color="@color/colorDivider"/>
+            <corners android:radius="@dimen/dp_3"/>
+            <solid android:color="@android:color/white"/>
+        </shape>
+    </item>
+</selector>
+

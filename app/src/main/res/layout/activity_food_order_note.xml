@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.haokuo.midtitlebar.MidTitleBar
+        android:id="@+id/mid_title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_56"
+        android:background="@color/colorText2"
+        app:midTitle="添加备注"/>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_12"
+        android:layout_marginRight="@dimen/dp_12"
+        android:layout_marginTop="@dimen/dp_8"
+        app:cardBackgroundColor="@color/colorWhite"
+        app:cardCornerRadius="@dimen/dp_4"
+        app:contentPadding="@dimen/dp_16">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="备注"
+                android:textColor="@color/colorText1"
+                android:textSize="@dimen/text_28px"/>
+
+            <EditText
+                android:id="@+id/et_note"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_75"
+                android:layout_marginTop="@dimen/dp_6"
+                android:background="@color/colorWhite"
+                android:gravity="top|left"
+                android:hint="请填写订单备注信息"
+                android:maxLength="70"
+                android:textSize="@dimen/text_28px"/>
+
+            <TextView
+                android:id="@+id/tv_word_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:text="0/70"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_1"
+                android:layout_marginTop="@dimen/dp_16"
+                android:background="@color/colorDivider"/>
+
+            <com.donkingliang.labels.LabelsView
+                android:id="@+id/lv_note"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_16"
+                app:labelBackground="@drawable/select_note_label"
+                app:labelTextColor="@drawable/select_note_label_color"
+                app:labelTextPaddingBottom="@dimen/dp_3"
+                app:labelTextPaddingLeft="@dimen/dp_6"
+                app:labelTextPaddingRight="@dimen/dp_6"
+                app:labelTextPaddingTop="@dimen/dp_3"
+                app:labelTextSize="@dimen/text_24px"
+                app:lineMargin="@dimen/dp_16"
+                app:maxSelect="0"
+                app:selectType="MULTI"
+                app:unselectable="false"
+                app:wordMargin="@dimen/dp_12"
+                />
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+</LinearLayout>

@@ -30,11 +30,13 @@ import okhttp3.Call;
  * Created by zjf on 2018/9/13.
  */
 public class DeliverAddressActivity extends BaseActivity {
+    public static final String EXTRA_ADDRESS = "com.haokuo.happyclub.extra.EXTRA_ADDRESS";
     @BindView(R.id.mid_title_bar)
     MidTitleBar mMidTitleBar;
     @BindView(R.id.rv_deliver_address)
     RecyclerView mRvDeliverAddress;
     private AddressAdapter mAddressAdapter;
+    private boolean mIsChooseAddress;
 
     @Override
     protected int initContentLayout() {
@@ -43,6 +45,7 @@ public class DeliverAddressActivity extends BaseActivity {
 
     @Override
     protected void initData() {
+        mIsChooseAddress = getIntent().getIntExtra(FoodOrderActivity.EXTRA_CHOOSE_ADDRESS, 0) == 1;
         //RecyclerView初始化
         mRvDeliverAddress.setLayoutManager(new LinearLayoutManager(this));
         int dividerHeight = (int) (getResources().getDimension(R.dimen.dp_1) + 0.5f);
@@ -74,29 +77,33 @@ public class DeliverAddressActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode==RESULT_OK) {
+        if (resultCode == RESULT_OK) {
             getAddressList();
         }
     }
 
     @Override
     protected void initListener() {
+
         mAddressAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                 AddressResultBean item = mAddressAdapter.getItem(position);
                 switch (view.getId()) {
-                    case R.id.btn_modify:
+                    case R.id.btn_modify: {
                         Intent intent = new Intent(DeliverAddressActivity.this, DeliverAddressDetailActivity.class);
                         intent.putExtra(DeliverAddressDetailActivity.EXTRA_ADDRESS, item);
                         startActivityForResult(intent, 0);
-                        break;
-                    case R.id.btn_delete:
+                    }
+                    break;
+                    case R.id.btn_delete: {
                         IdParams params = new IdParams(item.getId());
                         HttpHelper.getInstance().deleteAddress(params, new NetworkCallback() {
                             @Override
                             public void onSuccess(Call call, String json) {
-                              getAddressList();
+                                //如果删除的是默认地址
+                                //TODO 如果删除的是默认地址
+                                getAddressList();
                             }
 
                             @Override
@@ -104,7 +111,17 @@ public class DeliverAddressActivity extends BaseActivity {
                                 ToastUtils.showShort("删除地址失败，" + message);
                             }
                         });
-                        break;
+                    }
+                    break;
+                    case R.id.rl_content: {
+                        if (mIsChooseAddress) {
+                            Intent intent = new Intent();
+                            intent.putExtra(EXTRA_ADDRESS, item);
+                            setResult(RESULT_OK, intent);
+                            finish();
+                        }
+                    }
+                    break;
                 }
             }
         });

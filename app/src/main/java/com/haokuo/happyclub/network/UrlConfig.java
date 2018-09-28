@@ -7,6 +7,7 @@ package com.haokuo.happyclub.network;
 public class UrlConfig {
     public static final String IMAGE_STRING_SPLIT = ",";
     public static final String BASE_URL = "http://192.168.1.193:9088/xfhsi/";
+    public static final String IMAGE_BASE_URL = "http://18t69t8992.51mypc.cn:9088/xfhs/upload/";
     //个人信息
     public static final String REGISTER_URL = "/custom/register.do";
     public static final String GET_LOGIN_VERIFY_CODE_URL = "/custom/loginVerificationCode.do";
@@ -32,6 +33,13 @@ public class UrlConfig {
     public static final String REPUBLISH_SERVE_URL = "/custom/app/updateResetServe.do";
     public static final String EVALUATE_SERVE_URL = "/custom/app/insertEvaluation.do";
     public static final String CHANGE_SERVE_STATUS_URL = "/custom/app/toChangeStatus.do";
-    public static final String MY__SERVE_URL = "/custom/app/myPushServe.do";
+    public static final String GET_ACCEPTED_SERVE_URL = "/custom/app/myPushServe.do";
     public static final String VOLUNTEER_SERVE_LIST_URL = "/custom/app/volunteerServer.do";
+    //食堂
+    public static final String GET_ALL_FOOD_LIST_URL = "/custom/app/getAllFoodlist.do";
+    public static final String INSERT_FOOD_ORDER_URL = "/custom/app/insertFoodOrder.do";
+
+    public static String buildImageUrl(String url) {
+        return IMAGE_BASE_URL + url;
+    }
 }

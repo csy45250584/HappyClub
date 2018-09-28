@@ -5,12 +5,14 @@ import android.view.View;
 
 import com.haokuo.happyclub.R;
 import com.haokuo.happyclub.base.BaseActivity;
+import com.haokuo.happyclub.bean.CartFoodBean;
 import com.haokuo.happyclub.eventbus.LogoutEvent;
 import com.haokuo.happyclub.util.MySpUtil;
 import com.haokuo.happyclub.view.SettingItemView;
 import com.rey.material.widget.Button;
 
 import org.greenrobot.eventbus.EventBus;
+import org.litepal.LitePal;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -45,11 +47,16 @@ public class SystemSettingActivity extends BaseActivity {
             case R.id.siv_about_us:
                 break;
             case R.id.btn_logout:
+                clearAllData();
                 startActivity(new Intent(SystemSettingActivity.this, LoginActivity.class));
-                MySpUtil.getInstance().logout();
                 EventBus.getDefault().post(new LogoutEvent());
                 finish();
                 break;
         }
+    }
+
+    private void clearAllData() {
+        MySpUtil.getInstance().logout();
+        LitePal.deleteAll(CartFoodBean.class);
     }
 }
