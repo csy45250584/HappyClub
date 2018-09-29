@@ -25,7 +25,7 @@
         app:tl_textBold="NONE"
         app:tl_textSelectColor="@color/colorPrimary"
         app:tl_textUnselectColor="@color/colorText3"
-        app:tl_textsize="@dimen/text_30px"
+        app:tl_textsize="@dimen/text_26px"
         app:tl_underline_color="@color/colorDivider"
         app:tl_underline_height="1dp">
     </com.flyco.tablayout.SlidingTabLayout>

@@ -12,7 +12,7 @@ import android.widget.EditText;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.haokuo.happyclub.R;
 import com.haokuo.happyclub.adapter.MyRefreshLoadMoreListener;
-import com.haokuo.happyclub.adapter.MyServeAdapter;
+import com.haokuo.happyclub.adapter.VolunteerServeAdapter;
 import com.haokuo.happyclub.base.BaseActivity;
 import com.haokuo.happyclub.bean.RecourseBean;
 import com.haokuo.happyclub.bean.list.RecourseListBean;
@@ -43,7 +43,7 @@ public class VolunteerOrderActivity extends BaseActivity {
     RecyclerView mRvVolunteerOrder;
     @BindView(R.id.srl_volunteer_order)
     SmartRefreshLayout mSrlVolunteerOrder;
-    private MyServeAdapter mMyServeAdapter;
+    private VolunteerServeAdapter mVolunteerServeAdapter;
     private GetVolunteerServeParams mParams;
     private MyRefreshLoadMoreListener<RecourseBean> mSrlListener;
     private List<RecourseBean> mRecourseBeanList;
@@ -112,7 +112,7 @@ public class VolunteerOrderActivity extends BaseActivity {
     @Override
     protected void initListener() {
         mSrlListener = new MyRefreshLoadMoreListener<RecourseBean>
-                (mSrlVolunteerOrder, mParams, mMyServeAdapter, RecourseListBean.class, "获取志愿工单失败") {
+                (mSrlVolunteerOrder, mParams, mVolunteerServeAdapter, RecourseListBean.class, "获取志愿工单失败") {
             @Override
             protected void loadMore() {
                 HttpHelper.getInstance().getVolunteerServeList((GetVolunteerServeParams) getParams(), mLoadMoreCallback);
@@ -153,10 +153,10 @@ public class VolunteerOrderActivity extends BaseActivity {
                 mSrlVolunteerOrder.autoRefresh();
             }
         });
-        mMyServeAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+        mVolunteerServeAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                RecourseBean item = mMyServeAdapter.getItem(position);
+                RecourseBean item = mVolunteerServeAdapter.getItem(position);
                 if (item != null) {
                     switch (view.getId()) {
                         case R.id.iv_accept_serve://接受服务
@@ -187,8 +187,8 @@ public class VolunteerOrderActivity extends BaseActivity {
         mRvVolunteerOrder.setLayoutManager(new LinearLayoutManager(this));
         int dividerHeight = (int) (getResources().getDimension(R.dimen.dp_1) + 0.5f);
         mRvVolunteerOrder.addItemDecoration(new RecyclerViewDivider(this, LinearLayoutManager.HORIZONTAL, dividerHeight, R.color.colorDivider));
-        mMyServeAdapter = new MyServeAdapter(R.layout.item_volunteer_serve);
-        mRvVolunteerOrder.setAdapter(mMyServeAdapter);
+        mVolunteerServeAdapter = new VolunteerServeAdapter(R.layout.item_volunteer_serve);
+        mRvVolunteerOrder.setAdapter(mVolunteerServeAdapter);
         mParams = new GetVolunteerServeParams(null);
         //设置搜索框指针
         mSearchView.setCursorDrawable(R.drawable.search_bar_cursor);

@@ -9,14 +9,15 @@ import lombok.Data;
  */
 @Data
 public class GetAcceptedServeParams extends PageParams {
-    public static final int STATUS_RECEIVED = 11;
-    public static final int STATUS_SERVING = 22;
-    public static final int STATUS_SERVED = 33;
-    public static final int STATUS_COMPLETED = 44;
-    public static final int STATUS_ABANDONED = 88;
-    private int status;
+    public static final Integer STATUS_RECEIVED = 11;
+    public static final Integer STATUS_SERVING = 22;
+    public static final Integer STATUS_SERVED = 33;
+    public static final Integer STATUS_COMPLETED = 44;
+    public static final Integer STATUS_ABANDONED = 88;
+    public static final Integer STATUS_ALL = null;
+    private Integer status;
 
-    public GetAcceptedServeParams(int status) {
+    public GetAcceptedServeParams(Integer status) {
         this.status = status;
     }
 }

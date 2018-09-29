@@ -32,21 +32,15 @@ public class MyServeActivity extends BaseActivity {
     protected void initData() {
         String[] titles = {"全部", "已接单", "服务中", "已服务", "已完成", "已放弃"};
         ArrayList<Fragment> fragments = new ArrayList<>();
-        MyServeFragment conferenceFragment = new MyServeFragment();
-        Bundle bundle1 = new Bundle();
-        bundle1.putInt(MyServeFragment.KEY_STATUS, GetAcceptedServeParams.STATUS_RECEIVED);
-        conferenceFragment.setArguments(bundle1);
-        fragments.add(conferenceFragment);
-        MyServeFragment newsFragment = new MyServeFragment();
-        Bundle bundle2 = new Bundle();
-        bundle2.putInt(MyServeFragment.KEY_STATUS, GetAcceptedServeParams.STATUS_SERVING);
-        newsFragment.setArguments(bundle2);
-        fragments.add(newsFragment);
-        MyServeFragment noticeFragment = new MyServeFragment();
-        Bundle bundle3 = new Bundle();
-        bundle3.putInt(MyServeFragment.KEY_STATUS, GetAcceptedServeParams.STATUS_SERVED);
-        noticeFragment.setArguments(bundle3);
-        fragments.add(noticeFragment);
+        Integer[] statusList = {null, GetAcceptedServeParams.STATUS_RECEIVED, GetAcceptedServeParams.STATUS_SERVING, GetAcceptedServeParams.STATUS_SERVED,
+                GetAcceptedServeParams.STATUS_COMPLETED, GetAcceptedServeParams.STATUS_ABANDONED};
+        for (Integer status : statusList) {
+            MyServeFragment myServeFragment = new MyServeFragment();
+            Bundle bundle = new Bundle();
+            bundle.putSerializable(MyServeFragment.KEY_STATUS, status);
+            myServeFragment.setArguments(bundle);
+            fragments.add(myServeFragment);
+        }
         mIndicatorMyServe.setViewPager(mVpMyServe, titles, this, fragments);
     }
 }

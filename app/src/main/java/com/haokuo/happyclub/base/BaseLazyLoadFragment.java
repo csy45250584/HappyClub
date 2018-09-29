@@ -41,6 +41,10 @@ public abstract class BaseLazyLoadFragment extends BaseFragment {
         onVisibleToUser();
     }
 
+    protected void setLoadDataFinished(boolean loadDataFinished) {
+        this.loadDataFinished = loadDataFinished;
+    }
+
     /**
      * 判断是否需要加载数据
      */

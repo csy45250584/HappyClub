@@ -423,7 +423,7 @@ public class HttpHelper {
         doPost(entity, UrlConfig.VOLUNTEER_SERVE_LIST_URL, callback);
     }
 
-    /** 志愿工单列表(所有发布的志愿者活动) **/
+    /** 接受志愿者工单 **/
     public void acceptServe(IdParams entity, NetworkCallback callback) {
         doPost(entity, UrlConfig.ACCEPT_SERVE_URL, callback);
     }
