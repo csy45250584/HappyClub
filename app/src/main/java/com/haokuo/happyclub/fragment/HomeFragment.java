@@ -9,6 +9,7 @@ import android.view.View;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.haokuo.happyclub.R;
 import com.haokuo.happyclub.activity.CanteenActivity;
+import com.haokuo.happyclub.activity.VolunteerOrderActivity;
 import com.haokuo.happyclub.adapter.ActionAdapter;
 import com.haokuo.happyclub.base.BaseLazyLoadFragment;
 import com.haokuo.happyclub.bean.ActionBean;
@@ -54,7 +55,7 @@ public class HomeFragment extends BaseLazyLoadFragment {
     private void initVolunteerActionAdapter() {
         ArrayList<ActionBean> actionBeans = new ArrayList<>();
         actionBeans.add(new ActionBean("党员录入", R.drawable.zy1));
-        actionBeans.add(new ActionBean("志愿工单", R.drawable.zy2));
+        actionBeans.add(new ActionBean("志愿工单", R.drawable.zy2, VolunteerOrderActivity.class));
         actionBeans.add(new ActionBean("我的服务", R.drawable.zy3));
         actionBeans.add(new ActionBean("服务评价", R.drawable.zy4));
         actionBeans.add(new ActionBean("我的积分", R.drawable.zy5));
@@ -80,6 +81,16 @@ public class HomeFragment extends BaseLazyLoadFragment {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 ActionBean item = mActionAdapter.getItem(position);
+                if (item != null && item.getClz() != null) {
+                    Intent intent = new Intent(mContext, item.getClz());
+                    startActivity(intent);
+                }
+            }
+        });
+        mVolunteerActionAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                ActionBean item = mVolunteerActionAdapter.getItem(position);
                 if (item != null && item.getClz() != null) {
                     Intent intent = new Intent(mContext, item.getClz());
                     startActivity(intent);

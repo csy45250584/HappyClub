@@ -138,7 +138,7 @@ public class FoodOrderActivity extends BaseActivity {
         mTvAmountPrice.setText(totalPrice);
         //设置RecyclerView
         mRvFoodList.setLayoutManager(new LinearLayoutManager(this));
-        mRvFoodList.addItemDecoration(new RecyclerViewDivider(this, LinearLayoutManager.HORIZONTAL, ResUtils.getDimens(R.dimen.dp_1), ResUtils.getColor(R.color.colorDivider)));
+        mRvFoodList.addItemDecoration(new RecyclerViewDivider(this, LinearLayoutManager.HORIZONTAL, ResUtils.getDimens(R.dimen.dp_1), R.color.colorDivider));
         mOrderFoodAdapter = new OrderFoodAdapter(R.layout.item_order_food);
         mRvFoodList.setAdapter(mOrderFoodAdapter);
         RecyclerView.ItemAnimator itemAnimator = mRvFoodList.getItemAnimator();

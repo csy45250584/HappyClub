@@ -110,6 +110,7 @@ public class CanteenActivity extends BaseActivity implements BaseQuickAdapter.On
             View v = getCurrentFocus();
             if (isShouldHideInput(v, ev)) {
                 KeyboardUtils.hideSoftInput(this, v);
+                mSearchView.closeSearch();
                 return super.dispatchTouchEvent(ev); //隐藏键盘时，其他控件不响应点击事件==》注释则不拦截点击事件
             }
         }

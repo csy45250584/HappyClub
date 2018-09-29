@@ -35,6 +35,7 @@ public class UrlConfig {
     public static final String CHANGE_SERVE_STATUS_URL = "/custom/app/toChangeStatus.do";
     public static final String GET_ACCEPTED_SERVE_URL = "/custom/app/myPushServe.do";
     public static final String VOLUNTEER_SERVE_LIST_URL = "/custom/app/volunteerServer.do";
+    public static final String ACCEPT_SERVE_URL = "/custom/app/getVolunteerServe.do";
     //食堂
     public static final String GET_ALL_FOOD_LIST_URL = "/custom/app/getAllFoodlist.do";
     public static final String INSERT_FOOD_ORDER_URL = "/custom/app/insertFoodOrder.do";

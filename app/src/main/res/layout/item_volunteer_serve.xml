@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp_100"
+    android:background="@color/colorWhite"
+    android:padding="@dimen/dp_16">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_serve_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dp_60"
+            android:singleLine="true"
+            android:text="女性会操作手机女性会操作手机女性会操作手机女性会操作手机"
+            android:textColor="@color/colorText1"
+            android:textSize="@dimen/text_30px"/>
+
+        <TextView
+            android:id="@+id/tv_serve_request"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dp_70"
+            android:layout_marginTop="@dimen/dp_4"
+            android:singleLine="true"
+            android:text="女性会操作手机女性会操作手机女性会操作手机女性会操作手机女性会操作手机"
+            android:textColor="@color/colorText2"
+            android:textSize="@dimen/text_26px"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_4"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_serve_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLength="16"
+                android:singleLine="true"
+                android:text="女性会操作手机女性会操女性会操作手机女性会操"
+                android:textColor="@color/colorText2"
+                android:textSize="@dimen/text_26px"/>
+
+            <TextView
+                android:id="@+id/tv_serve_distance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_4"
+                android:singleLine="true"
+                android:text="约1km"
+                android:textColor="@color/colorText2"
+                android:textSize="@dimen/text_26px"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="@dimen/dp_20"
+            android:layout_height="@dimen/dp_20"
+            android:layout_marginRight="@dimen/dp_3"
+            android:src="@drawable/zy5"/>
+
+        <TextView
+            android:id="@+id/tv_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="80"
+            android:textColor="@color/colorDarkOrange"
+            android:textSize="@dimen/sp_20"
+            />
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/iv_accept_serve"
+        android:layout_width="@dimen/dp_24"
+        android:layout_height="@dimen/dp_24"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/bg_primary_circle"
+        android:scaleType="centerInside"
+        android:src="@drawable/db1"
+        />
+
+
+</RelativeLayout>

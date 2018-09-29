@@ -103,6 +103,7 @@
         <activity android:name=".activity.FoodOrderActivity"/>
         <activity android:name=".activity.FoodOrderNoteActivity"/>
         <activity android:name=".activity.MyServeActivity"/>
+        <activity android:name=".activity.VolunteerOrderActivity"/>
 
     </application>
 

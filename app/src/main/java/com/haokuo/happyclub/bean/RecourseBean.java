@@ -8,7 +8,7 @@ import lombok.Data;
  * Created by zjf on 2018/9/14.
  */
 @Data
-public class RecourseBean implements Serializable{
+public class RecourseBean implements Serializable {
     private long id;
     private String serveName;   //服务名称
     private String startTime;    //开始时间

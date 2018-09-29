@@ -36,7 +36,6 @@ public class RecyclerViewDivider extends RecyclerView.ItemDecoration {
             throw new IllegalArgumentException("请输入正确的参数！");
         }
         mOrientation = orientation;
-
         final TypedArray a = context.obtainStyledAttributes(ATTRS);
         mDivider = a.getDrawable(0);
         a.recycle();
@@ -62,14 +61,13 @@ public class RecyclerViewDivider extends RecyclerView.ItemDecoration {
      * @param context
      * @param orientation   列表方向
      * @param dividerHeight 分割线高度
-     * @param dividerColor  分割线颜色
+     * @param dividerColorId  分割线颜色
      */
-    public RecyclerViewDivider(Context context, int orientation, int dividerHeight, int dividerColor) {
+    public RecyclerViewDivider(Context context, int orientation, int dividerHeight,  int dividerColorId) {
         this(context, orientation);
         mDividerHeight = dividerHeight;
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mPaint.setColor(0X00f);
-        mPaint.setAlpha(0);
+        mPaint.setColor(ContextCompat.getColor(context,dividerColorId));
         mPaint.setStyle(Paint.Style.FILL);
     }
 
@@ -77,14 +75,10 @@ public class RecyclerViewDivider extends RecyclerView.ItemDecoration {
         this(context, orientation);
         mDividerHeight = dividerHeight;
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        //        mPaint.setColor(ContextCompat.getColor(context, dividerColorId));
-//        mPaint.setColor(ContextCompat.getColor(context, dividerColorId));
-        mPaint.setColor(0x000);
-        mPaint.setAlpha(0);
+        mPaint.setColor(ContextCompat.getColor(context, dividerColorId));
         mPaint.setStyle(Paint.Style.FILL);
         mPaddingLeft = paddingLeft;
         mPaddingRight = paddingRight;
-        int color = mPaint.getColor();
     }
 
     //获取分割线尺寸
@@ -118,12 +112,11 @@ public class RecyclerViewDivider extends RecyclerView.ItemDecoration {
             RecyclerView.LayoutParams layoutParams = (RecyclerView.LayoutParams) child.getLayoutParams();
             final int top = child.getBottom() + layoutParams.bottomMargin;
             final int bottom = top + mDividerHeight;
-            if (mDivider != null) {
-                mDivider.setBounds(left, top, right, bottom);
-                mDivider.draw(canvas);
-            }
             if (mPaint != null) {
                 canvas.drawRect(left, top, right, bottom, mPaint);
+            } else if (mDivider != null) {
+                mDivider.setBounds(left, top, right, bottom);
+                mDivider.draw(canvas);
             }
         }
     }
@@ -138,12 +131,11 @@ public class RecyclerViewDivider extends RecyclerView.ItemDecoration {
             RecyclerView.LayoutParams layoutParams = (RecyclerView.LayoutParams) child.getLayoutParams();
             final int left = child.getRight() + layoutParams.rightMargin;
             final int right = left + mDividerHeight;
-            if (mDivider != null) {
-                mDivider.setBounds(left, top, right, bottom);
-                mDivider.draw(canvas);
-            }
             if (mPaint != null) {
                 canvas.drawRect(left, top, right, bottom, mPaint);
+            } else if (mDivider != null) {
+                mDivider.setBounds(left, top, right, bottom);
+                mDivider.draw(canvas);
             }
         }
     }

@@ -81,4 +81,12 @@ public abstract class MyRefreshLoadMoreListener<T> implements OnRefreshLoadMoreL
     }
 
     protected abstract void refresh();
+
+    public void setParams(PageParams params) {
+        mParams = params;
+    }
+
+    public PageParams getParams() {
+        return mParams;
+    }
 }

@@ -8,8 +8,8 @@
     app:rightMenuView="@+id/ll_right_menu">
 
     <RelativeLayout
-        android:id="@+id/rl_content"
         xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/rl_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorWhite"
@@ -28,6 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp_12"
+            android:layout_marginRight="@dimen/dp_30"
             android:layout_toRightOf="@id/tv_name"
             android:text="1345949161564"
             android:textColor="@color/colorText1"
@@ -48,8 +49,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_marginLeft="@dimen/dp_6"
+            android:layout_marginRight="@dimen/dp_30"
             android:layout_toRightOf="@id/tv_default_flag"
-            android:text="fdfdfdfdfdfdfdf"
+            android:singleLine="true"
+            android:text="fdfdfdfdfdfdfdffdfdfdfdfdfdfdffdfdfdfdfdfdfdf"
             android:textColor="@color/colorText2"
             android:textSize="@dimen/text_26px"/>
 
@@ -60,6 +63,7 @@
             android:layout_centerVertical="true"
             android:src="@drawable/v"/>
     </RelativeLayout>
+
     <LinearLayout
         android:id="@+id/ll_right_menu"
         android:layout_width="wrap_content"

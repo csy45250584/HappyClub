@@ -16,6 +16,7 @@ import com.haokuo.happyclub.network.bean.ChangeServeStatusParams;
 import com.haokuo.happyclub.network.bean.CheckIsNextParams;
 import com.haokuo.happyclub.network.bean.GetAcceptedServeParams;
 import com.haokuo.happyclub.network.bean.GetRecourseListParams;
+import com.haokuo.happyclub.network.bean.GetVolunteerServeParams;
 import com.haokuo.happyclub.network.bean.LoginByTelParams;
 import com.haokuo.happyclub.network.bean.LoginParams;
 import com.haokuo.happyclub.network.bean.RegisterParams;
@@ -252,7 +253,7 @@ public class HttpHelper {
             field.setAccessible(true);
             //返回输出指定对象a上此 Field表示的字段名和字段值
             try {
-                if (!field.isSynthetic() && !field.getName().equals("serialVersionUID")) { //android studio如果开启的话编译器就会对所有类都添加$change成员变量
+                if (!field.isSynthetic() && !field.getName().equals("serialVersionUID") && field.get(object) != null) { //android studio如果开启的话编译器就会对所有类都添加$change成员变量
                     builder.add(field.getName(), field.get(object).toString());
                 }
             } catch (IllegalAccessException e) {
@@ -417,5 +418,13 @@ public class HttpHelper {
         doPostWithJson(json, UrlConfig.INSERT_FOOD_ORDER_URL, callback);
     }
 
+    /** 志愿工单列表(所有发布的志愿者活动) **/
+    public void getVolunteerServeList(GetVolunteerServeParams entity, NetworkCallback callback) {
+        doPost(entity, UrlConfig.VOLUNTEER_SERVE_LIST_URL, callback);
+    }
 
+    /** 志愿工单列表(所有发布的志愿者活动) **/
+    public void acceptServe(IdParams entity, NetworkCallback callback) {
+        doPost(entity, UrlConfig.ACCEPT_SERVE_URL, callback);
+    }
 }
