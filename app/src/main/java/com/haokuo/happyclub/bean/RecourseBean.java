@@ -27,4 +27,5 @@ public class RecourseBean implements Serializable {
     private String description; //描述
     private String volunteer;    //接单人
     private String userTel;        //求助人信息
+    private float distance;        //手机定位距离服务距离
 }

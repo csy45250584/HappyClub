@@ -1,7 +1,12 @@
 package com.haokuo.happyclub.activity;
 
+import android.Manifest;
+import android.content.DialogInterface;
+import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -9,6 +14,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
+import com.amap.api.location.AMapLocation;
+import com.amap.api.location.AMapLocationClient;
+import com.amap.api.location.AMapLocationClientOption;
+import com.amap.api.location.AMapLocationListener;
+import com.amap.api.services.core.LatLonPoint;
+import com.amap.api.services.route.DistanceResult;
+import com.amap.api.services.route.DistanceSearch;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.haokuo.happyclub.R;
 import com.haokuo.happyclub.adapter.MyRefreshLoadMoreListener;
@@ -26,12 +38,18 @@ import com.haokuo.midtitlebar.MidTitleBar;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
+import java.util.List;
+
 import butterknife.BindView;
 import okhttp3.Call;
+import permissions.dispatcher.NeedsPermission;
+import permissions.dispatcher.OnPermissionDenied;
+import permissions.dispatcher.RuntimePermissions;
 
 /**
  * Created by zjf on 2018/9/28.
  */
+@RuntimePermissions
 public class VolunteerOrderActivity extends BaseActivity {
     @BindView(R.id.mid_title_bar)
     MidTitleBar mMidTitleBar;
@@ -44,6 +62,9 @@ public class VolunteerOrderActivity extends BaseActivity {
     private VolunteerServeAdapter mVolunteerServeAdapter;
     private GetVolunteerServeParams mParams;
     private MyRefreshLoadMoreListener<RecourseBean> mSrlListener;
+    //声明AMapLocationClient类对象
+    public AMapLocationClient mLocationClient = null;
+    private DistanceSearch mDistanceSearch;
 
     @Override
     protected int initContentLayout() {
@@ -176,6 +197,43 @@ public class VolunteerOrderActivity extends BaseActivity {
                 }
             }
         });
+        if (mLocationClient != null) {
+            mLocationClient.setLocationListener(new AMapLocationListener() {
+                @Override
+                public void onLocationChanged(AMapLocation aMapLocation) {
+                    if (aMapLocation != null) {
+                        if (aMapLocation.getErrorCode() == 0) {
+                            //可在其中解析amapLocation获取相应内容。
+                            LatLonPoint latLonPoint = new LatLonPoint(aMapLocation.getLatitude(), aMapLocation.getLongitude());
+                            List<LatLonPoint> latLonPointList = mVolunteerServeAdapter.getLatLonPointList();
+                            DistanceSearch.DistanceQuery distanceQuery = new DistanceSearch.DistanceQuery();
+                            distanceQuery.setOrigins(latLonPointList);
+                            distanceQuery.setDestination(latLonPoint);
+                            mDistanceSearch.calculateRouteDistanceAsyn(distanceQuery);
+                            //                            mVolunteerServeAdapter.setCurrentPoint(latLonPoint);
+                        } else {
+                            //定位失败时，可通过ErrCode（错误码）信息来确定失败的原因，errInfo是错误信息，详见错误码表。
+                            Log.e("AmapError", "location Error, ErrCode:"
+                                    + aMapLocation.getErrorCode() + ", errInfo:"
+                                    + aMapLocation.getErrorInfo());
+                        }
+                    }
+                }
+            });
+        }
+        mDistanceSearch.setDistanceSearchListener(new DistanceSearch.OnDistanceSearchListener() {
+            @Override
+            public void onDistanceSearched(DistanceResult distanceResult, int errorCode) {
+                if (errorCode == 1000) {
+                    for (int i = 0; i < distanceResult.getDistanceResults().size(); i++) {
+                        RecourseBean recourseBean = mVolunteerServeAdapter.getData().get(i);
+                        if (recourseBean != null) {
+                            recourseBean.setDistance(distanceResult.getDistanceResults().get(i).getDistance());
+                        }
+                    }
+                }
+            }
+        });
     }
 
     @Override
@@ -189,5 +247,52 @@ public class VolunteerOrderActivity extends BaseActivity {
         mParams = new GetVolunteerServeParams(null);
         //设置搜索框指针
         mSearchView.setCursorDrawable(R.drawable.search_bar_cursor);
+        //定位初始化
+        VolunteerOrderActivityPermissionsDispatcher.initLocationClientWithPermissionCheck(this);
+    }
+
+    @NeedsPermission({Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION})
+    void initLocationClient() {
+        //初始化定位
+        mLocationClient = new AMapLocationClient(getApplicationContext());
+        AMapLocationClientOption option = new AMapLocationClientOption();
+        //设置定位模式为AMapLocationMode.Hight_Accuracy，高精度模式。
+        option.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
+        //设置是否返回地址信息（默认返回地址信息）
+        option.setNeedAddress(true);
+        if (null != mLocationClient) {
+            mLocationClient.setLocationOption(option);
+            //设置场景模式后最好调用一次stop，再调用start以保证场景模式生效
+            mLocationClient.stopLocation();
+            mLocationClient.startLocation();
+        }
+        //初始化测距
+        mDistanceSearch = new DistanceSearch(this);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        VolunteerOrderActivityPermissionsDispatcher.onRequestPermissionsResult(this, requestCode, grantResults);
+    }
+
+    @OnPermissionDenied({Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION})
+    void onLocationDenied() {
+        new AlertDialog.Builder(this)
+                .setTitle("权限提示")
+                .setMessage("定位权限被拒绝后无法使用定位功能，是否再次请求权限？")
+                .setPositiveButton("是", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        VolunteerOrderActivityPermissionsDispatcher.initLocationClientWithPermissionCheck(VolunteerOrderActivity.this);
+                    }
+                })
+                .setNegativeButton("否", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                })
+                .create()
+                .show();
     }
 }
