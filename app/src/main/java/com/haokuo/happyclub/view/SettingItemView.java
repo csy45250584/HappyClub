@@ -31,6 +31,7 @@ public class SettingItemView extends FrameLayout {
     public SettingItemView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         //View
+
         View inflate = inflate(context, R.layout.view_setting_item, this);
         TextView tvLeftText = inflate.findViewById(R.id.tv_left_text);
         mTvRightText = inflate.findViewById(R.id.tv_right_text);

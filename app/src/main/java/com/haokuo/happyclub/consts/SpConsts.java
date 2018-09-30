@@ -17,4 +17,5 @@ public class SpConsts {
     public static final String KEY_REAL_NAME = "real_name";
     public static final String KEY_SEX = "sex";
     public static final String KEY_TEL = "tel";
+    public static final String KEY_VOLUNTEER_STATUS = "volunteer_status";
 }

@@ -427,4 +427,9 @@ public class HttpHelper {
     public void acceptServe(IdParams entity, NetworkCallback callback) {
         doPost(entity, UrlConfig.ACCEPT_SERVE_URL, callback);
     }
+
+    /** 接受志愿者工单 **/
+    public void apply2beVolunteer( NetworkCallback callback) {
+        doPost(null, UrlConfig.APPLY_2BE_VOLUNTEER_URL, callback);
+    }
 }

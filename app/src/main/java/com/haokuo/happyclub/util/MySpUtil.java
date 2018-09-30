@@ -45,6 +45,7 @@ public class MySpUtil {
         mPersonInfoSp.put(SpConsts.KEY_ID_CARD, userInfoBean.getIdCard());
         mPersonInfoSp.put(SpConsts.KEY_REAL_NAME, userInfoBean.getRealname());
         mPersonInfoSp.put(SpConsts.KEY_SEX, userInfoBean.getSex());
+        mPersonInfoSp.put(SpConsts.KEY_VOLUNTEER_STATUS, userInfoBean.getVolunteerStatus());
     }
 
     public UserInfoBean getUserInfo() {
@@ -55,6 +56,7 @@ public class MySpUtil {
         userInfoBean.setIdCard(mPersonInfoSp.getString(SpConsts.KEY_ID_CARD));
         userInfoBean.setRealname(mPersonInfoSp.getString(SpConsts.KEY_REAL_NAME));
         userInfoBean.setSex(mPersonInfoSp.getString(SpConsts.KEY_SEX));
+        userInfoBean.setVolunteerStatus(mPersonInfoSp.getInt(SpConsts.KEY_VOLUNTEER_STATUS));
         return userInfoBean;
     }
 
@@ -64,5 +66,9 @@ public class MySpUtil {
 
     public String geTel() {
         return mPersonInfoSp.getString(SpConsts.KEY_TEL);
+    }
+
+    public int getVolunteerStatus() {
+        return mPersonInfoSp.getInt(SpConsts.KEY_VOLUNTEER_STATUS);
     }
 }

@@ -1,6 +1,8 @@
 package com.haokuo.happyclub.fragment;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,12 +15,18 @@ import com.haokuo.happyclub.activity.VolunteerOrderActivity;
 import com.haokuo.happyclub.adapter.ActionAdapter;
 import com.haokuo.happyclub.base.BaseLazyLoadFragment;
 import com.haokuo.happyclub.bean.ActionBean;
+import com.haokuo.happyclub.bean.UserInfoBean;
+import com.haokuo.happyclub.network.HttpHelper;
+import com.haokuo.happyclub.network.NetworkCallback;
 import com.haokuo.happyclub.util.GlideImageLoader;
+import com.haokuo.happyclub.util.MySpUtil;
+import com.haokuo.happyclub.util.utilscode.ToastUtils;
 import com.youth.banner.Banner;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
+import okhttp3.Call;
 
 /**
  * Created by zjf on 2018/9/11.
@@ -54,7 +62,7 @@ public class HomeFragment extends BaseLazyLoadFragment {
 
     private void initVolunteerActionAdapter() {
         ArrayList<ActionBean> actionBeans = new ArrayList<>();
-        actionBeans.add(new ActionBean("党员录入", R.drawable.zy1));
+        actionBeans.add(new ActionBean("志愿者申请", R.drawable.zy1));
         actionBeans.add(new ActionBean("志愿工单", R.drawable.zy2, VolunteerOrderActivity.class));
         actionBeans.add(new ActionBean("我的服务", R.drawable.zy3));
         actionBeans.add(new ActionBean("服务评价", R.drawable.zy4));
@@ -91,11 +99,52 @@ public class HomeFragment extends BaseLazyLoadFragment {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 ActionBean item = mVolunteerActionAdapter.getItem(position);
-                if (item != null && item.getClz() != null) {
-                    Intent intent = new Intent(mContext, item.getClz());
-                    startActivity(intent);
+                if (item != null) {
+                    if (item.getClz() != null) {
+                        Intent intent = new Intent(mContext, item.getClz());
+                        startActivity(intent);
+                    } else {
+                        switch (item.getTitle()) {
+                            case "志愿者申请":
+                                int volunteerStatus = MySpUtil.getInstance().getVolunteerStatus();
+                                if (volunteerStatus == UserInfoBean.VOLUNTEER_STATUS_NONE || volunteerStatus == UserInfoBean.VOLUNTEER_STATUS_REJECTED) {
+                                    showApply2BeVolunteer();
+                                } else if (volunteerStatus == UserInfoBean.VOLUNTEER_STATUS_UNCHECKED) {
+                                    ToastUtils.showShort("您的志愿者已等待审核,无须再次提交!");
+                                }else if (volunteerStatus == UserInfoBean.VOLUNTEER_STATUS_AGREED) {
+                                    ToastUtils.showShort("您已是志愿者,无须申请!");
+                                }
+                                break;
+                        }
+                    }
                 }
             }
         });
+    }
+
+    private void showApply2BeVolunteer() {
+        new AlertDialog.Builder(mContext)
+                .setTitle("申请成为志愿者")
+                .setMessage("成为志愿者后能够提供服务以赚取积分,是否成为志愿者?")
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        mContext.showLoading("正在提交...");
+                        HttpHelper.getInstance().apply2beVolunteer(new NetworkCallback() {
+                            @Override
+                            public void onSuccess(Call call, String json) {
+                                mContext.loadSuccess("申请成功,等待审核",false);
+                            }
+
+                            @Override
+                            public void onFailure(Call call, String message) {
+                                mContext.loadFailed("申请失败," + message);
+                            }
+                        });
+                    }
+                })
+                .setNegativeButton("取消", null)
+                .create()
+                .show();
     }
 }

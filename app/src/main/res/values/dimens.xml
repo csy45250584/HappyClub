@@ -402,6 +402,7 @@
     <dimen name="sp_10">10sp</dimen>
     <dimen name="sp_11">11sp</dimen>
     <dimen name="sp_12">12sp</dimen>
+    <dimen name="sp_12_1">12.1sp</dimen>
     <dimen name="sp_13">13sp</dimen>
     <dimen name="sp_13_2">13.2sp</dimen>
     <dimen name="sp_14">14sp</dimen>
@@ -440,6 +441,8 @@
     <dimen name="text_28px">@dimen/sp_15_4</dimen>
     <dimen name="text_26px">@dimen/sp_14_3</dimen>
     <dimen name="text_24px">@dimen/sp_13_2</dimen>
+    <dimen name="text_22px">@dimen/sp_12_1</dimen>
+    <dimen name="text_20px">@dimen/sp_11</dimen>
     <dimen name="button_corners">@dimen/dp_4</dimen>
     <dimen name="button_height">@dimen/dp_52</dimen>
 </resources>
