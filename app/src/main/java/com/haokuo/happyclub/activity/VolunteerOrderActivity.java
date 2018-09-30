@@ -26,8 +26,6 @@ import com.haokuo.midtitlebar.MidTitleBar;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
-import java.util.List;
-
 import butterknife.BindView;
 import okhttp3.Call;
 
@@ -46,7 +44,6 @@ public class VolunteerOrderActivity extends BaseActivity {
     private VolunteerServeAdapter mVolunteerServeAdapter;
     private GetVolunteerServeParams mParams;
     private MyRefreshLoadMoreListener<RecourseBean> mSrlListener;
-    private List<RecourseBean> mRecourseBeanList;
 
     @Override
     protected int initContentLayout() {
