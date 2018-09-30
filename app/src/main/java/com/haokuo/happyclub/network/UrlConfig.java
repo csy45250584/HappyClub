@@ -15,6 +15,8 @@ public class UrlConfig {
     public static final String LOGIN_BY_TEL_URL = "/custom/loginTel.do";
     public static final String LOGIN_URL = "/custom/login.do";
     public static final String GET_RESET_VERIFY_CODE_URL = "/custom/resetVerificationCode.do";
+    public static final String GET_BIND_VERIFY_CODE_URL = "/custom/app/bindingVerificationCode.do";
+    public static final String BIND_USER_TEL_URL = "/custom/app/updateUserTel.do";
     public static final String CHECK_IS_NEXT_URL = "/custom/checkIsNext.do";
     public static final String RESET_PASSWORD_URL = "/custom/resetPassword.do";
     public static final String UPDATE_PASSWORD_URL = "/custom/app/updatePassword.do";

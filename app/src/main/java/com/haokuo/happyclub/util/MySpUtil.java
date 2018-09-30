@@ -67,7 +67,9 @@ public class MySpUtil {
     public String geTel() {
         return mPersonInfoSp.getString(SpConsts.KEY_TEL);
     }
-
+    public void saveTel(String tel) {
+         mPersonInfoSp.put(SpConsts.KEY_TEL,tel);
+    }
     public int getVolunteerStatus() {
         return mPersonInfoSp.getInt(SpConsts.KEY_VOLUNTEER_STATUS);
     }

@@ -18,6 +18,7 @@ import com.haokuo.happyclub.network.NetworkCallback;
 import com.haokuo.happyclub.network.bean.LoginByTelParams;
 import com.haokuo.happyclub.network.bean.LoginParams;
 import com.haokuo.happyclub.network.bean.base.TelPhoneParams;
+import com.haokuo.happyclub.util.MySpUtil;
 import com.haokuo.happyclub.util.utilscode.RegexUtils;
 import com.haokuo.happyclub.util.utilscode.SPUtils;
 import com.haokuo.happyclub.util.utilscode.ToastUtils;
@@ -103,7 +104,7 @@ public class LoginActivity extends BaseActivity {
                 spUtils.put(SpConsts.KEY_USER_ID, result.getUserId());
                 spUtils.put(SpConsts.KEY_TOKEN, result.getToken());
                 String tel = mIsTelLogin ? mEtTel.getEditableText().toString().trim() : mEtAccount.getEditableText().toString().trim();
-                spUtils.put(SpConsts.KEY_TEL,tel );
+                MySpUtil.getInstance().saveTel(tel);
                 loadSuccess("登录成功", new LoadingDialog.OnFinishListener() {
                     @Override
                     public void onFinish() {

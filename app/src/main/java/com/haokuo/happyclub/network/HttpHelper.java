@@ -12,9 +12,11 @@ import com.haokuo.happyclub.bean.FoodOrderBean;
 import com.haokuo.happyclub.bean.RecourseBean;
 import com.haokuo.happyclub.bean.SuccessBean;
 import com.haokuo.happyclub.bean.UserInfoBean;
+import com.haokuo.happyclub.network.bean.BindUserTelParams;
 import com.haokuo.happyclub.network.bean.ChangeServeStatusParams;
 import com.haokuo.happyclub.network.bean.CheckIsNextParams;
 import com.haokuo.happyclub.network.bean.GetAcceptedServeParams;
+import com.haokuo.happyclub.network.bean.GetBindTelCodeParams;
 import com.haokuo.happyclub.network.bean.GetRecourseListParams;
 import com.haokuo.happyclub.network.bean.GetVolunteerServeParams;
 import com.haokuo.happyclub.network.bean.LoginByTelParams;
@@ -314,6 +316,16 @@ public class HttpHelper {
         doPost(params, UrlConfig.GET_RESET_VERIFY_CODE_URL, callback);
     }
 
+    /** 重新绑定手机 **/
+    public void bindUserTel(BindUserTelParams params, NetworkCallback callback) {
+        doPost(params, UrlConfig.BIND_USER_TEL_URL, callback);
+    }
+
+    /** 获取重新绑定手机验证码 **/
+    public void getBindVerifyCode(GetBindTelCodeParams params, NetworkCallback callback) {
+        doPost(params, UrlConfig.GET_BIND_VERIFY_CODE_URL, callback);
+    }
+
     /** 是否允许重置密码 **/
     public void checkIsNext(CheckIsNextParams params, NetworkCallback callback) {
         doPost(params, UrlConfig.CHECK_IS_NEXT_URL, callback);
@@ -429,7 +441,7 @@ public class HttpHelper {
     }
 
     /** 接受志愿者工单 **/
-    public void apply2beVolunteer( NetworkCallback callback) {
+    public void apply2beVolunteer(NetworkCallback callback) {
         doPost(null, UrlConfig.APPLY_2BE_VOLUNTEER_URL, callback);
     }
 }
