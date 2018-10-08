@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp_100"
+    android:background="@color/colorWhite"
+    android:padding="@dimen/dp_16">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_report_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:text="辅助老人操作手机"
+            android:textColor="@color/colorText1"
+            android:textSize="@dimen/text_28px"/>
+
+
+        <TextView
+            android:id="@+id/tv_report_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_4"
+            android:singleLine="true"
+            android:text="女性会操作手机女性会操"
+            android:textColor="@color/colorText2"
+            android:textSize="@dimen/text_26px"/>
+
+        <TextView
+            android:id="@+id/tv_report_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_4"
+            android:singleLine="true"
+            android:text="积分:80"
+            android:textColor="@color/colorText2"
+            android:textSize="@dimen/text_24px"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_repair_state"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:text="未完成"
+        android:textColor="@color/colorText2"
+        android:textSize="@dimen/text_26px"/>
+
+</RelativeLayout>

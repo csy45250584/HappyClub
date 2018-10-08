@@ -111,6 +111,9 @@
         <activity android:name=".activity.ReportRepairActivity"/>
         <activity android:name=".activity.RepairListActivity"/>
         <activity android:name=".activity.RepairDetailActivity"/>
+        <activity android:name=".activity.SuggestListActivity"/>
+        <activity android:name=".activity.ReportSuggestActivity"/>
+        <activity android:name=".activity.SuggestDetailActivity"/>
 
     </application>
 

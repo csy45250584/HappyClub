@@ -43,9 +43,11 @@ public class UrlConfig {
     public static final String GET_ALL_FOOD_LIST_URL = "/custom/app/getAllFoodlist.do";
     public static final String INSERT_FOOD_ORDER_URL = "/custom/app/insertFoodOrder.do";
 
-    //物业报修
+    //报修投诉
     public static final String REPORT_REPAIR_URL = "/custom/app/insertPropertyRepair.do";
     public static final String GET_MY_REPAIR_URL = "/custom/app/getMyPropertyRepair.do";
+    public static final String REPORT_SUGGEST_URL = "/custom/app/insertPropertySuggest.do";
+    public static final String GET_MY_SUGGEST_URL = "/custom/app/getMyPropertySuggest.do";
 
     public static String buildImageUrl(String url) {
         return IMAGE_BASE_URL + url;

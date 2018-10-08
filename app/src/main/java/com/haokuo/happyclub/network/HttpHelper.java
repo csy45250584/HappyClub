@@ -12,6 +12,7 @@ import com.haokuo.happyclub.bean.FoodOrderBean;
 import com.haokuo.happyclub.bean.RecourseBean;
 import com.haokuo.happyclub.bean.RepairBean;
 import com.haokuo.happyclub.bean.SuccessBean;
+import com.haokuo.happyclub.bean.SuggestBean;
 import com.haokuo.happyclub.bean.UserInfoBean;
 import com.haokuo.happyclub.network.bean.BindUserTelParams;
 import com.haokuo.happyclub.network.bean.ChangeServeStatusParams;
@@ -451,9 +452,19 @@ public class HttpHelper {
     public void reportRepair(RepairBean json, NetworkCallback callback) {
         doPostWithJson(json, UrlConfig.REPORT_REPAIR_URL, callback);
     }
+
     /** 获取我的报修列表 **/
     public void getRepairList(PageParams entity, NetworkCallback callback) {
         doPost(entity, UrlConfig.GET_MY_REPAIR_URL, callback);
     }
 
+    /** 发起物业投诉 **/
+    public void reportSuggest(SuggestBean json, NetworkCallback callback) {
+        doPostWithJson(json, UrlConfig.REPORT_SUGGEST_URL, callback);
+    }
+
+    /** 获取我的投诉列表 **/
+    public void getSuggestList(PageParams entity, NetworkCallback callback) {
+        doPost(entity, UrlConfig.GET_MY_SUGGEST_URL, callback);
+    }
 }

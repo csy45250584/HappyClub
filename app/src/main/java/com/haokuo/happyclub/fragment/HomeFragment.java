@@ -12,6 +12,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.haokuo.happyclub.R;
 import com.haokuo.happyclub.activity.CanteenActivity;
 import com.haokuo.happyclub.activity.RepairListActivity;
+import com.haokuo.happyclub.activity.SuggestListActivity;
 import com.haokuo.happyclub.activity.VolunteerOrderActivity;
 import com.haokuo.happyclub.adapter.ActionAdapter;
 import com.haokuo.happyclub.base.BaseLazyLoadFragment;
@@ -79,7 +80,7 @@ public class HomeFragment extends BaseLazyLoadFragment {
         actionBeans.add(new ActionBean("幸福积分", R.drawable.q4));
         actionBeans.add(new ActionBean("幸福食堂", R.drawable.q5, CanteenActivity.class));
         actionBeans.add(new ActionBean("物业报修", R.drawable.q6, RepairListActivity.class));
-        actionBeans.add(new ActionBean("物业投诉", R.drawable.q7));
+        actionBeans.add(new ActionBean("物业投诉", R.drawable.q7,SuggestListActivity.class));
         actionBeans.add(new ActionBean("更多", R.drawable.q8));
         mActionAdapter.setNewData(actionBeans);
     }
