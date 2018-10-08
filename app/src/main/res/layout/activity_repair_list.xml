@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.haokuo.midtitlebar.MidTitleBar
+        android:id="@+id/mid_title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_56"
+        app:midTitle="物业报修"/>
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/srl_my_repair"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        >
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_my_repair"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+    <com.rey.material.widget.Button
+        android:id="@+id/btn_new_repair"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/button_height"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:text="我要报修"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/sp_18"
+        app:rd_style="@style/NoCornerButtonStyle"
+        />
+</LinearLayout>

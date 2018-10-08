@@ -10,6 +10,7 @@ import com.haokuo.happyclub.bean.AddressResultBean;
 import com.haokuo.happyclub.bean.EvaluationBean;
 import com.haokuo.happyclub.bean.FoodOrderBean;
 import com.haokuo.happyclub.bean.RecourseBean;
+import com.haokuo.happyclub.bean.RepairBean;
 import com.haokuo.happyclub.bean.SuccessBean;
 import com.haokuo.happyclub.bean.UserInfoBean;
 import com.haokuo.happyclub.network.bean.BindUserTelParams;
@@ -27,6 +28,7 @@ import com.haokuo.happyclub.network.bean.UpdatePasswordParams;
 import com.haokuo.happyclub.network.bean.UploadFileParams;
 import com.haokuo.happyclub.network.bean.base.IGetParamsMap;
 import com.haokuo.happyclub.network.bean.base.IdParams;
+import com.haokuo.happyclub.network.bean.base.PageParams;
 import com.haokuo.happyclub.network.bean.base.TelPhoneParams;
 import com.haokuo.happyclub.network.bean.base.UserIdTokenParams;
 import com.haokuo.happyclub.util.MySpUtil;
@@ -440,8 +442,18 @@ public class HttpHelper {
         doPost(entity, UrlConfig.ACCEPT_SERVE_URL, callback);
     }
 
-    /** 接受志愿者工单 **/
+    /** 申请成为志愿者 **/
     public void apply2beVolunteer(NetworkCallback callback) {
         doPost(null, UrlConfig.APPLY_2BE_VOLUNTEER_URL, callback);
     }
+
+    /** 发起物业报修 **/
+    public void reportRepair(RepairBean json, NetworkCallback callback) {
+        doPostWithJson(json, UrlConfig.REPORT_REPAIR_URL, callback);
+    }
+    /** 获取我的报修列表 **/
+    public void getRepairList(PageParams entity, NetworkCallback callback) {
+        doPost(entity, UrlConfig.GET_MY_REPAIR_URL, callback);
+    }
+
 }

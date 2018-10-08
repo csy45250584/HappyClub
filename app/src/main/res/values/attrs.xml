@@ -25,4 +25,8 @@
             <enum name="selector" value="2"/>
         </attr>
     </declare-styleable>
+    <declare-styleable name="TitleTextView">
+        <attr name="titleText"/>
+        <attr name="contentText" format="string"/>
+    </declare-styleable>
 </resources>

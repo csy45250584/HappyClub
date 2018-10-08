@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.haokuo.midtitlebar.MidTitleBar
+        android:id="@+id/mid_title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_56"
+        app:midTitle="发起报修"/>
+
+    <com.haokuo.happyclub.view.TitleEditorView
+        android:id="@+id/et_repair_name"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:layout_marginTop="@dimen/dp_8"
+        app:editorHint="请填写报修人姓名"
+        app:titleText="姓         名"
+        app:type="editor"/>
+
+    <com.haokuo.happyclub.view.TitleEditorView
+        android:id="@+id/et_repair_tel"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:layout_marginTop="@dimen/dp_1"
+        app:editorHint="请填写报修人联系方式"
+        app:titleText="联系方式"
+        app:type="editor"/>
+
+    <com.haokuo.happyclub.view.TitleEditorView
+        android:id="@+id/et_repair_address"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:layout_marginTop="@dimen/dp_8"
+        app:editorHint="请填写报修地点"
+        app:titleText="报修地点"
+        app:type="editor"/>
+
+    <com.haokuo.happyclub.view.TitleEditorView
+        android:id="@+id/et_repair_type"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:layout_marginTop="@dimen/dp_1"
+        app:selectText="请选择报修类型"
+        app:titleText="报修类型"
+        app:type="selector"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_1"
+        android:background="@color/colorWhite"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/dp_8"
+        android:paddingLeft="@dimen/dp_25"
+        android:paddingRight="@dimen/dp_25"
+        android:paddingTop="@dimen/dp_14">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="报修内容"
+            android:textColor="@color/colorText1"
+            android:textSize="@dimen/text_28px"/>
+
+        <EditText
+            android:id="@+id/et_repair_content"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_80"
+            android:layout_marginTop="@dimen/dp_8"
+            android:background="@color/colorWhite"
+            android:gravity="left|top"
+            android:hint="请填写报修内容"
+            android:padding="@dimen/dp_2"
+            android:textColor="@color/colorText2"
+            android:textSize="@dimen/text_28px"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_60"
+        android:layout_marginTop="@dimen/dp_1"
+        android:background="@color/colorWhite"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/dp_25"
+        android:paddingRight="@dimen/dp_25">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="上传图片"
+            android:textColor="@color/colorText1"
+            android:textSize="@dimen/text_28px"/>
+
+        <ImageView
+            android:id="@+id/iv_repair_image"
+            android:layout_width="@dimen/dp_50"
+            android:layout_height="@dimen/dp_50"
+            android:layout_marginLeft="@dimen/dp_18"
+            android:src="@drawable/tianjia_add"/>
+    </LinearLayout>
+</LinearLayout>

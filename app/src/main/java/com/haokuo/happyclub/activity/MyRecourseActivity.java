@@ -54,7 +54,7 @@ public class MyRecourseActivity extends BaseActivity {
     protected void initData() {
         mRvMyRecourse.setLayoutManager(new LinearLayoutManager(this));
         int dividerHeight = (int) (getResources().getDimension(R.dimen.dp_1) + 0.5f);
-        mRvMyRecourse.addItemDecoration(new RecyclerViewDivider(this, LinearLayoutManager.HORIZONTAL, dividerHeight, R.color.divider,
+        mRvMyRecourse.addItemDecoration(new RecyclerViewDivider(this, LinearLayoutManager.HORIZONTAL, dividerHeight, R.color.colorDefBg,
                 0, 0));
         mRecourseAdapter = new RecourseAdapter(R.layout.item_my_recourse);
         mRvMyRecourse.setAdapter(mRecourseAdapter);

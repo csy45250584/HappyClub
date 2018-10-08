@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">HappyClub</string>
+    <string-array name="report_repair_type">
+        <item>水电</item>
+        <item>煤气</item>
+        <item>安防</item>
+        <item>公共</item>
+        <item>其他</item>
+    </string-array>
 </resources>
