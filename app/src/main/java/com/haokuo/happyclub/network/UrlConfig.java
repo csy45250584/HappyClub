@@ -6,7 +6,8 @@ package com.haokuo.happyclub.network;
 
 public class UrlConfig {
     public static final String IMAGE_STRING_SPLIT = ",";
-    public static final String BASE_URL = "http://192.168.1.193:9088/xfhsi/";
+//    public static final String BASE_URL = "http://192.168.1.193:9088/xfhsi/";
+    public static final String BASE_URL = "http://18t69t8992.51mypc.cn:9088/xfhsi/";
     public static final String IMAGE_BASE_URL = "http://18t69t8992.51mypc.cn:9088/xfhs/upload/";
     //个人信息
     public static final String REGISTER_URL = "/custom/register.do";
@@ -48,6 +49,9 @@ public class UrlConfig {
     public static final String GET_MY_REPAIR_URL = "/custom/app/getMyPropertyRepair.do";
     public static final String REPORT_SUGGEST_URL = "/custom/app/insertPropertySuggest.do";
     public static final String GET_MY_SUGGEST_URL = "/custom/app/getMyPropertySuggest.do";
+    //会所服务
+    public static final String GET_SERVICE_TYPE_URL = "/custom/app/getAllServicelist.do";
+    public static final String GET_CLUB_SERVICE_URL = "/custom/app/getAllService.do";
 
     public static String buildImageUrl(String url) {
         return IMAGE_BASE_URL + url;

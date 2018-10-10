@@ -107,23 +107,29 @@ public class SetPersonalInfoActivity extends BaseActivity implements Toolbar.OnM
 
     @Override
     public boolean onMenuItemClick(MenuItem menuItem) {
-        final UserInfoBean userInfo = MySpUtil.getInstance().getUserInfo();
+        final UserInfoBean userInfoOrignal = MySpUtil.getInstance().getUserInfo();
+        final UserInfoBean userInfo = new UserInfoBean();
         if (menuItem.getItemId() == R.id.item_commit) {
             switch (mType) {
                 case TYPE_NICKNAME:
                     userInfo.setUserName(mEtInfo.getEditableText().toString());
+                    userInfoOrignal.setUserName(mEtInfo.getEditableText().toString());
                     break;
                 case TYPE_REAL_NAME:
                     userInfo.setRealname(mEtInfo.getEditableText().toString());
+                    userInfoOrignal.setRealname(mEtInfo.getEditableText().toString());
                     break;
                 case TYPE_SEX:
                     userInfo.setSex(mSivSexMale.isChecked() ? "男" : "女");
+                    userInfoOrignal.setSex(mSivSexMale.isChecked() ? "男" : "女");
                     break;
                 case TYPE_BIRTHDAY:
                     userInfo.setBirthday(mSivBirthday.getLeftText());
+                    userInfoOrignal.setBirthday(mSivBirthday.getLeftText());
                     break;
                 case TYPE_ID_CARD:
                     userInfo.setIdCard(mEtInfo.getEditableText().toString());
+                    userInfoOrignal.setIdCard(mEtInfo.getEditableText().toString());
                     break;
             }
             showLoading("提交中...");
@@ -131,7 +137,7 @@ public class SetPersonalInfoActivity extends BaseActivity implements Toolbar.OnM
                 @Override
                 public void onSuccess(Call call, String json) {
                     loadSuccess("修改成功");
-                    MySpUtil.getInstance().saveUserInfo(userInfo);
+                    MySpUtil.getInstance().saveUserInfo(userInfoOrignal);
                 }
 
                 @Override

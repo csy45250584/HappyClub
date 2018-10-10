@@ -11,6 +11,7 @@ import android.view.View;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.haokuo.happyclub.R;
 import com.haokuo.happyclub.activity.CanteenActivity;
+import com.haokuo.happyclub.activity.ClubServiceActivity;
 import com.haokuo.happyclub.activity.RepairListActivity;
 import com.haokuo.happyclub.activity.SuggestListActivity;
 import com.haokuo.happyclub.activity.VolunteerOrderActivity;
@@ -75,7 +76,7 @@ public class HomeFragment extends BaseLazyLoadFragment {
     private void initActionAdapter() {
         ArrayList<ActionBean> actionBeans = new ArrayList<>();
         actionBeans.add(new ActionBean("签到", R.drawable.q1));
-        actionBeans.add(new ActionBean("会所服务", R.drawable.q2));
+        actionBeans.add(new ActionBean("会所服务", R.drawable.q2,ClubServiceActivity.class));
         actionBeans.add(new ActionBean("活动公开", R.drawable.q3));
         actionBeans.add(new ActionBean("幸福积分", R.drawable.q4));
         actionBeans.add(new ActionBean("幸福食堂", R.drawable.q5, CanteenActivity.class));

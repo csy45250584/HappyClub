@@ -32,6 +32,7 @@ import com.haokuo.happyclub.network.bean.base.IdParams;
 import com.haokuo.happyclub.network.bean.base.PageParams;
 import com.haokuo.happyclub.network.bean.base.TelPhoneParams;
 import com.haokuo.happyclub.network.bean.base.UserIdTokenParams;
+import com.haokuo.happyclub.network.bean.GetClubServiceParams;
 import com.haokuo.happyclub.util.MySpUtil;
 
 import java.io.File;
@@ -466,5 +467,15 @@ public class HttpHelper {
     /** 获取我的投诉列表 **/
     public void getSuggestList(PageParams entity, NetworkCallback callback) {
         doPost(entity, UrlConfig.GET_MY_SUGGEST_URL, callback);
+    }
+
+    /** 获取服务分类信息 **/
+    public void getServiceType(NetworkCallback callback) {
+        doPost(null, UrlConfig.GET_SERVICE_TYPE_URL, callback);
+    }
+
+    /** 获取会所服务信息 **/
+    public void getClubService(GetClubServiceParams entity, NetworkCallback callback) {
+        doPost(entity, UrlConfig.GET_CLUB_SERVICE_URL, callback);
     }
 }

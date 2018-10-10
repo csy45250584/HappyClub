@@ -51,6 +51,7 @@ import permissions.dispatcher.RuntimePermissions;
  */
 @RuntimePermissions
 public class VolunteerOrderActivity extends BaseActivity {
+    private static final String TAG = "VolunteerOrderActivity";
     @BindView(R.id.mid_title_bar)
     MidTitleBar mMidTitleBar;
     @BindView(R.id.search_view)
@@ -63,7 +64,7 @@ public class VolunteerOrderActivity extends BaseActivity {
     private GetVolunteerServeParams mParams;
     private MyRefreshLoadMoreListener<RecourseBean> mSrlListener;
     //声明AMapLocationClient类对象
-    public AMapLocationClient mLocationClient = null;
+    private AMapLocationClient mLocationClient = null;
     private DistanceSearch mDistanceSearch;
 
     @Override
@@ -86,6 +87,16 @@ public class VolunteerOrderActivity extends BaseActivity {
             }
         }
         return super.dispatchTouchEvent(ev);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mLocationClient != null) {
+            mLocationClient.stopLocation();//停止定位后，本地定位服务并不会被销毁
+            mLocationClient.onDestroy();//销毁定位客户端，同时销毁本地定位服务。
+            mLocationClient = null;
+        }
     }
 
     @Override
@@ -197,43 +208,6 @@ public class VolunteerOrderActivity extends BaseActivity {
                 }
             }
         });
-        if (mLocationClient != null) {
-            mLocationClient.setLocationListener(new AMapLocationListener() {
-                @Override
-                public void onLocationChanged(AMapLocation aMapLocation) {
-                    if (aMapLocation != null) {
-                        if (aMapLocation.getErrorCode() == 0) {
-                            //可在其中解析amapLocation获取相应内容。
-                            LatLonPoint latLonPoint = new LatLonPoint(aMapLocation.getLatitude(), aMapLocation.getLongitude());
-                            List<LatLonPoint> latLonPointList = mVolunteerServeAdapter.getLatLonPointList();
-                            DistanceSearch.DistanceQuery distanceQuery = new DistanceSearch.DistanceQuery();
-                            distanceQuery.setOrigins(latLonPointList);
-                            distanceQuery.setDestination(latLonPoint);
-                            mDistanceSearch.calculateRouteDistanceAsyn(distanceQuery);
-                            //                            mVolunteerServeAdapter.setCurrentPoint(latLonPoint);
-                        } else {
-                            //定位失败时，可通过ErrCode（错误码）信息来确定失败的原因，errInfo是错误信息，详见错误码表。
-                            Log.e("AmapError", "location Error, ErrCode:"
-                                    + aMapLocation.getErrorCode() + ", errInfo:"
-                                    + aMapLocation.getErrorInfo());
-                        }
-                    }
-                }
-            });
-        }
-        mDistanceSearch.setDistanceSearchListener(new DistanceSearch.OnDistanceSearchListener() {
-            @Override
-            public void onDistanceSearched(DistanceResult distanceResult, int errorCode) {
-                if (errorCode == 1000) {
-                    for (int i = 0; i < distanceResult.getDistanceResults().size(); i++) {
-                        RecourseBean recourseBean = mVolunteerServeAdapter.getData().get(i);
-                        if (recourseBean != null) {
-                            recourseBean.setDistance(distanceResult.getDistanceResults().get(i).getDistance());
-                        }
-                    }
-                }
-            }
-        });
     }
 
     @Override
@@ -268,6 +242,50 @@ public class VolunteerOrderActivity extends BaseActivity {
         }
         //初始化测距
         mDistanceSearch = new DistanceSearch(this);
+        if (mLocationClient != null) {
+            mLocationClient.setLocationListener(new AMapLocationListener() {
+                @Override
+                public void onLocationChanged(AMapLocation aMapLocation) {
+                    if (aMapLocation != null) {
+                        if (aMapLocation.getErrorCode() == 0) {
+                            //可在其中解析amapLocation获取相应内容。
+                            LatLonPoint latLonPoint = new LatLonPoint(aMapLocation.getLatitude(), aMapLocation.getLongitude());
+                            List<LatLonPoint> latLonPointList = mVolunteerServeAdapter.getLatLonPointList();
+                            if (latLonPointList.size() > 0) {
+                                DistanceSearch.DistanceQuery distanceQuery = new DistanceSearch.DistanceQuery();
+                                distanceQuery.setOrigins(latLonPointList);
+                                distanceQuery.setDestination(latLonPoint);
+                                mDistanceSearch.calculateRouteDistanceAsyn(distanceQuery);
+                            }
+                        } else {
+                            //定位失败时，可通过ErrCode（错误码）信息来确定失败的原因，errInfo是错误信息，详见错误码表。
+                            Log.e("AmapError", "location Error, ErrCode:"
+                                    + aMapLocation.getErrorCode() + ", errInfo:"
+                                    + aMapLocation.getErrorInfo());
+                        }
+                    }
+                }
+            });
+        }
+        if (mDistanceSearch != null) {
+            mDistanceSearch.setDistanceSearchListener(new DistanceSearch.OnDistanceSearchListener() {
+                @Override
+                public void onDistanceSearched(DistanceResult distanceResult, int errorCode) {
+                    if (errorCode == 1000) {
+                        Log.v("MY_CUSTOM_TAG", "VolunteerOrderActivity onDistanceSearched()-->");
+                        for (int i = 0; i < distanceResult.getDistanceResults().size(); i++) {
+                            RecourseBean recourseBean = mVolunteerServeAdapter.getData().get(i);
+                            if (recourseBean != null) {
+                                recourseBean.setDistance(distanceResult.getDistanceResults().get(i).getDistance());
+                            }
+                        }
+                        mVolunteerServeAdapter.notifyDataSetChanged();
+                    } else {
+                        Log.e(TAG, "onDistanceSearched: " + "errorCode = " + errorCode);
+                    }
+                }
+            });
+        }
     }
 
     @Override

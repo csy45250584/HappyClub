@@ -1,7 +1,6 @@
 package com.haokuo.happyclub.adapter;
 
 import com.amap.api.services.core.LatLonPoint;
-import com.amap.api.services.route.DistanceSearch;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.haokuo.happyclub.R;
@@ -26,11 +25,18 @@ public class VolunteerServeAdapter extends BaseQuickAdapter<RecourseBean, BaseVi
         helper.setText(R.id.tv_serve_address, item.getAddress());
         //TODO 设置距离
         helper.setVisible(R.id.tv_serve_distance, item.getDistance() != 0);
+        float distance = item.getDistance();
+        String distanceString;
+        if (distance >= 1000) {
+            float temp = distance / 1000;
+            distanceString = String.format("约%.1fkm", temp);
+        } else {
+            distanceString = String.format("约%.0fm", distance);
+        }
+        helper.setText(R.id.tv_serve_distance, distanceString);
         helper.setText(R.id.tv_score, String.valueOf(item.getIntegral()));
         helper.addOnClickListener(R.id.iv_accept_serve);
     }
-
-
 
     public List<LatLonPoint> getLatLonPointList() {
         ArrayList<LatLonPoint> latLonPoints = new ArrayList<>();
