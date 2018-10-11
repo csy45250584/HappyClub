@@ -33,6 +33,7 @@ public class UrlConfig {
     public static final String GET_RECOURSE_LIST_URL = "/custom/app/myPopServe.do";
     public static final String NEW_RECOURSE_URL = "/custom/app/insertServe.do";
     public static final String DELETE_SERVE_URL = "/custom/app/deletedMyServe.do";
+    public static final String GET_RECOURSE_DETAIL_URL = "/custom/app/myPopServeById.do";
     public static final String REPUBLISH_SERVE_URL = "/custom/app/updateResetServe.do";
     public static final String EVALUATE_SERVE_URL = "/custom/app/insertEvaluation.do";
     public static final String CHANGE_SERVE_STATUS_URL = "/custom/app/toChangeStatus.do";

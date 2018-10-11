@@ -478,4 +478,9 @@ public class HttpHelper {
     public void getClubService(GetClubServiceParams entity, NetworkCallback callback) {
         doPost(entity, UrlConfig.GET_CLUB_SERVICE_URL, callback);
     }
+
+    /** 通过id查询我发布的服务 **/
+    public  void getRecourseDetail(IdParams entity, NetworkCallback callback) {
+        doPost(entity, UrlConfig.GET_RECOURSE_DETAIL_URL, callback);
+    }
 }

@@ -17,6 +17,9 @@ public class RecourseBean implements Serializable {
     private String longitude;    //经度
     private String latitude;    //维度
     private String level;        //任务等级
+    private String evaluation;        //评论
+    private String evaluationTime;        //评论时间
+    private Integer star;        //星级
 
     private Double price;        //所得金币
     private Double integral;    //所得积分

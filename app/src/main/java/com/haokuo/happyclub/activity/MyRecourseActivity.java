@@ -73,6 +73,15 @@ public class MyRecourseActivity extends BaseActivity {
 
     @Override
     protected void initListener() {
+        mRecourseAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                Intent intent = new Intent(MyRecourseActivity.this, RecourseDetailActivity.class);
+                long id = mRecourseAdapter.getItem(position).getId();
+                intent.putExtra(RecourseDetailActivity.EXTRA_RECOURSE_ID, id);
+                startActivity(intent);
+            }
+        });
         mRecourseAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, final int position) {
