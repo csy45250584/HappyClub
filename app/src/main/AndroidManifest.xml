@@ -115,6 +115,7 @@
         <activity android:name=".activity.ReportSuggestActivity"/>
         <activity android:name=".activity.SuggestDetailActivity"/>
         <activity android:name=".activity.ClubServiceActivity"/>
+        <activity android:name=".activity.EvaluateRecourseActivity"/>
 
     </application>
 

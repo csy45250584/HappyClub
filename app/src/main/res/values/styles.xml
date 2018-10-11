@@ -14,7 +14,10 @@
         <item name="rd_rippleColor">@color/colorRipple</item>
         <item name="rd_delayClick">none</item>
     </style>
-
+    <style name="MyRatingBar" parent="Widget.MaterialRatingBar.RatingBar">
+        <item name="android:minHeight">@dimen/dp_30</item>
+        <item name="android:maxHeight">@dimen/dp_30</item>
+    </style>
     <style name="MyColorRippleWaveStyle" parent="Material.Drawable.Ripple.Wave">
         <item name="rd_rippleAnimDuration">300</item>
         <item name="rd_rippleColor">@color/colorColorRipple</item>

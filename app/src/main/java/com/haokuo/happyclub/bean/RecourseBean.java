@@ -23,7 +23,7 @@ public class RecourseBean implements Serializable {
     private String claim;        //任务要求
     private String content;        //任务内容
     private Integer origin;        //服务来源
-    private Integer reviewState;    //审核状态(0:未审核; 1:已审核; 2:已拒绝; 11:已接单; 22:服务中; 33:已服务; 44:已完成;88:已放弃)
+    private Integer reviewState;    //审核状态(0:未审核; 1:已审核; 2:已拒绝; 11:已接单; 22:服务中; 33:已服务; 44:已完成;55:已评价;88:已放弃)
     private String description; //描述
     private String volunteer;    //接单人
     private String userTel;        //求助人信息

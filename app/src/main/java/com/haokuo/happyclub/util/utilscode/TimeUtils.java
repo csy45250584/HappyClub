@@ -179,6 +179,7 @@ public final class TimeUtils {
 
     public static final DateFormat DEFAULT_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
     public static final SimpleDateFormat CUSTOM_FORMAT = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+    public static final SimpleDateFormat SQL_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.0", Locale.getDefault());
 
     private TimeUtils() {
         throw new UnsupportedOperationException("u can't instantiate me...");
@@ -1622,5 +1623,13 @@ public final class TimeUtils {
             }
         }
         return sb.toString();
+    }
+
+    public static String sqlTime2String(String time, SimpleDateFormat customFormat) {
+        time = time.substring(0, time.length() - 2);
+//        long millis = string2Millis(time, SQL_FORMAT);
+//        return millis2String(millis, customFormat);
+        long millis = string2Millis(time, DEFAULT_FORMAT);
+        return millis2String(millis, customFormat);
     }
 }

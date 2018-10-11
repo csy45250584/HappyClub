@@ -31,6 +31,8 @@ import okhttp3.Call;
  * Created by zjf on 2018/9/14.
  */
 public class MyRecourseActivity extends BaseActivity {
+    private static final int REQUEST_CODE_NEW_RECOURSE = 1;
+    private static final int REQUEST_CODE_EVALUATION = 2;
     @BindView(R.id.rv_my_recourse)
     RecyclerView mRvMyRecourse;
     @BindView(R.id.srl_my_recourse)
@@ -101,7 +103,7 @@ public class MyRecourseActivity extends BaseActivity {
                         if (reviewState == 2 || reviewState == 88) {//重新发布
                             Intent intent = new Intent(MyRecourseActivity.this, NewRecourseActivity.class);
                             intent.putExtra(NewRecourseActivity.EXTRA_RECOURSE_BEAN, item);
-                            startActivityForResult(intent, 0);
+                            startActivityForResult(intent, REQUEST_CODE_NEW_RECOURSE);
                         } else if (reviewState == 33) { //完成
                             showLoading("提交中...");
                             ChangeServeStatusParams params = new ChangeServeStatusParams(item.getId(), 33);
@@ -117,19 +119,9 @@ public class MyRecourseActivity extends BaseActivity {
                                 }
                             });
                         } else if (reviewState == 44) { //评价
-                            //                            showLoading("提交中...");
-                            //                            EvaluationBean evaluationBean = new EvaluationBean();
-                            //                            HttpHelper.getInstance().evaluateRecourse(evaluationBean, new NetworkCallback() {
-                            //                                @Override
-                            //                                public void onSuccess(Call call, String json) {
-                            //                                    loadSuccess("提交成功",false);
-                            //                                }
-                            //
-                            //                                @Override
-                            //                                public void onFailure(Call call, String message) {
-                            //                                    loadFailed("提交完成，" + message);
-                            //                                }
-                            //                            });
+                            Intent intent = new Intent(MyRecourseActivity.this, EvaluateRecourseActivity.class);
+                            intent.putExtra(EvaluateRecourseActivity.EXTRA_RECOURSE_BEAN, item);
+                            startActivityForResult(intent, REQUEST_CODE_EVALUATION);
                         }
                     }
                     break;
@@ -153,6 +145,6 @@ public class MyRecourseActivity extends BaseActivity {
     @OnClick(R.id.btn_new_recourse)
     public void onViewClicked() {
         //新建求助
-        startActivityForResult(new Intent(MyRecourseActivity.this, NewRecourseActivity.class), 0);
+        startActivityForResult(new Intent(MyRecourseActivity.this, NewRecourseActivity.class), REQUEST_CODE_NEW_RECOURSE);
     }
 }

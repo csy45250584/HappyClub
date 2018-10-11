@@ -65,6 +65,11 @@ public class RecourseAdapter extends BaseQuickAdapter<RecourseBean, BaseViewHold
                 helper.setGone(R.id.tv_right_button, true);
                 helper.setText(R.id.tv_right_button, "评价");
                 break;
+            case 55:
+                helper.setText(R.id.tv_review_state, "已评价");
+                helper.setTextColor(R.id.tv_review_state, ContextCompat.getColor(mContext, R.color.colorPrimary));
+                helper.setGone(R.id.tv_right_button, false);
+                break;
             case 88:
                 helper.setText(R.id.tv_review_state, "已放弃");
                 helper.setTextColor(R.id.tv_review_state, ContextCompat.getColor(mContext, R.color.colorText2));
