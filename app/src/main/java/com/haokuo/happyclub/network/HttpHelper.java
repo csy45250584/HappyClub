@@ -19,6 +19,7 @@ import com.haokuo.happyclub.network.bean.ChangeServeStatusParams;
 import com.haokuo.happyclub.network.bean.CheckIsNextParams;
 import com.haokuo.happyclub.network.bean.GetAcceptedServeParams;
 import com.haokuo.happyclub.network.bean.GetBindTelCodeParams;
+import com.haokuo.happyclub.network.bean.GetMallProductParams;
 import com.haokuo.happyclub.network.bean.GetRecourseListParams;
 import com.haokuo.happyclub.network.bean.GetVolunteerServeParams;
 import com.haokuo.happyclub.network.bean.LoginByTelParams;
@@ -480,7 +481,17 @@ public class HttpHelper {
     }
 
     /** 通过id查询我发布的服务 **/
-    public  void getRecourseDetail(IdParams entity, NetworkCallback callback) {
+    public void getRecourseDetail(IdParams entity, NetworkCallback callback) {
         doPost(entity, UrlConfig.GET_RECOURSE_DETAIL_URL, callback);
+    }
+
+    /** 获取积分商城分类信息 **/
+    public void getMallType(NetworkCallback callback) {
+        doPost(null, UrlConfig.GET_MALL_LIST_URL, callback);
+    }
+
+    /** 获取积分商城商品信息 **/
+    public void getMallProduct(GetMallProductParams entity, NetworkCallback callback) {
+        doPost(entity, UrlConfig.GET_ALL_MALL_PRODUCT_URL, callback);
     }
 }

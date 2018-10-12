@@ -12,6 +12,8 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.haokuo.happyclub.R;
 import com.haokuo.happyclub.activity.CanteenActivity;
 import com.haokuo.happyclub.activity.ClubServiceActivity;
+import com.haokuo.happyclub.activity.MyServeActivity;
+import com.haokuo.happyclub.activity.PointsMallActivity;
 import com.haokuo.happyclub.activity.RepairListActivity;
 import com.haokuo.happyclub.activity.SuggestListActivity;
 import com.haokuo.happyclub.activity.VolunteerOrderActivity;
@@ -67,7 +69,7 @@ public class HomeFragment extends BaseLazyLoadFragment {
         ArrayList<ActionBean> actionBeans = new ArrayList<>();
         actionBeans.add(new ActionBean("志愿者申请", R.drawable.zy1));
         actionBeans.add(new ActionBean("志愿工单", R.drawable.zy2, VolunteerOrderActivity.class));
-        actionBeans.add(new ActionBean("我的服务", R.drawable.zy3));
+        actionBeans.add(new ActionBean("我的服务", R.drawable.zy3, MyServeActivity.class));
         actionBeans.add(new ActionBean("服务评价", R.drawable.zy4));
         actionBeans.add(new ActionBean("我的积分", R.drawable.zy5));
         mVolunteerActionAdapter.setNewData(actionBeans);
@@ -76,12 +78,12 @@ public class HomeFragment extends BaseLazyLoadFragment {
     private void initActionAdapter() {
         ArrayList<ActionBean> actionBeans = new ArrayList<>();
         actionBeans.add(new ActionBean("签到", R.drawable.q1));
-        actionBeans.add(new ActionBean("会所服务", R.drawable.q2,ClubServiceActivity.class));
+        actionBeans.add(new ActionBean("会所服务", R.drawable.q2, ClubServiceActivity.class));
         actionBeans.add(new ActionBean("活动公开", R.drawable.q3));
-        actionBeans.add(new ActionBean("幸福积分", R.drawable.q4));
+        actionBeans.add(new ActionBean("积分商城", R.drawable.q4, PointsMallActivity.class));
         actionBeans.add(new ActionBean("幸福食堂", R.drawable.q5, CanteenActivity.class));
         actionBeans.add(new ActionBean("物业报修", R.drawable.q6, RepairListActivity.class));
-        actionBeans.add(new ActionBean("物业投诉", R.drawable.q7,SuggestListActivity.class));
+        actionBeans.add(new ActionBean("物业投诉", R.drawable.q7, SuggestListActivity.class));
         actionBeans.add(new ActionBean("更多", R.drawable.q8));
         mActionAdapter.setNewData(actionBeans);
     }
@@ -114,7 +116,7 @@ public class HomeFragment extends BaseLazyLoadFragment {
                                     showApply2BeVolunteer();
                                 } else if (volunteerStatus == UserInfoBean.VOLUNTEER_STATUS_UNCHECKED) {
                                     ToastUtils.showShort("您的志愿者已等待审核,无须再次提交!");
-                                }else if (volunteerStatus == UserInfoBean.VOLUNTEER_STATUS_AGREED) {
+                                } else if (volunteerStatus == UserInfoBean.VOLUNTEER_STATUS_AGREED) {
                                     ToastUtils.showShort("您已是志愿者,无须申请!");
                                 }
                                 break;
@@ -136,7 +138,7 @@ public class HomeFragment extends BaseLazyLoadFragment {
                         HttpHelper.getInstance().apply2beVolunteer(new NetworkCallback() {
                             @Override
                             public void onSuccess(Call call, String json) {
-                                mContext.loadSuccess("申请成功,等待审核",false);
+                                mContext.loadSuccess("申请成功,等待审核", false);
                             }
 
                             @Override

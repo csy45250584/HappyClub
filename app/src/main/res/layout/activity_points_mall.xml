@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.haokuo.midtitlebar.MidTitleBar
+        android:id="@+id/mid_title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_56"
+        app:midTitle="积分商城"/>
+
+    <com.yyydjk.library.DropDownMenu
+        android:id="@+id/drop_down_menu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:dddividerColor="@color/colorDivider"
+        app:ddmaskColor="@color/mask_color"
+        app:ddmenuBackgroundColor="@color/colorWhite"
+        app:ddmenuMenuHeightPercent="0.5"
+        app:ddmenuSelectedIcon="@drawable/sj1"
+        app:ddmenuTextSize="13sp"
+        app:ddmenuUnselectedIcon="@drawable/sj2"
+        app:ddtextSelectedColor="@color/colorPrimary"
+        app:ddtextUnselectedColor="@color/colorText2"
+        app:ddunderlineColor="@color/colorDivider"
+        />
+
+</LinearLayout>
