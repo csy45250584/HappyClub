@@ -5,12 +5,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
-    <com.haokuo.midtitlebar.MidTitleBar
-        android:id="@+id/mid_title_bar"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_56"
-        app:midTitle="积分商城"/>
+        android:layout_height="wrap_content">
+
+        <com.haokuo.midtitlebar.MidTitleBar
+            android:id="@+id/mid_title_bar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_56"
+            app:midTitle="积分商城"/>
+
+        <com.miguelcatalan.materialsearchview.MaterialSearchView
+            android:id="@+id/search_view"
+            style="@style/MaterialSearchViewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+    </FrameLayout>
+
 
     <com.yyydjk.library.DropDownMenu
         android:id="@+id/drop_down_menu"

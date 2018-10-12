@@ -4,8 +4,12 @@ import android.graphics.drawable.ColorDrawable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.haokuo.happyclub.R;
@@ -20,8 +24,11 @@ import com.haokuo.happyclub.network.EntityCallback;
 import com.haokuo.happyclub.network.HttpHelper;
 import com.haokuo.happyclub.network.bean.GetMallProductParams;
 import com.haokuo.happyclub.util.ResUtils;
+import com.haokuo.happyclub.util.utilscode.KeyboardUtils;
 import com.haokuo.happyclub.util.utilscode.ToastUtils;
 import com.haokuo.happyclub.view.RecyclerViewDivider;
+import com.haokuo.midtitlebar.MidTitleBar;
+import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.yyydjk.library.DropDownMenu;
 
@@ -42,6 +49,10 @@ public class PointsMallActivity extends BaseActivity {
     private static final String SORT_DESCEND = "价格降序";
     @BindView(R.id.drop_down_menu)
     DropDownMenu mDropDownMenu;
+    @BindView(R.id.mid_title_bar)
+    MidTitleBar mMidTitleBar;
+    @BindView(R.id.search_view)
+    MaterialSearchView mSearchView;
     private SmartRefreshLayout mSrlPointsMall;
     private RecyclerView mRvPointsMall;
     private PointsMallAdapter mPointsMallAdapter;
@@ -51,6 +62,7 @@ public class PointsMallActivity extends BaseActivity {
     private GetMallProductParams mParams;
     private Long typeListId;
     private Integer sortStatus;
+    private String searchName;
 
     @Override
     protected int initContentLayout() {
@@ -100,6 +112,15 @@ public class PointsMallActivity extends BaseActivity {
         popupViews.add(sortRv);
         mDropDownMenu.setDropDownMenu(Arrays.asList(headers), popupViews, contentView);
         mParams = new GetMallProductParams(null, null, null);
+        mSearchView.setCursorDrawable(R.drawable.search_bar_cursor);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_canteen, menu);
+        MenuItem item = menu.getItem(0);
+        mSearchView.setMenuItem(item);
+        return true;
     }
 
     @Override
@@ -107,6 +128,8 @@ public class PointsMallActivity extends BaseActivity {
         //退出activity前关闭菜单
         if (mDropDownMenu.isShowing()) {
             mDropDownMenu.closeMenu();
+        } else if (mSearchView.isSearchOpen()) {
+            mSearchView.closeSearch();
         } else {
             super.onBackPressed();
         }
@@ -133,6 +156,7 @@ public class PointsMallActivity extends BaseActivity {
     public void changeParams() {
         mParams.setSortStatus(sortStatus);
         mParams.setProductlistId(typeListId);
+        mParams.setProductName(searchName);
     }
 
     @Override
@@ -183,5 +207,70 @@ public class PointsMallActivity extends BaseActivity {
                 mSrlPointsMall.autoRefresh();
             }
         });
+        mSearchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                //点击输入法搜索按钮
+                searchName = query;
+                changeParams();
+                mSrlPointsMall.autoRefresh();
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                //每次输入新的字符串
+                return true;
+            }
+        });
+        mSearchView.setOnSearchViewListener(new MaterialSearchView.SearchViewListener() {
+            @Override
+            public void onSearchViewShown() {
+
+            }
+
+            @Override
+            public void onSearchViewClosed() {
+                // 搜索框关闭
+                searchName = null;
+                changeParams();
+                mSrlPointsMall.autoRefresh();
+            }
+        });
+    }
+
+    //点击其他地方，输入法消失
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (ev.getAction() == MotionEvent.ACTION_DOWN) {
+            View v = getCurrentFocus();
+            if (isShouldHideInput(v, ev)) {
+                View rootView = ((ViewGroup) findViewById(android.R.id.content)).getChildAt(0);
+                rootView.setFocusable(true);
+                rootView.setFocusableInTouchMode(true);
+                rootView.requestFocus();
+                KeyboardUtils.hideSoftInput(this, v);
+                return super.dispatchTouchEvent(ev); //隐藏键盘时，其他控件不响应点击事件==》注释则不拦截点击事件
+            }
+        }
+        return super.dispatchTouchEvent(ev);
+    }
+
+    //点击其他地方，输入法消失
+    public static boolean isShouldHideInput(View v, MotionEvent event) {
+        if (v != null && (v instanceof EditText)) {
+            int[] leftTop = {0, 0};
+            v.getLocationInWindow(leftTop);
+            int left = leftTop[0], top = leftTop[1], bottom = top + v.getHeight(), right = left
+                    + v.getWidth();
+            if (event.getX() > left && event.getX() < right
+                    && event.getY() > top && event.getY() < bottom) {
+                // 保留点击EditText的事件
+                return false;
+            } else {
+                return true;
+            }
+        }
+        return false;
     }
 }
