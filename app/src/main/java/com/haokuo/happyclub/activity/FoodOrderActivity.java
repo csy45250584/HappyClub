@@ -1,15 +1,10 @@
 package com.haokuo.happyclub.activity;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.SpannableString;
-import android.text.Spanned;
 import android.text.TextUtils;
-import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,7 +41,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import okhttp3.Call;
 
@@ -72,10 +66,10 @@ public class FoodOrderActivity extends BaseActivity {
     TextView mTvName;
     @BindView(R.id.tv_tel)
     TextView mTvTel;
-    @BindView(R.id.tv_delivery_cost)
-    TextView mTvDeliveryCost;
     @BindView(R.id.tv_amount_price)
     TextView mTvAmountPrice;
+    @BindView(R.id.tv_amount_score)
+    TextView mTvAmountScore;
     @BindView(R.id.tv_tableware)
     TextView mTvTableware;
     @BindView(R.id.fl_tableware)
@@ -86,6 +80,8 @@ public class FoodOrderActivity extends BaseActivity {
     FrameLayout mFlNote;
     @BindView(R.id.tv_total_price)
     TextView mTvTotalPrice;
+    @BindView(R.id.tv_total_score)
+    TextView mTvTotalScore;
     @BindView(R.id.btn_submit_order)
     Button mBtnSubmitOrder;
     @BindView(R.id.tv_select_address_tips)
@@ -105,6 +101,8 @@ public class FoodOrderActivity extends BaseActivity {
     private BigDecimal mTotalPriceDecimal;
     private AddressResultBean mAddressBean;
     private String mEatTime;
+    private int mTotalScore;
+    private ArrayList<FoodOrderBean.CartFoodBean> mCartFoodBeans;
 
     @Override
     protected int initContentLayout() {
@@ -119,23 +117,21 @@ public class FoodOrderActivity extends BaseActivity {
             mTableWareList.add(i);
         }
         mTableWareList.add(100);
-        mTableWareCount = -1;
+        mTableWareCount = 0;
         //从数据库中读取购物车信息
         List<CartFoodBean> cartFoodList = LitePal.findAll(CartFoodBean.class);
         mTotalPriceDecimal = BigDecimal.valueOf(0);
-        int totalScore = 0;
+        mTotalScore = 0;
+        mCartFoodBeans = new ArrayList<>();
         for (CartFoodBean cartFoodBean : cartFoodList) {
             mTotalPriceDecimal = mTotalPriceDecimal.add(new BigDecimal(cartFoodBean.getPrice()));
-            totalScore += cartFoodBean.getScore();
+            mTotalScore += cartFoodBean.getScore();
+            mCartFoodBeans.add(new FoodOrderBean.CartFoodBean(cartFoodBean.getFoodId(), cartFoodBean.getCount()));
         }
         DecimalFormat decimalFormat = new DecimalFormat("¥0.00");
-        //设置配送费
-        //TODO 该处配送费为模拟值，需要获取配送费用
-        BigDecimal deliveryCost = new BigDecimal("3.00");
-        mTvDeliveryCost.setText(decimalFormat.format(deliveryCost));
-        mTotalPriceDecimal = mTotalPriceDecimal.add(deliveryCost);
         String totalPrice = decimalFormat.format(mTotalPriceDecimal);
         mTvAmountPrice.setText(totalPrice);
+        mTvAmountScore.setText(String.valueOf(mTotalScore));
         //设置RecyclerView
         mRvFoodList.setLayoutManager(new LinearLayoutManager(this));
         mRvFoodList.addItemDecoration(new RecyclerViewDivider(this, LinearLayoutManager.HORIZONTAL, ResUtils.getDimens(R.dimen.dp_1), R.color.colorDivider));
@@ -146,11 +142,14 @@ public class FoodOrderActivity extends BaseActivity {
             itemAnimator.setChangeDuration(0);
         }
         mOrderFoodAdapter.setNewData(cartFoodList);
+
         //设置底部总价合计
-        SpannableString totalPriceString = new SpannableString("合计:" + totalPrice + "元");
-        ForegroundColorSpan colorSpan = new ForegroundColorSpan(Color.parseColor("#0099EE"));
-        totalPriceString.setSpan(colorSpan, 3, totalPriceString.length() - 1, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
-        mTvTotalPrice.setText(totalPriceString);
+        mTvTotalPrice.setText(totalPrice);
+        mTvTotalScore.setText(String.valueOf(mTotalScore));
+        //        SpannableString totalPriceString = new SpannableString("合计:" + totalPrice + "元");
+        //        ForegroundColorSpan colorSpan = new ForegroundColorSpan(Color.parseColor("#0099EE"));
+        //        totalPriceString.setSpan(colorSpan, 3, totalPriceString.length() - 1, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+        //        mTvTotalPrice.setText(totalPriceString);
     }
 
     @OnClick({R.id.fl_tableware, R.id.fl_note, R.id.btn_submit_order, R.id.rl_address_container, R.id.rl_time_container})
@@ -183,12 +182,19 @@ public class FoodOrderActivity extends BaseActivity {
                 FoodOrderBean foodOrderBean = new FoodOrderBean();
                 foodOrderBean.setMoneySum(mTotalPriceDecimal.doubleValue());
                 foodOrderBean.setRemarks(mNote);
-                foodOrderBean.setAddresId(mAddressBean.getId());
-
+                foodOrderBean.setState(mTableWareCount);
+                foodOrderBean.setIntegralSum(mTotalScore);
+                if (mRgDeliveryMethod.getCheckedRadioButtonId() == R.id.rb_take_out) {
+                    foodOrderBean.setAddressId(mAddressBean.getId());
+                } else {
+                    foodOrderBean.setScheduledTime(mTvSelectTime.getText().toString());
+                }
+                foodOrderBean.setOrderItems(mCartFoodBeans);
                 showLoading("提交订单中...");
                 HttpHelper.getInstance().insertFoodOrder(foodOrderBean, new NetworkCallback() {
                     @Override
                     public void onSuccess(Call call, String json) {
+                        setResult(RESULT_OK);
                         loadSuccess("下单成功");
                     }
 
@@ -311,12 +317,5 @@ public class FoodOrderActivity extends BaseActivity {
         });
         tablewareDialog.contentView(contentView);
         tablewareDialog.show();
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
     }
 }

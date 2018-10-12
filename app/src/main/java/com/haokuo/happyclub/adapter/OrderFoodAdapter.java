@@ -30,5 +30,6 @@ public class OrderFoodAdapter extends BaseQuickAdapter<CartFoodBean, BaseViewHol
         DecimalFormat decimalFormat = new DecimalFormat("¥0.00");
         String price = decimalFormat.format(BigDecimal.valueOf(item.getPrice()).multiply(BigDecimal.valueOf(item.getCount())));
         helper.setText(R.id.tv_sum_price, price);
+        helper.setText(R.id.tv_food_score, String.valueOf(item.getScore() * item.getCount()));
     }
 }

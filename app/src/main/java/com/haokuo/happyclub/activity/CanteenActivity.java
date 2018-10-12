@@ -3,6 +3,7 @@ package com.haokuo.happyclub.activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -374,7 +375,7 @@ public class CanteenActivity extends BaseActivity implements BaseQuickAdapter.On
             case R.id.btn_settle_account:
                 //下单
                 if (mCartCount != 0) { //购物车数量不为0时展示购物车数据
-                    startActivity(new Intent(CanteenActivity.this, FoodOrderActivity.class));
+                    startActivityForResult(new Intent(CanteenActivity.this, FoodOrderActivity.class), 0);
                 } else {
                     ToastUtils.showShort("请添加先添加菜品到购物车");
                 }
@@ -387,6 +388,14 @@ public class CanteenActivity extends BaseActivity implements BaseQuickAdapter.On
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            clearCart();
+        }
+    }
+
     private void showBottomSheet() {
         List<CartFoodBean> cartFoodList = LitePal.findAll(CartFoodBean.class);
         mBottomSheetDialog = new BottomSheetDialog(this, R.style.BottomSheetDialog);
@@ -395,13 +404,7 @@ public class CanteenActivity extends BaseActivity implements BaseQuickAdapter.On
         tvClearCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //清空购物车
-                LitePal.deleteAll(CartFoodBean.class);
-                mCartCount = 0;
-                mTotalPrice = BigDecimal.valueOf(0);
-                mTotalScore = 0;
-                setTotalInfoUi();
-                mFoodListAdapter.deleteAllBuyCount();
+                clearCart();
                 mBottomSheetDialog.dismiss();
             }
         });
@@ -438,6 +441,16 @@ public class CanteenActivity extends BaseActivity implements BaseQuickAdapter.On
         cartFoodsAdapter.setOnItemChildClickListener(this);
         mBottomSheetDialog.contentView(v);
         mBottomSheetDialog.show();
+    }
+
+    private void clearCart() {
+        //清空购物车
+        LitePal.deleteAll(CartFoodBean.class);
+        mCartCount = 0;
+        mTotalPrice = BigDecimal.valueOf(0);
+        mTotalScore = 0;
+        setTotalInfoUi();
+        mFoodListAdapter.deleteAllBuyCount();
     }
 
     @Override
