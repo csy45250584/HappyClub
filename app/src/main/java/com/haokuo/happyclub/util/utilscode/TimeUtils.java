@@ -1625,11 +1625,15 @@ public final class TimeUtils {
         return sb.toString();
     }
 
-    public static String sqlTime2String(String time, SimpleDateFormat customFormat) {
+    public static String sqlTime2String(String time, DateFormat customFormat) {
         time = time.substring(0, time.length() - 2);
-//        long millis = string2Millis(time, SQL_FORMAT);
-//        return millis2String(millis, customFormat);
+        //        long millis = string2Millis(time, SQL_FORMAT);
+        //        return millis2String(millis, customFormat);
         long millis = string2Millis(time, DEFAULT_FORMAT);
         return millis2String(millis, customFormat);
+    }
+
+    public static String sqlTime2String(String time) {
+       return sqlTime2String(time, DEFAULT_FORMAT);
     }
 }

@@ -118,6 +118,8 @@
         <activity android:name=".activity.EvaluateRecourseActivity"/>
         <activity android:name=".activity.RecourseDetailActivity"/>
         <activity android:name=".activity.PointsMallActivity"/>
+        <activity android:name=".activity.FoodOrderDetailActivity"/>
+        <activity android:name=".activity.PayOrderActivity"/>
 
     </application>
 

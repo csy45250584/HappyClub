@@ -3,7 +3,6 @@ package com.haokuo.happyclub.activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -25,6 +24,7 @@ import com.haokuo.happyclub.adapter.FoodListAdapter;
 import com.haokuo.happyclub.base.BaseActivity;
 import com.haokuo.happyclub.bean.AllFoodBean;
 import com.haokuo.happyclub.bean.CartFoodBean;
+import com.haokuo.happyclub.eventbus.OrderFoodEvent;
 import com.haokuo.happyclub.network.EntityCallback;
 import com.haokuo.happyclub.network.HttpHelper;
 import com.haokuo.happyclub.util.utilscode.KeyboardUtils;
@@ -36,6 +36,7 @@ import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.rey.material.app.BottomSheetDialog;
 import com.rey.material.widget.Button;
 
+import org.greenrobot.eventbus.Subscribe;
 import org.litepal.LitePal;
 
 import java.math.BigDecimal;
@@ -98,6 +99,11 @@ public class CanteenActivity extends BaseActivity implements BaseQuickAdapter.On
         } else {
             super.onBackPressed();
         }
+    }
+
+    @Override
+    protected boolean getRegisterEventBus() {
+        return true;
     }
 
     @Override
@@ -375,7 +381,7 @@ public class CanteenActivity extends BaseActivity implements BaseQuickAdapter.On
             case R.id.btn_settle_account:
                 //下单
                 if (mCartCount != 0) { //购物车数量不为0时展示购物车数据
-                    startActivityForResult(new Intent(CanteenActivity.this, FoodOrderActivity.class), 0);
+                    startActivity(new Intent(CanteenActivity.this, FoodOrderActivity.class));
                 } else {
                     ToastUtils.showShort("请添加先添加菜品到购物车");
                 }
@@ -388,12 +394,10 @@ public class CanteenActivity extends BaseActivity implements BaseQuickAdapter.On
         }
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK) {
-            clearCart();
-        }
+    //下单成功后
+    @Subscribe
+    public void onServeChangeEvent(OrderFoodEvent event) {
+        clearCart();
     }
 
     private void showBottomSheet() {

@@ -4,6 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/dp_124"
     android:background="@color/colorWhite"
+    android:clickable="true"
+    android:foreground="?android:attr/selectableItemBackground"
     android:padding="@dimen/dp_16">
 
     <LinearLayout

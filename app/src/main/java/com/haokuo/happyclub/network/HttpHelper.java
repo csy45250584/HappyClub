@@ -19,11 +19,14 @@ import com.haokuo.happyclub.network.bean.ChangeServeStatusParams;
 import com.haokuo.happyclub.network.bean.CheckIsNextParams;
 import com.haokuo.happyclub.network.bean.GetAcceptedServeParams;
 import com.haokuo.happyclub.network.bean.GetBindTelCodeParams;
+import com.haokuo.happyclub.network.bean.GetClubServiceParams;
 import com.haokuo.happyclub.network.bean.GetMallProductParams;
+import com.haokuo.happyclub.network.bean.GetOrderDetailParams;
 import com.haokuo.happyclub.network.bean.GetRecourseListParams;
 import com.haokuo.happyclub.network.bean.GetVolunteerServeParams;
 import com.haokuo.happyclub.network.bean.LoginByTelParams;
 import com.haokuo.happyclub.network.bean.LoginParams;
+import com.haokuo.happyclub.network.bean.UpdateOrderParams;
 import com.haokuo.happyclub.network.bean.RegisterParams;
 import com.haokuo.happyclub.network.bean.ResetPasswordParams;
 import com.haokuo.happyclub.network.bean.UpdatePasswordParams;
@@ -33,7 +36,6 @@ import com.haokuo.happyclub.network.bean.base.IdParams;
 import com.haokuo.happyclub.network.bean.base.PageParams;
 import com.haokuo.happyclub.network.bean.base.TelPhoneParams;
 import com.haokuo.happyclub.network.bean.base.UserIdTokenParams;
-import com.haokuo.happyclub.network.bean.GetClubServiceParams;
 import com.haokuo.happyclub.util.MySpUtil;
 
 import java.io.File;
@@ -433,6 +435,16 @@ public class HttpHelper {
     /** 食堂下单 **/
     public void insertFoodOrder(FoodOrderBean json, NetworkCallback callback) {
         doPostWithJson(json, UrlConfig.INSERT_FOOD_ORDER_URL, callback);
+    }
+
+    /** 下单支付及订单其他操作 **/
+    public void updateFoodOrder(UpdateOrderParams entity, NetworkCallback callback) {
+        doPost(entity, UrlConfig.UPDATE_FOOD_ORDER_URL, callback);
+    }
+
+    /** 获取订单详情 **/
+    public void getOrderDetail(GetOrderDetailParams entity, NetworkCallback callback) {
+        doPost(entity, UrlConfig.GET_ORDER_DETAIL_URL, callback);
     }
 
     /** 志愿工单列表(所有发布的志愿者活动) **/

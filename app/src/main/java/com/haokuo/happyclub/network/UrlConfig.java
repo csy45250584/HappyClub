@@ -44,6 +44,8 @@ public class UrlConfig {
     //食堂
     public static final String GET_ALL_FOOD_LIST_URL = "/custom/app/getAllFoodlist.do";
     public static final String INSERT_FOOD_ORDER_URL = "/custom/app/insertFoodOrder.do";
+    public static final String UPDATE_FOOD_ORDER_URL = "/custom/app/updateFoodOrder.do";
+    public static final String GET_ORDER_DETAIL_URL = "/custom/app/getOrderComplexById.do";
 
     //报修投诉
     public static final String REPORT_REPAIR_URL = "/custom/app/insertPropertyRepair.do";

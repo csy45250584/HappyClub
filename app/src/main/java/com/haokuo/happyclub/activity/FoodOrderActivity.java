@@ -22,8 +22,10 @@ import com.haokuo.happyclub.base.BaseActivity;
 import com.haokuo.happyclub.bean.AddressResultBean;
 import com.haokuo.happyclub.bean.CartFoodBean;
 import com.haokuo.happyclub.bean.FoodOrderBean;
+import com.haokuo.happyclub.bean.OrderFoodResultBean;
+import com.haokuo.happyclub.eventbus.OrderFoodEvent;
+import com.haokuo.happyclub.network.EntityCallback;
 import com.haokuo.happyclub.network.HttpHelper;
-import com.haokuo.happyclub.network.NetworkCallback;
 import com.haokuo.happyclub.util.ResUtils;
 import com.haokuo.happyclub.util.utilscode.TimeUtils;
 import com.haokuo.happyclub.util.utilscode.ToastUtils;
@@ -32,7 +34,9 @@ import com.rey.material.app.BottomSheetDialog;
 import com.rey.material.app.DialogFragment;
 import com.rey.material.app.TimePickerDialog;
 import com.rey.material.widget.Button;
+import com.xiasuhuei321.loadingdialog.view.LoadingDialog;
 
+import org.greenrobot.eventbus.EventBus;
 import org.litepal.LitePal;
 
 import java.math.BigDecimal;
@@ -191,16 +195,26 @@ public class FoodOrderActivity extends BaseActivity {
                 }
                 foodOrderBean.setOrderItems(mCartFoodBeans);
                 showLoading("提交订单中...");
-                HttpHelper.getInstance().insertFoodOrder(foodOrderBean, new NetworkCallback() {
-                    @Override
-                    public void onSuccess(Call call, String json) {
-                        setResult(RESULT_OK);
-                        loadSuccess("下单成功");
-                    }
 
+                HttpHelper.getInstance().insertFoodOrder(foodOrderBean, new EntityCallback<OrderFoodResultBean>() {
                     @Override
                     public void onFailure(Call call, String message) {
                         loadFailed("下单失败，" + message);
+                    }
+
+                    @Override
+                    public void onSuccess(Call call, final OrderFoodResultBean result) {
+                        EventBus.getDefault().post(new OrderFoodEvent());
+                        loadSuccess("下单成功", new LoadingDialog.OnFinishListener() {
+                            @Override
+                            public void onFinish() {
+                                Intent intent = new Intent(FoodOrderActivity.this, FoodOrderDetailActivity.class);
+                                intent.putExtra(FoodOrderDetailActivity.EXTRA_AUTO_PAY, true);
+                                intent.putExtra(FoodOrderDetailActivity.EXTRA_ORDER_ID, result.getOrderId());
+                                startActivity(intent);
+                                finish();
+                            }
+                        });
                     }
                 });
             }

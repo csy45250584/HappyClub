@@ -27,6 +27,7 @@ import com.haokuo.happyclub.util.GlideImageLoader;
 import com.haokuo.happyclub.util.MySpUtil;
 import com.haokuo.happyclub.util.utilscode.ToastUtils;
 import com.youth.banner.Banner;
+import com.youth.banner.BannerConfig;
 
 import java.util.ArrayList;
 
@@ -55,6 +56,14 @@ public class HomeFragment extends BaseLazyLoadFragment {
     protected void initData() {
         //banner设置
         mBannerHome.setImageLoader(new GlideImageLoader());
+        ArrayList<Integer> bannerImages = new ArrayList<>();
+        bannerImages.add(R.drawable.tp1);
+        bannerImages.add(R.drawable.tp2);
+        bannerImages.add(R.drawable.tp3);
+        bannerImages.add(R.drawable.tp4);
+        mBannerHome.setImages(bannerImages);
+        mBannerHome.setBannerStyle(BannerConfig.NOT_INDICATOR);
+        mBannerHome.start();
         mRvAction.setLayoutManager(new GridLayoutManager(mContext, 4, LinearLayoutManager.VERTICAL, false));
         mActionAdapter = new ActionAdapter(R.layout.item_action);
         mRvAction.setAdapter(mActionAdapter);
