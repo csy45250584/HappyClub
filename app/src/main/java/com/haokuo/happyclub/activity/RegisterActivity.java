@@ -1,5 +1,6 @@
 package com.haokuo.happyclub.activity;
 
+import android.content.Intent;
 import android.os.CountDownTimer;
 import android.support.design.widget.TextInputEditText;
 import android.text.InputFilter;
@@ -27,6 +28,8 @@ public class RegisterActivity extends BaseActivity {
     private static final int CODE_NUM = 4;
     private static final long TOTAL_TIME = 60 * 1000;
     private static final long ONCE_TIME = 1000;
+    public static final String EXTRA_TEL = "com.haokuo.happyclub.extra.EXTRA_TEL";
+    public static final String EXTRA_PASSWORD = "com.haokuo.happyclub.extra.EXTRA_PASSWORD";
     @BindView(R.id.et_tel)
     TextInputEditText mEtTel;
     @BindView(R.id.et_code)
@@ -50,11 +53,13 @@ public class RegisterActivity extends BaseActivity {
             resetGetVerifyCode();
         }
     };
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
         countDownTimer.cancel();
     }
+
     private void resetGetVerifyCode() {
         canGetCode = true;
         mTvGetCode.setText("重新获取");
@@ -100,9 +105,9 @@ public class RegisterActivity extends BaseActivity {
             }
             break;
             case R.id.btn_register: {
-                String tel = mEtTel.getEditableText().toString().trim();
+                final String tel = mEtTel.getEditableText().toString().trim();
                 String code = mEtCode.getEditableText().toString().trim();
-                String password = mEtPassword.getEditableText().toString().trim();
+                final String password = mEtPassword.getEditableText().toString().trim();
                 if (!RegexUtils.isMobileSimple(tel)) {
                     ToastUtils.showShort("请输入正确的手机号码");
                     return;
@@ -120,6 +125,10 @@ public class RegisterActivity extends BaseActivity {
                 HttpHelper.getInstance().register(params, new NetworkCallback() {
                     @Override
                     public void onSuccess(Call call, String json) {
+                        Intent intent = new Intent();
+                        intent.putExtra(EXTRA_TEL,tel);
+                        intent.putExtra(EXTRA_PASSWORD,password);
+                        setResult(RESULT_OK,intent);
                         loadSuccess("注册成功");
                     }
 

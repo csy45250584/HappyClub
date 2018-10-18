@@ -11,6 +11,7 @@
             <option value="$PROJECT_DIR$/MidTitleBar" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/labels" />
+            <option value="$PROJECT_DIR$/libzxing" />
             <option value="$PROJECT_DIR$/popwindow" />
           </set>
         </option>

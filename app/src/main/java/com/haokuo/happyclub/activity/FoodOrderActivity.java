@@ -22,7 +22,7 @@ import com.haokuo.happyclub.base.BaseActivity;
 import com.haokuo.happyclub.bean.AddressResultBean;
 import com.haokuo.happyclub.bean.CartFoodBean;
 import com.haokuo.happyclub.bean.FoodOrderBean;
-import com.haokuo.happyclub.bean.OrderFoodResultBean;
+import com.haokuo.happyclub.bean.OrderResultBean;
 import com.haokuo.happyclub.eventbus.OrderFoodEvent;
 import com.haokuo.happyclub.network.EntityCallback;
 import com.haokuo.happyclub.network.HttpHelper;
@@ -196,14 +196,14 @@ public class FoodOrderActivity extends BaseActivity {
                 foodOrderBean.setOrderItems(mCartFoodBeans);
                 showLoading("提交订单中...");
 
-                HttpHelper.getInstance().insertFoodOrder(foodOrderBean, new EntityCallback<OrderFoodResultBean>() {
+                HttpHelper.getInstance().insertFoodOrder(foodOrderBean, new EntityCallback<OrderResultBean>() {
                     @Override
                     public void onFailure(Call call, String message) {
                         loadFailed("下单失败，" + message);
                     }
 
                     @Override
-                    public void onSuccess(Call call, final OrderFoodResultBean result) {
+                    public void onSuccess(Call call, final OrderResultBean result) {
                         EventBus.getDefault().post(new OrderFoodEvent());
                         loadSuccess("下单成功", new LoadingDialog.OnFinishListener() {
                             @Override

@@ -2,6 +2,7 @@ package com.haokuo.happyclub.activity;
 
 import android.content.Intent;
 import android.os.CountDownTimer;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
 import android.text.InputFilter;
 import android.view.View;
@@ -132,11 +133,24 @@ public class LoginActivity extends BaseActivity {
     //            loadFailed("登录失败，" + message);
     //        }
     //    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && data != null) {// 注册成功
+            showLoading("登录中...");
+            String tel = data.getStringExtra(RegisterActivity.EXTRA_TEL);
+            String password = data.getStringExtra(RegisterActivity.EXTRA_PASSWORD);
+            LoginParams params = new LoginParams(tel, password);
+            HttpHelper.getInstance().login(params, mLoginCallback);
+        }
+    }
+
     @OnClick({R.id.btn_register, R.id.tv_get_code, R.id.btn_login, R.id.tv_login_by_password, R.id.tv_login_by_tel, R.id.tv_forget_password})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_register:
-                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+                startActivityForResult(new Intent(LoginActivity.this, RegisterActivity.class), 0);
                 break;
             case R.id.tv_get_code: {
                 if (canGetCode) {

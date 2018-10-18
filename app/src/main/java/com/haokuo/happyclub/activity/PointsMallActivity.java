@@ -1,5 +1,6 @@
 package com.haokuo.happyclub.activity;
 
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,8 +18,10 @@ import com.haokuo.happyclub.adapter.MallProductFilterAdapter;
 import com.haokuo.happyclub.adapter.MyRefreshLoadMoreListener;
 import com.haokuo.happyclub.adapter.PointsMallAdapter;
 import com.haokuo.happyclub.base.BaseActivity;
+import com.haokuo.happyclub.bean.FoodOrderBean;
 import com.haokuo.happyclub.bean.MallProductBean;
 import com.haokuo.happyclub.bean.MallProductTypeListBean;
+import com.haokuo.happyclub.bean.OrderResultBean;
 import com.haokuo.happyclub.bean.list.MallProductListBean;
 import com.haokuo.happyclub.network.EntityCallback;
 import com.haokuo.happyclub.network.HttpHelper;
@@ -30,6 +33,7 @@ import com.haokuo.happyclub.view.RecyclerViewDivider;
 import com.haokuo.midtitlebar.MidTitleBar;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.xiasuhuei321.loadingdialog.view.LoadingDialog;
 import com.yyydjk.library.DropDownMenu;
 
 import java.util.ArrayList;
@@ -237,8 +241,52 @@ public class PointsMallActivity extends BaseActivity {
                 mSrlPointsMall.autoRefresh();
             }
         });
+        mPointsMallAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                if (view.getId() == R.id.tv_exchange) { //兑换
+                    MallProductBean item = mPointsMallAdapter.getItem(position);
+                    showLoading("正在下单...");
+                    //下单请求
+                    FoodOrderBean foodOrderBean = new FoodOrderBean();
+                    foodOrderBean.setIntegralSum(item.getProduct_integral());
+                    ArrayList<FoodOrderBean.CartFoodBean> cartFoodBeans = new ArrayList<>();
+                    cartFoodBeans.add(new FoodOrderBean.CartFoodBean(item.getId(), 1));
+                    foodOrderBean.setOrderItems(cartFoodBeans);
+                    HttpHelper.getInstance().insertMallOrder(foodOrderBean, new EntityCallback<OrderResultBean>() {
+                        @Override
+                        public void onFailure(Call call, String message) {
+                            loadFailed("下单失败，" + message);
+                        }
+
+                        @Override
+                        public void onSuccess(Call call, final OrderResultBean result) {
+                            loadSuccess("下单成功", new LoadingDialog.OnFinishListener() {
+                                @Override
+                                public void onFinish() {
+                                    Intent intent = new Intent(PointsMallActivity.this, MallOrderDetailActivity.class);
+                                    intent.putExtra(MallOrderDetailActivity.EXTRA_ORDER_ID, result.getOrderId());
+                                    startActivity(intent);
+                                }
+                            });
+                        }
+                    });
+                }
+            }
+        });
     }
 
+    //new NetworkCallback() {
+    //        @Override
+    //        public void onSuccess(Call call, String json) {
+    //
+    //        }
+    //
+    //        @Override
+    //        public void onFailure(Call call, String message) {
+    //
+    //        }
+    //    }
     //点击其他地方，输入法消失
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {

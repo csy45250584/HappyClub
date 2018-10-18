@@ -23,6 +23,7 @@ public class SettingItemView extends FrameLayout {
     private String mLeftText;
     private TextView mTvRightText;
     private ImageView mIvRightIcon;
+    private TextView mTvLeftText;
 
     public SettingItemView(Context context) {
         this(context, null);
@@ -33,7 +34,7 @@ public class SettingItemView extends FrameLayout {
         //View
 
         View inflate = inflate(context, R.layout.view_setting_item, this);
-        TextView tvLeftText = inflate.findViewById(R.id.tv_left_text);
+        mTvLeftText = inflate.findViewById(R.id.tv_left_text);
         mTvRightText = inflate.findViewById(R.id.tv_right_text);
         ImageView ivLeftIcon = inflate.findViewById(R.id.iv_left_icon);
         mIvRightIcon = inflate.findViewById(R.id.iv_right_icon);
@@ -49,9 +50,9 @@ public class SettingItemView extends FrameLayout {
         Drawable rightIcon = typedArray.getDrawable(R.styleable.SettingItemView_rightIcon);
         typedArray.recycle();//释放
         //Set
-        tvLeftText.setText(mLeftText);
-        tvLeftText.setTextColor(leftTextColor);
-        tvLeftText.setTextSize(leftTextSize / getResources().getDisplayMetrics().density);
+        mTvLeftText.setText(mLeftText);
+        mTvLeftText.setTextColor(leftTextColor);
+        mTvLeftText.setTextSize(leftTextSize / getResources().getDisplayMetrics().density);
         mTvRightText.setText(rightText);
         mTvRightText.setTextColor(rightTextColor);
         mTvRightText.setTextSize(rightTextSize / getResources().getDisplayMetrics().density);
@@ -73,10 +74,12 @@ public class SettingItemView extends FrameLayout {
         if (TextUtils.isEmpty(mLeftText)) {
             throw new RuntimeException("the title is unassigned !");
         } else {
-            return mLeftText;
+            return mTvLeftText.getText().toString();
         }
     }
-
+    public void setLeftText(String content) {
+        mTvLeftText.setText(content);
+    }
     public void setRightText(String content) {
         mTvRightText.setText(content);
     }

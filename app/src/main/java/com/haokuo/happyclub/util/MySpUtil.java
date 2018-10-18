@@ -1,5 +1,7 @@
 package com.haokuo.happyclub.util;
 
+import android.util.Log;
+
 import com.haokuo.happyclub.bean.UserInfoBean;
 import com.haokuo.happyclub.consts.SpConsts;
 import com.haokuo.happyclub.util.utilscode.SPUtils;
@@ -41,6 +43,7 @@ public class MySpUtil {
     public void saveUserInfo(UserInfoBean userInfoBean) {
         mPersonInfoSp.put(SpConsts.KEY_USER_NAME, userInfoBean.getUserName());
         mPersonInfoSp.put(SpConsts.KEY_BIRTHDAY, userInfoBean.getBirthday());
+        Log.v("MY_CUSTOM_TAG", "MySpUtil saveUserInfo()-->" + userInfoBean.getBirthday());
         mPersonInfoSp.put(SpConsts.KEY_HEAD_PHOTO, userInfoBean.getHeadPhoto());
         mPersonInfoSp.put(SpConsts.KEY_ID_CARD, userInfoBean.getIdCard());
         mPersonInfoSp.put(SpConsts.KEY_REAL_NAME, userInfoBean.getRealname());

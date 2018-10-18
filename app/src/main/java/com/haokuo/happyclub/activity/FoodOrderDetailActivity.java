@@ -67,6 +67,8 @@ public class FoodOrderDetailActivity extends BaseActivity {
     TextView mTvScheduledTime;
     @BindView(R.id.ll_address_container)
     LinearLayout mLlAddressContainer;
+    @BindView(R.id.ll_btn_container)
+    LinearLayout mLlBtnContainer;
     private boolean mIsAutoPay;
     private long mOrderId;
     private OrderDetailBean mOrderDetailBean;
@@ -133,6 +135,11 @@ public class FoodOrderDetailActivity extends BaseActivity {
         mTvOrderNote.setText(orderDetailBean.getRemarks());
         List<OrderDetailBean.OrderItem> orderItems = orderDetailBean.getOrderItems();
         mOrderFoodAdapter.setNewData(orderItems);
+        if (orderDetailBean.getStatus() == OrderDetailBean.STATE_WAIT_FOR_HANDLE) {
+            mLlBtnContainer.setVisibility(View.VISIBLE);
+        } else {
+            mLlBtnContainer.setVisibility(View.GONE);
+        }
     }
 
     @OnClick({R.id.tv_cancel_order, R.id.tv_pay_order})
@@ -166,7 +173,8 @@ public class FoodOrderDetailActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
-            loadData();
+            finish();
+//            loadData();
         }
     }
 }

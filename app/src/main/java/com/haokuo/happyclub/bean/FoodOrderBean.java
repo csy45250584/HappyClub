@@ -15,7 +15,7 @@ public class FoodOrderBean {
     private int state;  //餐具数量 1
     private Integer integralSum;    //积分总计 1
 
-    private int payType;        //支付方式 1
+    private Integer payType;        //支付方式 1
     private int customId;        //客户id
     private int shopId;            //商家id
     private int workId;            //员工id

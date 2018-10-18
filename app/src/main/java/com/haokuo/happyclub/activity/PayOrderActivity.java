@@ -1,5 +1,6 @@
 package com.haokuo.happyclub.activity;
 
+import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -43,6 +44,8 @@ public class PayOrderActivity extends BaseActivity {
     Button mBtnConfirmPay;
     @BindView(R.id.rg_pay_type)
     RadioGroup mRgPayType;
+    @BindView(R.id.tv_slash)
+    TextView mTvSlash;
     private OrderDetailBean mOrderDetailBean;
 
     @Override
@@ -53,6 +56,13 @@ public class PayOrderActivity extends BaseActivity {
     @Override
     protected void initData() {
         mOrderDetailBean = (OrderDetailBean) getIntent().getSerializableExtra(EXTRA_ORDER_BEAN);
+        if (mOrderDetailBean.getOrderType() != OrderDetailBean.ORDER_TYPE_CANTEEN) {
+            mRbWechatPay.setVisibility(View.GONE);
+            mRbAlipayPay.setVisibility(View.GONE);
+            mRbUnionPay.setVisibility(View.GONE);
+            mTvOrderPrice.setVisibility(View.GONE);
+            mTvSlash.setVisibility(View.GONE);
+        }
         mTvOrderNumber.setText(String.format("订单编号：%s", mOrderDetailBean.getOrderNo()));
         mTvOrderPrice.setText(DecimalUtils.getMoneyString(mOrderDetailBean.getMoneySum()));
         mTvOrderScore.setText(String.valueOf(mOrderDetailBean.getIntegralSum()));
@@ -70,6 +80,11 @@ public class PayOrderActivity extends BaseActivity {
                 }
             }
         });
+    }
+
+    @Override
+    protected void loadData() {
+        mRgPayType.check(R.id.rb_score_pay);
     }
 
     @OnClick(R.id.btn_confirm_pay)
@@ -92,6 +107,8 @@ public class PayOrderActivity extends BaseActivity {
                     }
                 });
                 break;
+            default:
+                loadFailed("暂未开放的支付方式");
         }
     }
 }

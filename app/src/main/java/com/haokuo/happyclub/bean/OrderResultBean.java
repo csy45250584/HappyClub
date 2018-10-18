@@ -6,6 +6,6 @@ import lombok.Data;
  * Created by zjf on 2018/10/13.
  */
 @Data
-public class OrderFoodResultBean {
+public class OrderResultBean {
     private long orderId;
 }

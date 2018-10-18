@@ -1,6 +1,7 @@
 package com.haokuo.happyclub.activity;
 
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,9 +14,12 @@ import com.haokuo.happyclub.bean.UserInfoBean;
 import com.haokuo.happyclub.network.HttpHelper;
 import com.haokuo.happyclub.network.NetworkCallback;
 import com.haokuo.happyclub.util.MySpUtil;
+import com.haokuo.happyclub.util.utilscode.TimeUtils;
 import com.haokuo.happyclub.view.SettingItemView;
 import com.haokuo.happyclub.view.SexRadioButton;
 import com.haokuo.midtitlebar.MidTitleBar;
+import com.rey.material.app.DatePickerDialog;
+import com.rey.material.app.DialogFragment;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -91,7 +95,6 @@ public class SetPersonalInfoActivity extends BaseActivity implements Toolbar.OnM
                 mEtInfo.setHint("请输入身份证号码");
                 break;
         }
-
     }
 
     @Override
@@ -125,6 +128,7 @@ public class SetPersonalInfoActivity extends BaseActivity implements Toolbar.OnM
                     break;
                 case TYPE_BIRTHDAY:
                     userInfo.setBirthday(mSivBirthday.getLeftText());
+                    Log.v("MY_CUSTOM_TAG", "SetPersonalInfoActivity onMenuItemClick()-->" + mSivBirthday.getLeftText());
                     userInfoOrignal.setBirthday(mSivBirthday.getLeftText());
                     break;
                 case TYPE_ID_CARD:
@@ -149,12 +153,11 @@ public class SetPersonalInfoActivity extends BaseActivity implements Toolbar.OnM
         return true;
     }
 
-
-
     @OnClick({R.id.siv_birthday, R.id.siv_sex_male, R.id.siv_sex_female})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.siv_birthday:
+                showDateDialog();
                 break;
             case R.id.siv_sex_male:
                 mSivSexMale.setChecked(true);
@@ -165,5 +168,30 @@ public class SetPersonalInfoActivity extends BaseActivity implements Toolbar.OnM
                 mSivSexFemale.setChecked(true);
                 break;
         }
+    }
+
+    private void showDateDialog() {
+        DatePickerDialog.Builder builder = new DatePickerDialog.Builder(R.style.MyDatePicker) {
+            @Override
+            public void onPositiveActionClicked(DialogFragment fragment) {
+                DatePickerDialog dialog = (DatePickerDialog) fragment.getDialog();
+                String date = dialog.getFormattedDate(TimeUtils.CUSTOM_FORMAT);
+                mSivBirthday.setLeftText(date);
+                super.onPositiveActionClicked(fragment);
+            }
+
+            @Override
+            public void onNegativeActionClicked(DialogFragment fragment) {
+                super.onNegativeActionClicked(fragment);
+            }
+        };
+        builder
+                .dateRange(0, TimeUtils.getNowMills())
+                .title("请选择出生日期")
+                .positiveAction("确定")
+                .negativeAction("取消");
+        //        builder.build(mContext).show();
+        DialogFragment fragment = DialogFragment.newInstance(builder);
+        fragment.show(((BaseActivity) this).getSupportFragmentManager(), null);
     }
 }

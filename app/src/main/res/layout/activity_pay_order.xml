@@ -55,6 +55,7 @@
                         android:textSize="@dimen/sp_25"/>
 
                     <TextView
+                        android:id="@+id/tv_slash"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/dp_3"
@@ -84,10 +85,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_16">
-
+                <RadioButton
+                    android:id="@+id/rb_score_pay"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_50"
+                    android:background="@color/colorWhite"
+                    android:paddingLeft="@dimen/dp_16"
+                    android:text="积分支付"
+                    android:textColor="@color/colorText1"
+                    android:textSize="@dimen/text_30px"/>
                 <RadioButton
                     android:id="@+id/rb_wechat_pay"
                     android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/dp_8"
                     android:layout_height="@dimen/dp_50"
                     android:background="@color/colorWhite"
                     android:paddingLeft="@dimen/dp_16"
@@ -117,16 +127,7 @@
                     android:textColor="@color/colorText1"
                     android:textSize="@dimen/text_30px"/>
 
-                <RadioButton
-                    android:id="@+id/rb_score_pay"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_50"
-                    android:layout_marginTop="@dimen/dp_8"
-                    android:background="@color/colorWhite"
-                    android:paddingLeft="@dimen/dp_16"
-                    android:text="积分支付"
-                    android:textColor="@color/colorText1"
-                    android:textSize="@dimen/text_30px"/>
+
             </RadioGroup>
         </LinearLayout>
 

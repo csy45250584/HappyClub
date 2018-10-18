@@ -55,9 +55,19 @@ public class UrlConfig {
     //会所服务
     public static final String GET_SERVICE_TYPE_URL = "/custom/app/getAllServicelist.do";
     public static final String GET_CLUB_SERVICE_URL = "/custom/app/getAllService.do";
+    public static final String INSERT_SERVICE_ORDER_URL = "/custom/app/insertServiceOrder.do";
     //积分商城
     public static final String GET_MALL_LIST_URL = "/business/app/getAllProductlist.do";
     public static final String GET_ALL_MALL_PRODUCT_URL = "/custom/app/getAllProduct.do";
+    public static final String INSERT_MALL_ORDER_URL = "/custom/app/insertIntegralOrder.do";
+
+    //订单
+    public static final String GET_ALL_ORDER_LIST_URL = "/custom/app/getAllOrderListPlus.do";
+
+    //活动新闻
+    public static final String GET_NEWS_LIST = "/custom/app/getNewsList.do";
+    public static final String GET_NEWS_INFO = "/custom/app/infoNews.do";
+    public static final String GET_NEWS_SORT_LIST_URL = "/custom/app/getSortList.do";
 
     public static String buildImageUrl(String url) {
         return IMAGE_BASE_URL + url;

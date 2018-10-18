@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.haokuo.midtitlebar.MidTitleBar
+        android:id="@+id/mid_title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_56"
+        app:midTitle="兑换码"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_qrcode"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/iv_qrcode"
+            android:layout_width="@dimen/dp_250"
+            android:layout_height="@dimen/dp_250"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dp_100"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/dp_16"
+            android:text="请到柜台展示付款码"
+            android:textColor="@color/colorWhiteText2"
+            android:textSize="@dimen/text_30px"/>
+    </LinearLayout>
+</LinearLayout>

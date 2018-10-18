@@ -1,5 +1,6 @@
 package com.haokuo.happyclub.activity;
 
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,6 +20,8 @@ import com.haokuo.happyclub.adapter.MyRefreshLoadMoreListener;
 import com.haokuo.happyclub.base.BaseActivity;
 import com.haokuo.happyclub.bean.ClubServiceBean;
 import com.haokuo.happyclub.bean.ClubServiceTypeListBean;
+import com.haokuo.happyclub.bean.FoodOrderBean;
+import com.haokuo.happyclub.bean.OrderResultBean;
 import com.haokuo.happyclub.bean.list.ClubServiceListBean;
 import com.haokuo.happyclub.network.EntityCallback;
 import com.haokuo.happyclub.network.HttpHelper;
@@ -30,6 +33,7 @@ import com.haokuo.happyclub.view.RecyclerViewDivider;
 import com.haokuo.midtitlebar.MidTitleBar;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.xiasuhuei321.loadingdialog.view.LoadingDialog;
 import com.yyydjk.library.DropDownMenu;
 
 import java.util.ArrayList;
@@ -160,6 +164,39 @@ public class ClubServiceActivity extends BaseActivity {
 
     @Override
     protected void initListener() {
+        mClubServiceAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                ClubServiceBean item = mClubServiceAdapter.getItem(position);
+                if (view.getId() == R.id.tv_exchange) {
+                    showLoading("正在下单...");
+                    //下单请求
+                    FoodOrderBean foodOrderBean = new FoodOrderBean();
+                    foodOrderBean.setIntegralSum(item.getService_integral());
+                    ArrayList<FoodOrderBean.CartFoodBean> cartFoodBeans = new ArrayList<>();
+                    cartFoodBeans.add(new FoodOrderBean.CartFoodBean(item.getId(), 1));
+                    foodOrderBean.setOrderItems(cartFoodBeans);
+                    HttpHelper.getInstance().insertServiceOrder(foodOrderBean, new EntityCallback<OrderResultBean>() {
+                        @Override
+                        public void onFailure(Call call, String message) {
+                            loadFailed("下单失败，" + message);
+                        }
+
+                        @Override
+                        public void onSuccess(Call call, final OrderResultBean result) {
+                            loadSuccess("下单成功", new LoadingDialog.OnFinishListener() {
+                                @Override
+                                public void onFinish() {
+                                    Intent intent = new Intent(ClubServiceActivity.this, ClubServiceDetailActivity.class);
+                                    intent.putExtra(ClubServiceDetailActivity.EXTRA_ORDER_ID, result.getOrderId());
+                                    startActivity(intent);
+                                }
+                            });
+                        }
+                    });
+                }
+            }
+        });
         mSrlClubService.setOnRefreshLoadMoreListener(new MyRefreshLoadMoreListener<ClubServiceBean>
                 (mSrlClubService, mParams, mClubServiceAdapter, ClubServiceListBean.class, "获取会所服务列表失败") {
             @Override

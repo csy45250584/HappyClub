@@ -16,7 +16,6 @@ import com.haokuo.happyclub.eventbus.LogoutEvent;
 import com.haokuo.happyclub.fragment.ActivityFragment;
 import com.haokuo.happyclub.fragment.HomeFragment;
 import com.haokuo.happyclub.fragment.MeFragment;
-import com.haokuo.happyclub.fragment.NearbyFragment;
 import com.haokuo.happyclub.fragment.OrderFragment;
 import com.haokuo.midtitlebar.MidTitleBar;
 
@@ -34,6 +33,7 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
     ViewPager mViewPager;
     @BindView(R.id.bottom_navigation_bar)
     BottomNavigationBar mBottomNavigationBar;
+    private OrderFragment mOrderFragment;
 
     @Override
     protected int initContentLayout() {
@@ -47,8 +47,9 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
         //        fragments.add(new IMFragment());
         fragments.add(new HomeFragment());
         fragments.add(new ActivityFragment());
-        fragments.add(new NearbyFragment());
-        fragments.add(new OrderFragment());
+//        fragments.add(new NearbyFragment());
+        mOrderFragment = new OrderFragment();
+        fragments.add(mOrderFragment);
         fragments.add(new MeFragment());
         MainFragmentPagerAdapter adapter = new MainFragmentPagerAdapter(getSupportFragmentManager(), fragments);
         mViewPager.setAdapter(adapter);
@@ -72,7 +73,7 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
                 //                .addItem(new BottomNavigationItem(R.drawable.news, "消息"))
                 .addItem(new BottomNavigationItem(R.drawable.s1a, "首页"))
                 .addItem(new BottomNavigationItem(R.drawable.s2a, "活动"))
-                .addItem(new BottomNavigationItem(R.drawable.s3a, "附近"))
+//                .addItem(new BottomNavigationItem(R.drawable.s3a, "附近"))
                 .addItem(new BottomNavigationItem(R.drawable.s4a, "订单"))
                 .addItem(new BottomNavigationItem(R.drawable.s5a, "我的"))
                 .setFirstSelectedPosition(DEFAULT_TAB_POSITION)//设置默认选择的按钮
@@ -101,6 +102,16 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
     }
 
     @Override
+    public void onBackPressed() {
+        //退出activity前关闭菜单
+        if (mOrderFragment.getUserVisibleHint() && mOrderFragment.isMenuShowing()) {
+            mOrderFragment.closeMenu();
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
     protected void initListener() {
         mMidTitleBar.setOnMenuItemClickListener(this);
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -116,19 +127,19 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
                         mMidTitleBar.setMidTitle("首页");
                         mMidTitleBar.getMenu().clear();
                         break;
+//                    case 1:
+//                        mMidTitleBar.setMidTitle("活动");
+//                        mMidTitleBar.getMenu().clear();
+//                        break;
                     case 1:
-                        mMidTitleBar.setMidTitle("活动");
-                        mMidTitleBar.getMenu().clear();
-                        break;
-                    case 2:
                         mMidTitleBar.setMidTitle("附近");
                         mMidTitleBar.getMenu().clear();
                         break;
-                    case 3:
+                    case 2:
                         mMidTitleBar.setMidTitle("订单");
                         mMidTitleBar.getMenu().clear();
                         break;
-                    case 4:
+                    case 3:
                         mMidTitleBar.setMidTitle("我的");
                         mMidTitleBar.getMenu().clear();
                         mMidTitleBar.getMenu().add(0, R.id.item_edit_info, 0, null).setIcon(R.drawable.xx1).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);

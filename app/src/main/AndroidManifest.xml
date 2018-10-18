@@ -120,6 +120,9 @@
         <activity android:name=".activity.PointsMallActivity"/>
         <activity android:name=".activity.FoodOrderDetailActivity"/>
         <activity android:name=".activity.PayOrderActivity"/>
+        <activity android:name=".activity.MallOrderDetailActivity"/>
+        <activity android:name=".activity.OrderQrcodeActivity"/>
+        <activity android:name=".activity.ClubServiceDetailActivity"/>
 
     </application>
 

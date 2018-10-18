@@ -21,14 +21,16 @@ import com.haokuo.happyclub.network.bean.GetAcceptedServeParams;
 import com.haokuo.happyclub.network.bean.GetBindTelCodeParams;
 import com.haokuo.happyclub.network.bean.GetClubServiceParams;
 import com.haokuo.happyclub.network.bean.GetMallProductParams;
+import com.haokuo.happyclub.network.bean.GetNewsListParams;
 import com.haokuo.happyclub.network.bean.GetOrderDetailParams;
+import com.haokuo.happyclub.network.bean.GetOrderListParams;
 import com.haokuo.happyclub.network.bean.GetRecourseListParams;
 import com.haokuo.happyclub.network.bean.GetVolunteerServeParams;
 import com.haokuo.happyclub.network.bean.LoginByTelParams;
 import com.haokuo.happyclub.network.bean.LoginParams;
-import com.haokuo.happyclub.network.bean.UpdateOrderParams;
 import com.haokuo.happyclub.network.bean.RegisterParams;
 import com.haokuo.happyclub.network.bean.ResetPasswordParams;
+import com.haokuo.happyclub.network.bean.UpdateOrderParams;
 import com.haokuo.happyclub.network.bean.UpdatePasswordParams;
 import com.haokuo.happyclub.network.bean.UploadFileParams;
 import com.haokuo.happyclub.network.bean.base.IGetParamsMap;
@@ -492,6 +494,11 @@ public class HttpHelper {
         doPost(entity, UrlConfig.GET_CLUB_SERVICE_URL, callback);
     }
 
+    /** 会所服务下单 **/
+    public void insertServiceOrder(FoodOrderBean json, NetworkCallback callback) {
+        doPostWithJson(json, UrlConfig.INSERT_SERVICE_ORDER_URL, callback);
+    }
+
     /** 通过id查询我发布的服务 **/
     public void getRecourseDetail(IdParams entity, NetworkCallback callback) {
         doPost(entity, UrlConfig.GET_RECOURSE_DETAIL_URL, callback);
@@ -505,5 +512,29 @@ public class HttpHelper {
     /** 获取积分商城商品信息 **/
     public void getMallProduct(GetMallProductParams entity, NetworkCallback callback) {
         doPost(entity, UrlConfig.GET_ALL_MALL_PRODUCT_URL, callback);
+    }
+
+    /** 积分商城下单 **/
+    public void insertMallOrder(FoodOrderBean json, NetworkCallback callback) {
+        doPostWithJson(json, UrlConfig.INSERT_MALL_ORDER_URL, callback);
+    }
+
+    /** 获取所有订单列表 **/
+    public void getOrderList(GetOrderListParams entity, NetworkCallback callback) {
+        doPost(entity, UrlConfig.GET_ALL_ORDER_LIST_URL, callback);
+    }
+
+    /** 获得新闻分类列表 **/
+    public void getNewsSortList(NetworkCallback callback) {
+        doPost(null, UrlConfig.GET_NEWS_SORT_LIST_URL, callback);
+    }
+
+    /** 获取活动公开列表 **/
+    public void getNewsList(GetNewsListParams entity, NetworkCallback callback) {
+        doPost(entity, UrlConfig.GET_NEWS_LIST, callback);
+    }
+    /** 获取活动详情 **/
+    public void getNewsInfo(IdParams entity, NetworkCallback callback) {
+        doPost(entity, UrlConfig.GET_NEWS_INFO, callback);
     }
 }
