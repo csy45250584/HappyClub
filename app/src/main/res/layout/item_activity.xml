@@ -12,7 +12,7 @@
         android:layout_width="90dp"
         android:layout_height="@dimen/dp_90"
         android:layout_gravity="center_vertical"
-        android:src="@drawable/zy2"/>
+        android:src="@mipmap/ic_launcher_round"/>
 
     <RelativeLayout
         android:layout_width="0dp"
@@ -22,29 +22,19 @@
         android:layout_weight="1">
 
         <TextView
-            android:id="@+id/tv_activity_name"
+            android:id="@+id/tv_activity_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:singleLine="true"
             android:text="幸福足迹活动幸"
             android:textColor="@color/colorText1"
-            android:textSize="@dimen/text_32px"/>
+            android:textSize="@dimen/text_28px"/>
 
         <TextView
-            android:id="@+id/tv_activity_time"
+            android:id="@+id/tv_activity_summary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:singleLine="true"
-            android:text="2天后开始"
-            android:textColor="@color/colorPrimary"
-            android:textSize="@dimen/text_24px"/>
-
-        <TextView
-            android:id="@+id/tv_activity_description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_activity_name"
+            android:layout_below="@id/tv_activity_title"
             android:layout_marginTop="@dimen/dp_4"
             android:ellipsize="end"
             android:maxLines="2"
@@ -53,30 +43,15 @@
             android:textSize="@dimen/text_24px"/>
 
         <TextView
-            android:id="@+id/tv_activity_price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:singleLine="true"
-            android:text="68"
-            android:textColor="@color/colorPrimary"
-            android:textSize="@dimen/text_36px"/>
-
-        <TextView
-            android:id="@+id/tv_sign_up_activity"
+            android:id="@+id/tv_activity_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:background="@drawable/bg_orange_full_button"
-            android:paddingBottom="@dimen/dp_4"
-            android:paddingLeft="@dimen/dp_6"
-            android:paddingRight="@dimen/dp_6"
-            android:paddingTop="@dimen/dp_4"
-            android:singleLine="true"
-            android:text="我要报名"
-            android:textColor="@color/colorWhiteText1"
+            android:text="2018-01-01"
+            android:textColor="@color/colorText2"
             android:textSize="@dimen/text_22px"/>
+
     </RelativeLayout>
 
 </LinearLayout>

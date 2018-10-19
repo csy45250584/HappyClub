@@ -6,8 +6,8 @@ package com.haokuo.happyclub.network;
 
 public class UrlConfig {
     public static final String IMAGE_STRING_SPLIT = ",";
-    //    public static final String BASE_URL = "http://192.168.1.193:9088/xfhsi/";
-    public static final String BASE_URL = "http://18t69t8992.51mypc.cn:9088/xfhsi/";
+        public static final String BASE_URL = "http://192.168.1.193:9088/xfhsi/";
+//    public static final String BASE_URL = "http://18t69t8992.51mypc.cn:9088/xfhsi/";
     public static final String IMAGE_BASE_URL = "http://18t69t8992.51mypc.cn:9088/xfhs/upload/";
     //个人信息
     public static final String REGISTER_URL = "/custom/register.do";

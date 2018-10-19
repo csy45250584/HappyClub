@@ -51,6 +51,7 @@ public abstract class MyRefreshLoadMoreListener<T> implements OnRefreshLoadMoreL
         mRefreshCallback = new NetworkCallback() {
             @Override
             public void onSuccess(Call call, String json) {
+                onSuccessResult(json);
                 ListResultBean<T> result = JSON.parseObject(json, clz);
                 List<T> data = result.getData();
                 mAdapter.setNewData(data);
@@ -64,6 +65,10 @@ public abstract class MyRefreshLoadMoreListener<T> implements OnRefreshLoadMoreL
                 refreshLayout.finishRefresh(false);
             }
         };
+    }
+
+    public void onSuccessResult(String json) {
+
     }
 
     @Override

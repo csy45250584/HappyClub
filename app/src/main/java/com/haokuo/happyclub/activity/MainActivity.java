@@ -132,7 +132,7 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
 //                        mMidTitleBar.getMenu().clear();
 //                        break;
                     case 1:
-                        mMidTitleBar.setMidTitle("附近");
+                        mMidTitleBar.setMidTitle("活动");
                         mMidTitleBar.getMenu().clear();
                         break;
                     case 2:
