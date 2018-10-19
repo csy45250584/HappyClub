@@ -13,6 +13,7 @@ import com.haokuo.happyclub.R;
 import com.haokuo.happyclub.activity.CanteenActivity;
 import com.haokuo.happyclub.activity.ClubServiceActivity;
 import com.haokuo.happyclub.activity.MyServeActivity;
+import com.haokuo.happyclub.activity.NewsListActivity;
 import com.haokuo.happyclub.activity.PointsMallActivity;
 import com.haokuo.happyclub.activity.RepairListActivity;
 import com.haokuo.happyclub.activity.SuggestListActivity;
@@ -20,18 +21,25 @@ import com.haokuo.happyclub.activity.VolunteerOrderActivity;
 import com.haokuo.happyclub.adapter.ActionAdapter;
 import com.haokuo.happyclub.base.BaseLazyLoadFragment;
 import com.haokuo.happyclub.bean.ActionBean;
+import com.haokuo.happyclub.bean.NewsBean;
 import com.haokuo.happyclub.bean.UserInfoBean;
+import com.haokuo.happyclub.bean.list.NewsListBean;
+import com.haokuo.happyclub.network.EntityCallback;
 import com.haokuo.happyclub.network.HttpHelper;
 import com.haokuo.happyclub.network.NetworkCallback;
+import com.haokuo.happyclub.network.bean.GetNewsListParams;
 import com.haokuo.happyclub.util.GlideImageLoader;
 import com.haokuo.happyclub.util.MySpUtil;
 import com.haokuo.happyclub.util.utilscode.ToastUtils;
+import com.sunfusheng.marqueeview.MarqueeView;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import okhttp3.Call;
 
 /**
@@ -44,6 +52,8 @@ public class HomeFragment extends BaseLazyLoadFragment {
     RecyclerView mRvAction;
     @BindView(R.id.rv_volunteer_action)
     RecyclerView mRvVolunteerAction;
+    @BindView(R.id.marquee_view_news)
+    MarqueeView mMarqueeViewNews;
     private ActionAdapter mActionAdapter;
     private ActionAdapter mVolunteerActionAdapter;
 
@@ -72,6 +82,31 @@ public class HomeFragment extends BaseLazyLoadFragment {
         mRvVolunteerAction.setAdapter(mVolunteerActionAdapter);
         initActionAdapter();
         initVolunteerActionAdapter();
+    }
+
+    @Override
+    protected void loadData() {
+        GetNewsListParams params = new GetNewsListParams(null, GetNewsListParams.STATUS_NEWS, null);
+        HttpHelper.getInstance().getNewsList(params, new EntityCallback<NewsListBean>() {
+            @Override
+            public void onFailure(Call call, String message) {
+                ToastUtils.showShort("获取头条信息失败");
+            }
+
+            @Override
+            public void onSuccess(Call call, NewsListBean result) {
+                List<NewsBean> data = result.getData();
+                List<String> info = new ArrayList<>();
+                for (NewsBean bean : data) {
+                    info.add(bean.getTitle());
+                }
+                mMarqueeViewNews.startWithList(info);
+            }
+        });
+    }
+
+    public MarqueeView getMarqueeViewNews() {
+        return mMarqueeViewNews;
     }
 
     private void initVolunteerActionAdapter() {
@@ -160,5 +195,12 @@ public class HomeFragment extends BaseLazyLoadFragment {
                 .setNegativeButton("取消", null)
                 .create()
                 .show();
+    }
+
+
+
+    @OnClick(R.id.ll_news_container)
+    public void onViewClicked() {
+        startActivity(new Intent(mContext,NewsListActivity.class));
     }
 }

@@ -124,6 +124,7 @@
         <activity android:name=".activity.OrderQrcodeActivity"/>
         <activity android:name=".activity.ClubServiceDetailActivity"/>
         <activity android:name=".activity.NewsDetailActivity"/>
+        <activity android:name=".activity.NewsListActivity"/>
 
     </application>
 

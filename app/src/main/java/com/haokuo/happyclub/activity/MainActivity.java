@@ -34,6 +34,7 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
     @BindView(R.id.bottom_navigation_bar)
     BottomNavigationBar mBottomNavigationBar;
     private OrderFragment mOrderFragment;
+    private HomeFragment mHomeFragment;
 
     @Override
     protected int initContentLayout() {
@@ -45,7 +46,8 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
         initBottomNaviBar();
         ArrayList<Fragment> fragments = new ArrayList<>();
         //        fragments.add(new IMFragment());
-        fragments.add(new HomeFragment());
+        mHomeFragment = new HomeFragment();
+        fragments.add(mHomeFragment);
         fragments.add(new ActivityFragment());
 //        fragments.add(new NearbyFragment());
         mOrderFragment = new OrderFragment();
@@ -165,5 +167,20 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
             public void onTabReselected(int position) {
             }
         });
+    }
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (mHomeFragment!=null&&mHomeFragment.getMarqueeViewNews()!=null) {
+            mHomeFragment.getMarqueeViewNews().startFlipping();
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mHomeFragment!=null&&mHomeFragment.getMarqueeViewNews()!=null) {
+            mHomeFragment.getMarqueeViewNews().stopFlipping();
+        }
     }
 }

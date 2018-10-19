@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -44,17 +45,40 @@
             android:overScrollMode="never"/>
     </LinearLayout>
 
-    <RelativeLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_6"
-        android:background="@color/colorWhite"
-        android:orientation="vertical">
+        android:layout_height="@dimen/dp_46"
+        android:layout_marginTop="@dimen/dp_6">
 
-        <ImageView
-            android:src="@color/colorWhite"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_46"
+            android:background="@color/colorWhite"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/dp_16"
+            android:paddingRight="@dimen/dp_16">
 
-    </RelativeLayout>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/tt"/>
+
+            <com.sunfusheng.marqueeview.MarqueeView
+                android:id="@+id/marquee_view_news"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginLeft="@dimen/dp_16"
+                app:mvAnimDuration="1000"
+                app:mvDirection="bottom_to_top"
+                app:mvSingleLine="true"
+                app:mvTextColor="@color/colorText2"
+                app:mvTextSize="@dimen/sp_14"/>
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/ll_news_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </FrameLayout>
 </LinearLayout>
