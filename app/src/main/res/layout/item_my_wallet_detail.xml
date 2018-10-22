@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp_80"
+    android:background="@color/colorWhite"
+    android:paddingBottom="@dimen/dp_12"
+    android:paddingLeft="@dimen/dp_16"
+    android:paddingRight="@dimen/dp_16"
+    android:paddingTop="@dimen/dp_12">
+
+    <TextView
+        android:id="@+id/tv_my_wallet_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:text="fdfdfd"
+        android:textColor="@color/colorText1"
+        android:textSize="@dimen/text_26px"/>
+
+    <TextView
+        android:id="@+id/tv_wallet_detail_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|bottom"
+        android:text="xiaofei20"
+        android:textColor="@color/colorText2"
+        android:textSize="@dimen/text_24px"/>
+</FrameLayout>

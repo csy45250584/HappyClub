@@ -533,8 +533,19 @@ public class HttpHelper {
     public void getNewsList(GetNewsListParams entity, NetworkCallback callback) {
         doPost(entity, UrlConfig.GET_NEWS_LIST, callback);
     }
+
     /** 获取活动详情 **/
     public void getNewsInfo(IdParams entity, NetworkCallback callback) {
         doPost(entity, UrlConfig.GET_NEWS_INFO, callback);
+    }
+
+    /** 积分钱包详情 **/
+    public void getMyWallet(NetworkCallback callback) {
+        doPost(null, UrlConfig.GET_MY_WALLET_URL, callback);
+    }
+
+    /** 我的积分明细 **/
+    public void getMyWalletDetail(PageParams entity, NetworkCallback callback) {
+        doPost(entity, UrlConfig.GET_MY_WALLET_DETAIL_URL, callback);
     }
 }

@@ -29,6 +29,8 @@ public class UrlConfig {
     public static final String INSERT_ADDRESS_URL = "/custom/app/insertAddress.do";
     public static final String DELETE_ADDRESS_URL = "/custom/app/delAddress.do";
     public static final String UPDATE_ADDRESS_URL = "/custom/app/updateAddress.do";
+    public static final String GET_MY_WALLET_URL = "/custom/app/getMyWallet.do";
+    public static final String GET_MY_WALLET_DETAIL_URL = "/custom/app/getMyWalletOp.do";
     //志愿者
     public static final String GET_RECOURSE_LIST_URL = "/custom/app/myPopServe.do";
     public static final String NEW_RECOURSE_URL = "/custom/app/insertServe.do";

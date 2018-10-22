@@ -12,6 +12,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.haokuo.happyclub.R;
 import com.haokuo.happyclub.activity.CanteenActivity;
 import com.haokuo.happyclub.activity.ClubServiceActivity;
+import com.haokuo.happyclub.activity.MyScoreActivity;
 import com.haokuo.happyclub.activity.MyServeActivity;
 import com.haokuo.happyclub.activity.NewsListActivity;
 import com.haokuo.happyclub.activity.PointsMallActivity;
@@ -115,7 +116,7 @@ public class HomeFragment extends BaseLazyLoadFragment {
         actionBeans.add(new ActionBean("志愿工单", R.drawable.zy2, VolunteerOrderActivity.class));
         actionBeans.add(new ActionBean("我的服务", R.drawable.zy3, MyServeActivity.class));
         actionBeans.add(new ActionBean("服务评价", R.drawable.zy4));
-        actionBeans.add(new ActionBean("我的积分", R.drawable.zy5));
+        actionBeans.add(new ActionBean("我的积分", R.drawable.zy5, MyScoreActivity.class));
         mVolunteerActionAdapter.setNewData(actionBeans);
     }
 
@@ -197,10 +198,8 @@ public class HomeFragment extends BaseLazyLoadFragment {
                 .show();
     }
 
-
-
     @OnClick(R.id.ll_news_container)
     public void onViewClicked() {
-        startActivity(new Intent(mContext,NewsListActivity.class));
+        startActivity(new Intent(mContext, NewsListActivity.class));
     }
 }

@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.haokuo.happyclub.R;
 import com.haokuo.happyclub.activity.MyRecourseActivity;
+import com.haokuo.happyclub.activity.MyScoreActivity;
 import com.haokuo.happyclub.activity.MyServeActivity;
 import com.haokuo.happyclub.activity.SafetySettingActivity;
 import com.haokuo.happyclub.activity.SystemSettingActivity;
@@ -95,6 +96,7 @@ public class MeFragment extends BaseLazyLoadFragment {
             case R.id.ll_coupon:
                 break;
             case R.id.siv_points:
+                startActivity(new Intent(mContext, MyScoreActivity.class));
                 break;
             case R.id.siv_service:
                 startActivity(new Intent(mContext, MyServeActivity.class));
