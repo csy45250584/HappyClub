@@ -6,8 +6,8 @@ package com.haokuo.happyclub.network;
 
 public class UrlConfig {
     public static final String IMAGE_STRING_SPLIT = ",";
-        public static final String BASE_URL = "http://192.168.1.193:9088/xfhsi/";
-//    public static final String BASE_URL = "http://18t69t8992.51mypc.cn:9088/xfhsi/";
+    public static final String BASE_URL = "http://192.168.1.193:9088/xfhsi/";
+    //    public static final String BASE_URL = "http://18t69t8992.51mypc.cn:9088/xfhsi/";
     public static final String IMAGE_BASE_URL = "http://18t69t8992.51mypc.cn:9088/xfhs/upload/";
     //个人信息
     public static final String REGISTER_URL = "/custom/register.do";
@@ -66,6 +66,7 @@ public class UrlConfig {
     //订单
     public static final String GET_ALL_ORDER_LIST_URL = "/custom/app/getAllOrderListPlus.do";
     public static final String EVALUATE_ORDER_URL = "/custom/app/updateOrderEvaluation.do";
+    public static final String UPDATE_ORDER_WITH_REASON_URL = "/custom/app/updateOrderReason.do";
 
     //活动新闻
     public static final String GET_NEWS_LIST = "/custom/app/getNewsList.do";

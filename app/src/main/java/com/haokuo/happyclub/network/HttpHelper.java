@@ -32,6 +32,7 @@ import com.haokuo.happyclub.network.bean.LoginParams;
 import com.haokuo.happyclub.network.bean.RegisterParams;
 import com.haokuo.happyclub.network.bean.ResetPasswordParams;
 import com.haokuo.happyclub.network.bean.UpdateOrderParams;
+import com.haokuo.happyclub.network.bean.UpdateOrderWithReasonParams;
 import com.haokuo.happyclub.network.bean.UpdatePasswordParams;
 import com.haokuo.happyclub.network.bean.UploadFileParams;
 import com.haokuo.happyclub.network.bean.base.IGetParamsMap;
@@ -553,5 +554,9 @@ public class HttpHelper {
     /** 订单评价相关操作(会所,服务商可用) **/
     public void evaluateOrder(EvaluateOrderParams entity, NetworkCallback callback) {
         doPost(entity, UrlConfig.EVALUATE_ORDER_URL, callback);
+    }
+    /** 订单评价相关操作(会所,服务商可用) **/
+    public void updateOrderWithReason(UpdateOrderWithReasonParams entity, NetworkCallback callback) {
+        doPost(entity, UrlConfig.UPDATE_ORDER_WITH_REASON_URL, callback);
     }
 }

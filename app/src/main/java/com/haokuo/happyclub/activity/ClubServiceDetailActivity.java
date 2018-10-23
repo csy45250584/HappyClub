@@ -1,8 +1,12 @@
 package com.haokuo.happyclub.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -18,6 +22,7 @@ import com.haokuo.happyclub.network.NetworkCallback;
 import com.haokuo.happyclub.network.UrlConfig;
 import com.haokuo.happyclub.network.bean.GetOrderDetailParams;
 import com.haokuo.happyclub.network.bean.UpdateOrderParams;
+import com.haokuo.happyclub.network.bean.UpdateOrderWithReasonParams;
 import com.haokuo.happyclub.util.utilscode.TimeUtils;
 import com.haokuo.happyclub.util.utilscode.ToastUtils;
 import com.haokuo.midtitlebar.MidTitleBar;
@@ -67,6 +72,7 @@ public class ClubServiceDetailActivity extends BaseActivity {
     TextView mTvEvaluate;
     private long mOrderId;
     private OrderDetailBean mOrderDetailBean;
+    private AlertDialog mRefundDialog;
 
     @Override
     protected int initContentLayout() {
@@ -144,10 +150,11 @@ public class ClubServiceDetailActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.tv_cancel_order: {
                 showLoading("正在取消订单...");
-                UpdateOrderParams params = new UpdateOrderParams(mOrderId, -1, UpdateOrderParams.OPERATION_REFUND);
+                UpdateOrderParams params = new UpdateOrderParams(mOrderId, -1, UpdateOrderParams.OPERATION_CANCEL);
                 HttpHelper.getInstance().updateFoodOrder(params, new NetworkCallback() {
                     @Override
                     public void onSuccess(Call call, String json) {
+                        loadData();
                         loadSuccess("取消订单成功");
                     }
 
@@ -161,13 +168,13 @@ public class ClubServiceDetailActivity extends BaseActivity {
             case R.id.tv_pay_order: {
                 Intent intent = new Intent(ClubServiceDetailActivity.this, PayOrderActivity.class);
                 intent.putExtra(PayOrderActivity.EXTRA_ORDER_BEAN, mOrderDetailBean);
-                startActivityForResult(intent, 0);
+                startActivityForResult(intent, REQUEST_CODE_PAY);
             }
             break;
             case R.id.tv_show_qrcode: {
                 Intent intent = new Intent(ClubServiceDetailActivity.this, OrderQrcodeActivity.class);
                 intent.putExtra(OrderQrcodeActivity.EXTRA_ORDER_ID, mOrderDetailBean.getId());
-                startActivityForResult(intent, 0);
+                startActivityForResult(intent, REQUEST_CODE_QRCODE);
             }
             break;
             case R.id.tv_complete: { //已服务点击完成订单
@@ -188,20 +195,7 @@ public class ClubServiceDetailActivity extends BaseActivity {
             }
             break;
             case R.id.tv_refund:
-                showLoading("提交请求中...");
-                UpdateOrderParams params = new UpdateOrderParams(mOrderId, null, UpdateOrderParams.OPERATION_REFUND);
-                HttpHelper.getInstance().updateFoodOrder(params, new NetworkCallback() {
-                    @Override
-                    public void onSuccess(Call call, String json) {
-                        loadSuccess("提交成功");
-                        loadData();
-                    }
-
-                    @Override
-                    public void onFailure(Call call, String message) {
-                        loadFailed("提交失败，" + message);
-                    }
-                });
+                showRefundDialog();
                 break;
             case R.id.tv_evaluate:
                 Intent intent = new Intent(ClubServiceDetailActivity.this, EvaluateOrderActivity.class);
@@ -209,6 +203,41 @@ public class ClubServiceDetailActivity extends BaseActivity {
                 startActivityForResult(intent, REQUEST_CODE_EVALUATE);
                 break;
         }
+    }
+
+    private void showRefundDialog() {
+        View inflate = LayoutInflater.from(this).inflate(R.layout.dialog_edittext, null);
+        final EditText editText = inflate.findViewById(R.id.edittext);
+        editText.setHint("请输入退款理由");
+        mRefundDialog = new AlertDialog.Builder(this)
+                .setTitle("申请退款")
+                .setView(inflate)
+                .setPositiveButton("提交", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        mRefundDialog.dismiss();
+                        showLoading("提交请求中...");
+                        String refundReason = editText.getEditableText().toString();
+                        int opStatus = mOrderDetailBean.getStatus() == OrderDetailBean.STATE_PAYED ? UpdateOrderWithReasonParams.OPERATION_REFUND_PAYED : UpdateOrderWithReasonParams.OPERATION_REFUND_CLUB;
+                        UpdateOrderWithReasonParams params = new UpdateOrderWithReasonParams(mOrderId, refundReason, opStatus);
+                        HttpHelper.getInstance().updateOrderWithReason(params, new NetworkCallback() {
+                            @Override
+                            public void onSuccess(Call call, String json) {
+                                loadSuccess("提交成功");
+                                loadData();
+                            }
+
+                            @Override
+                            public void onFailure(Call call, String message) {
+                                loadFailed("提交失败，" + message);
+                            }
+                        });
+                    }
+                })
+                .setNegativeButton("取消", null)
+                .create();
+        mRefundDialog.show();
     }
 
     @Override
@@ -220,16 +249,12 @@ public class ClubServiceDetailActivity extends BaseActivity {
                     loadData();
                     break;
                 case REQUEST_CODE_PAY:
-                    finish();
+                    loadData();
                     break;
                 case REQUEST_CODE_QRCODE:
                     loadData();
                     break;
             }
-
-            //            loadData();
         }
     }
-
-
 }

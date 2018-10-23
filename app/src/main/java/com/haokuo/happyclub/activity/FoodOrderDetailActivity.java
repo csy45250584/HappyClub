@@ -1,10 +1,14 @@
 package com.haokuo.happyclub.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -19,6 +23,7 @@ import com.haokuo.happyclub.network.HttpHelper;
 import com.haokuo.happyclub.network.NetworkCallback;
 import com.haokuo.happyclub.network.bean.GetOrderDetailParams;
 import com.haokuo.happyclub.network.bean.UpdateOrderParams;
+import com.haokuo.happyclub.network.bean.UpdateOrderWithReasonParams;
 import com.haokuo.happyclub.util.ResUtils;
 import com.haokuo.happyclub.util.utilscode.DecimalUtils;
 import com.haokuo.happyclub.util.utilscode.TimeUtils;
@@ -84,6 +89,7 @@ public class FoodOrderDetailActivity extends BaseActivity {
     private long mOrderId;
     private OrderDetailBean mOrderDetailBean;
     private OrderDetailFoodAdapter mOrderFoodAdapter;
+    private AlertDialog mRefundDialog;
 
     @Override
     protected int initContentLayout() {
@@ -183,10 +189,11 @@ public class FoodOrderDetailActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.tv_cancel_order: {
                 showLoading("正在取消订单...");
-                UpdateOrderParams params = new UpdateOrderParams(mOrderId, -1, UpdateOrderParams.OPERATION_REFUND);
+                UpdateOrderParams params = new UpdateOrderParams(mOrderId, -1, UpdateOrderParams.OPERATION_CANCEL);
                 HttpHelper.getInstance().updateFoodOrder(params, new NetworkCallback() {
                     @Override
                     public void onSuccess(Call call, String json) {
+                        loadData();
                         loadSuccess("取消订单成功");
                     }
 
@@ -227,20 +234,7 @@ public class FoodOrderDetailActivity extends BaseActivity {
             }
             break;
             case R.id.tv_refund:
-                showLoading("提交请求中...");
-                UpdateOrderParams params = new UpdateOrderParams(mOrderId, null, UpdateOrderParams.OPERATION_REFUND);
-                HttpHelper.getInstance().updateFoodOrder(params, new NetworkCallback() {
-                    @Override
-                    public void onSuccess(Call call, String json) {
-                        loadSuccess("提交成功");
-                        loadData();
-                    }
-
-                    @Override
-                    public void onFailure(Call call, String message) {
-                        loadFailed("提交失败，" + message);
-                    }
-                });
+                showRefundDialog();
                 break;
             case R.id.tv_evaluate:
                 Intent intent = new Intent(FoodOrderDetailActivity.this, EvaluateOrderActivity.class);
@@ -248,6 +242,40 @@ public class FoodOrderDetailActivity extends BaseActivity {
                 startActivityForResult(intent, REQUEST_CODE_EVALUATE);
                 break;
         }
+    }
+
+    private void showRefundDialog() {
+        View inflate = LayoutInflater.from(this).inflate(R.layout.dialog_edittext, null);
+        final EditText editText = inflate.findViewById(R.id.edittext);
+        editText.setHint("请输入退款理由");
+        mRefundDialog = new AlertDialog.Builder(this)
+                .setTitle("申请退款")
+                .setView(inflate)
+                .setPositiveButton("提交", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        mRefundDialog.dismiss();
+                        showLoading("提交请求中...");
+                        String refundReason = editText.getEditableText().toString();
+                        int opStatus = mOrderDetailBean.getStatus() == OrderDetailBean.STATE_PAYED ? UpdateOrderWithReasonParams.OPERATION_REFUND_PAYED : UpdateOrderWithReasonParams.OPERATION_REFUND;
+                        UpdateOrderWithReasonParams params = new UpdateOrderWithReasonParams(mOrderId, refundReason, opStatus);
+                        HttpHelper.getInstance().updateOrderWithReason(params, new NetworkCallback() {
+                            @Override
+                            public void onSuccess(Call call, String json) {
+                                loadSuccess("提交成功");
+                                loadData();
+                            }
+
+                            @Override
+                            public void onFailure(Call call, String message) {
+                                loadFailed("提交失败，" + message);
+                            }
+                        });
+                    }
+                })
+                .setNegativeButton("取消", null)
+                .create();
+        mRefundDialog.show();
     }
 
     @Override
@@ -259,7 +287,7 @@ public class FoodOrderDetailActivity extends BaseActivity {
                     loadData();
                     break;
                 case REQUEST_CODE_PAY:
-                    finish();
+                    loadData();
                     break;
                 case REQUEST_CODE_QRCODE:
                     loadData();

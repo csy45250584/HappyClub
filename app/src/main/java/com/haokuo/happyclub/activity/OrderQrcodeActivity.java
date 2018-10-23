@@ -36,4 +36,10 @@ public class OrderQrcodeActivity extends BaseActivity {
         long orderId = getIntent().getLongExtra(EXTRA_ORDER_ID, -1);
         setQrcodeImage(String.valueOf(orderId));
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        setResult(RESULT_OK);
+    }
 }
