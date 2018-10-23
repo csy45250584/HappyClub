@@ -17,6 +17,7 @@ import com.haokuo.happyclub.bean.UserInfoBean;
 import com.haokuo.happyclub.network.bean.BindUserTelParams;
 import com.haokuo.happyclub.network.bean.ChangeServeStatusParams;
 import com.haokuo.happyclub.network.bean.CheckIsNextParams;
+import com.haokuo.happyclub.network.bean.EvaluateOrderParams;
 import com.haokuo.happyclub.network.bean.GetAcceptedServeParams;
 import com.haokuo.happyclub.network.bean.GetBindTelCodeParams;
 import com.haokuo.happyclub.network.bean.GetClubServiceParams;
@@ -547,5 +548,10 @@ public class HttpHelper {
     /** 我的积分明细 **/
     public void getMyWalletDetail(PageParams entity, NetworkCallback callback) {
         doPost(entity, UrlConfig.GET_MY_WALLET_DETAIL_URL, callback);
+    }
+
+    /** 订单评价相关操作(会所,服务商可用) **/
+    public void evaluateOrder(EvaluateOrderParams entity, NetworkCallback callback) {
+        doPost(entity, UrlConfig.EVALUATE_ORDER_URL, callback);
     }
 }

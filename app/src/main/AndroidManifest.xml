@@ -126,6 +126,7 @@
         <activity android:name=".activity.NewsDetailActivity"/>
         <activity android:name=".activity.NewsListActivity"/>
         <activity android:name=".activity.MyScoreActivity"/>
+        <activity android:name=".activity.EvaluateOrderActivity"/>
 
     </application>
 

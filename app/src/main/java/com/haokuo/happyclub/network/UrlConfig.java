@@ -65,6 +65,7 @@ public class UrlConfig {
 
     //订单
     public static final String GET_ALL_ORDER_LIST_URL = "/custom/app/getAllOrderListPlus.do";
+    public static final String EVALUATE_ORDER_URL = "/custom/app/updateOrderEvaluation.do";
 
     //活动新闻
     public static final String GET_NEWS_LIST = "/custom/app/getNewsList.do";

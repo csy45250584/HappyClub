@@ -14,10 +14,10 @@ public class UpdateOrderParams extends UserIdTokenParams {
     public static final int OPERATION_COMPLETE = 6;
 
     private long orderId;
-    private int payType; //仅针对下单的字段 0:积分,1:支付宝,2:微信,3:银联,4:积分+其他,
+    private Integer payType; //仅针对下单的字段 0:积分,1:支付宝,2:微信,3:银联,4:积分+其他,
     private int opStatus; //付款:2 , 退款:11 , 完成 : 6
 
-    public UpdateOrderParams(long orderId, int payType, int opStatus) {
+    public UpdateOrderParams(long orderId, Integer payType, int opStatus) {
         this.orderId = orderId;
         this.payType = payType;
         this.opStatus = opStatus;

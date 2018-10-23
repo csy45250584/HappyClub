@@ -30,6 +30,7 @@ public class OrderDetailBean implements Serializable {
     private static final int STATE_REFUND_COMPLETED = 7;
     private static final int STATE_REFUND_FAILED = 77;
     private static final int STATE_REFUND_COMPLAINT = 78;
+    private static final int STATE_COMPLAINT_FAILED = 79;
     private static final int STATE_INVALID = 8;
 
     private String createDate; //下单时间
@@ -104,8 +105,10 @@ public class OrderDetailBean implements Serializable {
                 return "退款失败";
             case STATE_REFUND_COMPLAINT:
                 return "退款申诉中";
+            case STATE_COMPLAINT_FAILED:
+                return "申诉失败";
             case STATE_INVALID:
-                return "已失效";
+                return "已关闭";
             default:
                 return "未知状态:" + status;
         }

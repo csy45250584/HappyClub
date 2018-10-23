@@ -37,6 +37,9 @@ import okhttp3.Call;
 public class FoodOrderDetailActivity extends BaseActivity {
     public static final String EXTRA_AUTO_PAY = "com.haokuo.happyclub.extra.EXTRA_AUTO_PAY";
     public static final String EXTRA_ORDER_ID = "com.haokuo.happyclub.extra.EXTRA_ORDER_ID";
+    public static final int REQUEST_CODE_EVALUATE = 1;
+    public static final int REQUEST_CODE_PAY = 2;
+    public static final int REQUEST_CODE_QRCODE = 3;
     @BindView(R.id.tv_address)
     TextView mTvAddress;
     @BindView(R.id.tv_order_state)
@@ -69,6 +72,14 @@ public class FoodOrderDetailActivity extends BaseActivity {
     LinearLayout mLlAddressContainer;
     @BindView(R.id.ll_btn_container)
     LinearLayout mLlBtnContainer;
+    @BindView(R.id.tv_show_qrcode)
+    TextView mTvShowQrcode;
+    @BindView(R.id.tv_complete)
+    TextView mTvComplete;
+    @BindView(R.id.tv_refund)
+    TextView mTvRefund;
+    @BindView(R.id.tv_evaluate)
+    TextView mTvEvaluate;
     private boolean mIsAutoPay;
     private long mOrderId;
     private OrderDetailBean mOrderDetailBean;
@@ -135,14 +146,39 @@ public class FoodOrderDetailActivity extends BaseActivity {
         mTvOrderNote.setText(orderDetailBean.getRemarks());
         List<OrderDetailBean.OrderItem> orderItems = orderDetailBean.getOrderItems();
         mOrderFoodAdapter.setNewData(orderItems);
-        if (orderDetailBean.getStatus() == OrderDetailBean.STATE_WAIT_FOR_HANDLE) {
-            mLlBtnContainer.setVisibility(View.VISIBLE);
-        } else {
-            mLlBtnContainer.setVisibility(View.GONE);
+        mLlBtnContainer.setVisibility(View.GONE);
+        mTvPayOrder.setVisibility(View.GONE);
+        mTvCancelOrder.setVisibility(View.GONE);
+        mTvShowQrcode.setVisibility(View.GONE);
+        mTvRefund.setVisibility(View.GONE);
+        mTvComplete.setVisibility(View.GONE);
+        mTvEvaluate.setVisibility(View.GONE);
+        switch (orderDetailBean.getStatus()) {
+            case OrderDetailBean.STATE_WAIT_FOR_HANDLE:
+                mLlBtnContainer.setVisibility(View.VISIBLE);
+                mTvPayOrder.setVisibility(View.VISIBLE);
+                mTvCancelOrder.setVisibility(View.VISIBLE);
+                break;
+            case OrderDetailBean.STATE_PAYED:
+                mLlBtnContainer.setVisibility(View.VISIBLE);
+                mTvShowQrcode.setVisibility(View.VISIBLE);
+                mTvRefund.setVisibility(View.VISIBLE);
+                break;
+            case OrderDetailBean.STATE_SERVED:
+                mLlBtnContainer.setVisibility(View.VISIBLE);
+                mTvRefund.setVisibility(View.VISIBLE);
+                mTvComplete.setVisibility(View.VISIBLE);
+                break;
+            case OrderDetailBean.STATE_NO_EVALUATE:
+                mLlBtnContainer.setVisibility(View.VISIBLE);
+                mTvEvaluate.setVisibility(View.VISIBLE);
+                break;
+            default:
+                mLlBtnContainer.setVisibility(View.GONE);
         }
     }
 
-    @OnClick({R.id.tv_cancel_order, R.id.tv_pay_order})
+    @OnClick({R.id.tv_cancel_order, R.id.tv_pay_order, R.id.tv_show_qrcode, R.id.tv_complete, R.id.tv_refund, R.id.tv_evaluate})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_cancel_order: {
@@ -161,10 +197,55 @@ public class FoodOrderDetailActivity extends BaseActivity {
                 });
             }
             break;
-            case R.id.tv_pay_order:
+            case R.id.tv_pay_order: {
                 Intent intent = new Intent(FoodOrderDetailActivity.this, PayOrderActivity.class);
                 intent.putExtra(PayOrderActivity.EXTRA_ORDER_BEAN, mOrderDetailBean);
-                startActivityForResult(intent, 0);
+                startActivityForResult(intent, REQUEST_CODE_PAY);
+            }
+            break;
+            case R.id.tv_show_qrcode: {
+                Intent intent = new Intent(FoodOrderDetailActivity.this, OrderQrcodeActivity.class);
+                intent.putExtra(OrderQrcodeActivity.EXTRA_ORDER_ID, mOrderDetailBean.getId());
+                startActivityForResult(intent, REQUEST_CODE_QRCODE);
+            }
+            break;
+            case R.id.tv_complete: { //已服务点击完成订单
+                showLoading("提交请求中...");
+                UpdateOrderParams params = new UpdateOrderParams(mOrderId, null, UpdateOrderParams.OPERATION_COMPLETE);
+                HttpHelper.getInstance().updateFoodOrder(params, new NetworkCallback() {
+                    @Override
+                    public void onSuccess(Call call, String json) {
+                        loadSuccess("提交成功");
+                        loadData();
+                    }
+
+                    @Override
+                    public void onFailure(Call call, String message) {
+                        loadFailed("提交失败，" + message);
+                    }
+                });
+            }
+            break;
+            case R.id.tv_refund:
+                showLoading("提交请求中...");
+                UpdateOrderParams params = new UpdateOrderParams(mOrderId, null, UpdateOrderParams.OPERATION_REFUND);
+                HttpHelper.getInstance().updateFoodOrder(params, new NetworkCallback() {
+                    @Override
+                    public void onSuccess(Call call, String json) {
+                        loadSuccess("提交成功");
+                        loadData();
+                    }
+
+                    @Override
+                    public void onFailure(Call call, String message) {
+                        loadFailed("提交失败，" + message);
+                    }
+                });
+                break;
+            case R.id.tv_evaluate:
+                Intent intent = new Intent(FoodOrderDetailActivity.this, EvaluateOrderActivity.class);
+                intent.putExtra(EvaluateOrderActivity.EXTRA_ORDER_BEAN, mOrderDetailBean);
+                startActivityForResult(intent, REQUEST_CODE_EVALUATE);
                 break;
         }
     }
@@ -173,8 +254,19 @@ public class FoodOrderDetailActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
-            finish();
-//            loadData();
+            switch (requestCode) {
+                case REQUEST_CODE_EVALUATE:
+                    loadData();
+                    break;
+                case REQUEST_CODE_PAY:
+                    finish();
+                    break;
+                case REQUEST_CODE_QRCODE:
+                    loadData();
+                    break;
+            }
+
+            //            loadData();
         }
     }
 }

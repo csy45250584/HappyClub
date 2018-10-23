@@ -53,7 +53,6 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/dp_12"
                         android:gravity="center_vertical"
                         android:orientation="horizontal">
 
@@ -97,6 +96,7 @@
                         android:id="@+id/ll_btn_container"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_12"
                         android:orientation="vertical">
 
                         <include layout="@layout/include_divider"/>
@@ -109,47 +109,104 @@
 
                             <TextView
                                 android:id="@+id/tv_cancel_order"
-                                android:layout_width="wrap_content"
+                                android:layout_width="@dimen/dp_70"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
                                 android:background="@drawable/bg_gray_stroke_btn"
+                                android:gravity="center"
                                 android:paddingBottom="@dimen/dp_3"
                                 android:paddingLeft="@dimen/dp_6"
                                 android:paddingRight="@dimen/dp_6"
                                 android:paddingTop="@dimen/dp_3"
                                 android:text="取消订单"
                                 android:textColor="@color/colorText2"
-                                android:textSize="@dimen/text_26px"/>
+                                android:textSize="@dimen/text_26px"
+                                android:visibility="gone"/>
 
                             <TextView
                                 android:id="@+id/tv_pay_order"
-                                android:layout_width="wrap_content"
+                                android:layout_width="@dimen/dp_70"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginLeft="@dimen/dp_8"
                                 android:background="@drawable/bg_primary_solid_btn"
+                                android:gravity="center"
                                 android:paddingBottom="@dimen/dp_3"
                                 android:paddingLeft="@dimen/dp_6"
                                 android:paddingRight="@dimen/dp_6"
                                 android:paddingTop="@dimen/dp_3"
                                 android:text="支付订单"
                                 android:textColor="@color/colorWhiteText1"
-                                android:textSize="@dimen/text_26px"/>
+                                android:textSize="@dimen/text_26px"
+                                android:visibility="gone"/>
 
                             <TextView
                                 android:id="@+id/tv_show_qrcode"
-                                android:layout_width="wrap_content"
+                                android:layout_width="@dimen/dp_70"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginLeft="@dimen/dp_8"
                                 android:background="@drawable/bg_primary_solid_btn"
+                                android:gravity="center"
                                 android:paddingBottom="@dimen/dp_3"
                                 android:paddingLeft="@dimen/dp_6"
                                 android:paddingRight="@dimen/dp_6"
                                 android:paddingTop="@dimen/dp_3"
                                 android:text="兑换码"
                                 android:textColor="@color/colorWhiteText1"
-                                android:textSize="@dimen/text_26px"/>
+                                android:textSize="@dimen/text_26px"
+                                android:visibility="gone"/>
+
+                            <TextView
+                                android:id="@+id/tv_complete"
+                                android:layout_width="@dimen/dp_70"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="@dimen/dp_8"
+                                android:background="@drawable/bg_primary_solid_btn"
+                                android:gravity="center"
+                                android:paddingBottom="@dimen/dp_3"
+                                android:paddingLeft="@dimen/dp_6"
+                                android:paddingRight="@dimen/dp_6"
+                                android:paddingTop="@dimen/dp_3"
+                                android:text="完成订单"
+                                android:textColor="@color/colorWhiteText1"
+                                android:textSize="@dimen/text_26px"
+                                android:visibility="gone"/>
+
+                            <TextView
+                                android:id="@+id/tv_refund"
+                                android:layout_width="@dimen/dp_70"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="@dimen/dp_8"
+                                android:background="@drawable/bg_primary_solid_btn"
+                                android:gravity="center"
+                                android:paddingBottom="@dimen/dp_3"
+                                android:paddingLeft="@dimen/dp_6"
+                                android:paddingRight="@dimen/dp_6"
+                                android:paddingTop="@dimen/dp_3"
+                                android:text="申请退款"
+                                android:textColor="@color/colorWhiteText1"
+                                android:textSize="@dimen/text_26px"
+                                android:visibility="gone"/>
+
+                            <TextView
+                                android:id="@+id/tv_evaluate"
+                                android:layout_width="@dimen/dp_70"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="@dimen/dp_8"
+                                android:background="@drawable/bg_primary_solid_btn"
+                                android:gravity="center"
+                                android:paddingBottom="@dimen/dp_3"
+                                android:paddingLeft="@dimen/dp_6"
+                                android:paddingRight="@dimen/dp_6"
+                                android:paddingTop="@dimen/dp_3"
+                                android:text="评价"
+                                android:textColor="@color/colorWhiteText1"
+                                android:textSize="@dimen/text_26px"
+                                android:visibility="gone"/>
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
