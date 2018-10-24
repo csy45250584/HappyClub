@@ -10,14 +10,12 @@ import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.haokuo.happyclub.R;
-import com.haokuo.happyclub.activity.CanteenActivity;
 import com.haokuo.happyclub.activity.ClubServiceActivity;
+import com.haokuo.happyclub.activity.ConvenienceActivity;
+import com.haokuo.happyclub.activity.MoreActionActivity;
 import com.haokuo.happyclub.activity.MyScoreActivity;
 import com.haokuo.happyclub.activity.MyServeActivity;
 import com.haokuo.happyclub.activity.NewsListActivity;
-import com.haokuo.happyclub.activity.PointsMallActivity;
-import com.haokuo.happyclub.activity.RepairListActivity;
-import com.haokuo.happyclub.activity.SuggestListActivity;
 import com.haokuo.happyclub.activity.VolunteerOrderActivity;
 import com.haokuo.happyclub.adapter.ActionAdapter;
 import com.haokuo.happyclub.base.BaseLazyLoadFragment;
@@ -124,12 +122,12 @@ public class HomeFragment extends BaseLazyLoadFragment {
         ArrayList<ActionBean> actionBeans = new ArrayList<>();
         actionBeans.add(new ActionBean("签到", R.drawable.q1));
         actionBeans.add(new ActionBean("会所服务", R.drawable.q2, ClubServiceActivity.class));
-        actionBeans.add(new ActionBean("活动公开", R.drawable.q3));
-        actionBeans.add(new ActionBean("积分商城", R.drawable.q4, PointsMallActivity.class));
-        actionBeans.add(new ActionBean("幸福食堂", R.drawable.q5, CanteenActivity.class));
-        actionBeans.add(new ActionBean("物业报修", R.drawable.q6, RepairListActivity.class));
-        actionBeans.add(new ActionBean("物业投诉", R.drawable.q7, SuggestListActivity.class));
-        actionBeans.add(new ActionBean("更多", R.drawable.q8));
+        actionBeans.add(new ActionBean("党建学习", R.drawable.q3));
+        actionBeans.add(new ActionBean("爱心便民", R.drawable.q4, ConvenienceActivity.class));
+        actionBeans.add(new ActionBean("幸福学堂", R.drawable.q5));
+        actionBeans.add(new ActionBean("幸福养老", R.drawable.q6));
+        actionBeans.add(new ActionBean("志愿者服务", R.drawable.q7, VolunteerOrderActivity.class));
+        actionBeans.add(new ActionBean("更多", R.drawable.q8, MoreActionActivity.class));
         mActionAdapter.setNewData(actionBeans);
     }
 

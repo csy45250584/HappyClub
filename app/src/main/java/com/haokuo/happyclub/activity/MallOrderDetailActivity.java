@@ -186,7 +186,7 @@ public class MallOrderDetailActivity extends BaseActivity {
                 HttpHelper.getInstance().updateFoodOrder(params, new NetworkCallback() {
                     @Override
                     public void onSuccess(Call call, String json) {
-                        loadSuccess("提交成功");
+                        loadSuccess("提交成功",false);
                         loadData();
                     }
 

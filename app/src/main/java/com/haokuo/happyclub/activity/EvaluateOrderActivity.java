@@ -18,6 +18,7 @@ import com.haokuo.happyclub.bean.UploadPicResultBean;
 import com.haokuo.happyclub.network.EntityCallback;
 import com.haokuo.happyclub.network.HttpHelper;
 import com.haokuo.happyclub.network.NetworkCallback;
+import com.haokuo.happyclub.network.UrlConfig;
 import com.haokuo.happyclub.network.bean.EvaluateOrderParams;
 import com.haokuo.happyclub.network.bean.UploadFileParams;
 import com.haokuo.happyclub.util.DirUtil;
@@ -190,7 +191,7 @@ public class EvaluateOrderActivity extends BaseTakePhotoActivity {
                 ArrayList<File> files = new ArrayList<>();
                 files.add(new File(reportImagePath));
                 UploadFileParams params = new UploadFileParams(files, UploadFileParams.FILE_TYPE_IMAGE);
-                HttpHelper.getInstance().uploadPic(params, this, new EntityCallback<UploadPicResultBean>() {
+                HttpHelper.getInstance().uploadOneFile(params, this, new EntityCallback<UploadPicResultBean>() {
                     @Override
                     public void onFailure(Call call, String message) {
                         loadFailed("上传失败," + message);
@@ -199,7 +200,7 @@ public class EvaluateOrderActivity extends BaseTakePhotoActivity {
                     @Override
                     public void onSuccess(Call call, UploadPicResultBean result) {
                         mEvaluateImagePath = result.getSrc();
-                        Glide.with(EvaluateOrderActivity.this).load(mEvaluateImagePath).into(mIvEvaluateImage);
+                        Glide.with(EvaluateOrderActivity.this).load(UrlConfig.buildImageUrl(mEvaluateImagePath)).into(mIvEvaluateImage);
                         mIvDeleteImage.setVisibility(View.VISIBLE);
                         loadSuccess("上传成功", false);
                     }

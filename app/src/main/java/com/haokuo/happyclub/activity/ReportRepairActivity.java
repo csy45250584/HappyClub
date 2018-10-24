@@ -199,7 +199,7 @@ public class ReportRepairActivity extends BaseTakePhotoActivity {
                 ArrayList<File> files = new ArrayList<>();
                 files.add(new File(reportImagePath));
                 UploadFileParams params = new UploadFileParams(files, UploadFileParams.FILE_TYPE_IMAGE);
-                HttpHelper.getInstance().uploadPic(params, this, new EntityCallback<UploadPicResultBean>() {
+                HttpHelper.getInstance().uploadOneFile(params, this, new EntityCallback<UploadPicResultBean>() {
                     @Override
                     public void onFailure(Call call, String message) {
                         loadFailed("上传失败," + message);

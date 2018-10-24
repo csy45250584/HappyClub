@@ -127,6 +127,8 @@
         <activity android:name=".activity.NewsListActivity"/>
         <activity android:name=".activity.MyScoreActivity"/>
         <activity android:name=".activity.EvaluateOrderActivity"/>
+        <activity android:name=".activity.ConvenienceActivity"/>
+        <activity android:name=".activity.MoreActionActivity"/>
 
     </application>
 

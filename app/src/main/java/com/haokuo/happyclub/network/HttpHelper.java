@@ -362,6 +362,11 @@ public class HttpHelper {
         doPostUploadFile(params, UrlConfig.UPLOAD_PIC_URL, tag, callback);
     }
 
+    /** 上传单个文件 **/
+    public void uploadOneFile(UploadFileParams params, Object tag, NetworkCallback callback) {
+        doPostUploadFile(params, UrlConfig.UPLOAD_ONE_FILE_URL, tag, callback);
+    }
+
     /** 获取收货地址列表 **/
     public void getAddress(NetworkCallback callback) {
         doPost(null, UrlConfig.GET_ADDRESS_URL, callback);
@@ -555,6 +560,7 @@ public class HttpHelper {
     public void evaluateOrder(EvaluateOrderParams entity, NetworkCallback callback) {
         doPost(entity, UrlConfig.EVALUATE_ORDER_URL, callback);
     }
+
     /** 订单评价相关操作(会所,服务商可用) **/
     public void updateOrderWithReason(UpdateOrderWithReasonParams entity, NetworkCallback callback) {
         doPost(entity, UrlConfig.UPDATE_ORDER_WITH_REASON_URL, callback);
