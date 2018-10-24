@@ -25,13 +25,13 @@ public class OrderDetailBean implements Serializable {
     public static final int STATE_SERVED = 5;
     public static final int STATE_NO_EVALUATE = 6;
     public static final int STATE_COMPLETED = 9;
-    private static final int STATE_ORDER_DISTRIBUTED = 33;
-    private static final int STATE_APPLY_REFUND = 11;
-    private static final int STATE_REFUND_COMPLETED = 7;
-    private static final int STATE_REFUND_FAILED = 77;
-    private static final int STATE_REFUND_COMPLAINT = 78;
-    private static final int STATE_COMPLAINT_FAILED = 79;
-    private static final int STATE_INVALID = 8;
+   public static final int STATE_ORDER_DISTRIBUTED = 33;
+   public static final int STATE_APPLY_REFUND = 11;
+   public static final int STATE_REFUND_COMPLETED = 7;
+   public static final int STATE_REFUND_FAILED = 77;
+   public static final int STATE_REFUND_COMPLAINT = 78;
+   public static final int STATE_COMPLAINT_FAILED = 79;
+   public static final int STATE_INVALID = 8;
 
     private String createDate; //下单时间
     private String creator; //下单人昵称
@@ -48,6 +48,15 @@ public class OrderDetailBean implements Serializable {
     private int status; //订单状态
     private List<OrderItem> orderItems; //订单内容
     private AddressResultBean address; //地址
+    private EvaluationBean evaluation; //评论
+
+    @Data
+    public static class EvaluationBean implements Serializable {
+        private String evaluation;
+        private String image;
+        private String replay;
+        private Integer star;
+    }
 
     @Data
     public static class OrderItem implements Serializable {

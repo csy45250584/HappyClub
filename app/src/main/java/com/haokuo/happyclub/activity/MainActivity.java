@@ -97,7 +97,7 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
     public boolean onMenuItemClick(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case R.id.item_edit_info:
-                startActivity(new Intent(MainActivity.this, PersonalInfoActivity.class));
+
                 break;
         }
         return true;

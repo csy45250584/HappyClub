@@ -151,10 +151,18 @@
         </LinearLayout>
 
         <com.haokuo.happyclub.view.SettingItemView
-            android:id="@+id/siv_points"
+            android:id="@+id/siv_my_info"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_54"
             android:layout_marginTop="@dimen/dp_8"
+            app:leftText="我的信息"
+            app:rightIcon="@drawable/v"/>
+
+        <com.haokuo.happyclub.view.SettingItemView
+            android:id="@+id/siv_points"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_54"
+            android:layout_marginTop="@dimen/dp_1"
             app:leftText="我的积分"
             app:rightIcon="@drawable/v"/>
 
@@ -175,18 +183,18 @@
             app:rightIcon="@drawable/v"/>
 
         <com.haokuo.happyclub.view.SettingItemView
-            android:id="@+id/siv_activity"
+            android:id="@+id/siv_apply_volunteer"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_54"
-            android:layout_marginTop="@dimen/dp_1"
-            app:leftText="我的活动"
+            android:layout_marginTop="@dimen/dp_8"
+            app:leftText="志愿者申请"
             app:rightIcon="@drawable/v"/>
 
         <com.haokuo.happyclub.view.SettingItemView
             android:id="@+id/siv_safety_setting"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_54"
-            android:layout_marginTop="@dimen/dp_8"
+            android:layout_marginTop="@dimen/dp_1"
             app:leftText="安全设置"
             app:rightIcon="@drawable/v"/>
 

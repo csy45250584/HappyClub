@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -31,6 +32,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import me.zhanghai.android.materialratingbar.MaterialRatingBar;
 import okhttp3.Call;
 
 /**
@@ -68,15 +70,31 @@ public class ClubServiceDetailActivity extends BaseActivity {
     TextView mTvComplete;
     @BindView(R.id.tv_refund)
     TextView mTvRefund;
+    @BindView(R.id.tv_refund_appeal)
+    TextView mTvRefundAppeal;
     @BindView(R.id.tv_evaluate)
     TextView mTvEvaluate;
+    @BindView(R.id.rb_order_score)
+    MaterialRatingBar mRbOrderScore;
+    @BindView(R.id.tv_order_score)
+    TextView mTvOrderScore;
+    @BindView(R.id.tv_evaluation_content)
+    TextView mTvEvaluationContent;
+    @BindView(R.id.tv_reply_content)
+    TextView mTvReplyContent;
+    @BindView(R.id.ll_reply_container)
+    LinearLayout mLlReplyContainer;
+    @BindView(R.id.ll_evaluate_container)
+    LinearLayout mLlEvaluateContainer;
+    @BindView(R.id.iv_evaluate_image)
+    ImageView mIvEvaluateImage;
     private long mOrderId;
     private OrderDetailBean mOrderDetailBean;
     private AlertDialog mRefundDialog;
 
     @Override
     protected int initContentLayout() {
-        return R.layout.activity_mall_order_detail;
+        return R.layout.activity_club_service_detail;
     }
 
     @Override
@@ -120,6 +138,7 @@ public class ClubServiceDetailActivity extends BaseActivity {
         mTvRefund.setVisibility(View.GONE);
         mTvComplete.setVisibility(View.GONE);
         mTvEvaluate.setVisibility(View.GONE);
+        mTvRefundAppeal.setVisibility(View.GONE);
         switch (orderDetailBean.getStatus()) {
             case OrderDetailBean.STATE_WAIT_FOR_HANDLE:
                 mLlBtnContainer.setVisibility(View.VISIBLE);
@@ -140,12 +159,40 @@ public class ClubServiceDetailActivity extends BaseActivity {
                 mLlBtnContainer.setVisibility(View.VISIBLE);
                 mTvEvaluate.setVisibility(View.VISIBLE);
                 break;
+            case OrderDetailBean.STATE_REFUND_FAILED:
+                mLlBtnContainer.setVisibility(View.VISIBLE);
+                mTvRefundAppeal.setVisibility(View.VISIBLE);
+                break;
             default:
                 mLlBtnContainer.setVisibility(View.GONE);
         }
+        //设置评论
+        OrderDetailBean.EvaluationBean evaluation = mOrderDetailBean.getEvaluation();
+        if (evaluation == null) {
+            mLlEvaluateContainer.setVisibility(View.GONE);
+        } else {
+            mLlEvaluateContainer.setVisibility(View.VISIBLE);
+            mTvEvaluationContent.setText(evaluation.getEvaluation());
+            mRbOrderScore.setRating(evaluation.getStar());
+            mTvOrderScore.setText(String.format("%d分", evaluation.getStar()));
+            String imageUrl = evaluation.getImage();
+            if (TextUtils.isEmpty(imageUrl)) {
+                mIvEvaluateImage.setVisibility(View.GONE);
+            } else {
+                mIvEvaluateImage.setVisibility(View.VISIBLE);
+                Glide.with(this).load(UrlConfig.buildImageUrl(imageUrl)).into(mIvEvaluateImage);
+            }
+            String replay = evaluation.getReplay();
+            if (TextUtils.isEmpty(replay)) {
+                mLlReplyContainer.setVisibility(View.GONE);
+            } else {
+                mLlReplyContainer.setVisibility(View.VISIBLE);
+                mTvReplyContent.setText(replay);
+            }
+        }
     }
 
-    @OnClick({R.id.tv_cancel_order, R.id.tv_pay_order, R.id.tv_show_qrcode, R.id.tv_complete, R.id.tv_refund, R.id.tv_evaluate})
+    @OnClick({R.id.tv_cancel_order, R.id.tv_pay_order, R.id.tv_show_qrcode, R.id.tv_complete, R.id.tv_refund, R.id.tv_evaluate, R.id.tv_refund_appeal})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_cancel_order: {
@@ -183,7 +230,7 @@ public class ClubServiceDetailActivity extends BaseActivity {
                 HttpHelper.getInstance().updateFoodOrder(params, new NetworkCallback() {
                     @Override
                     public void onSuccess(Call call, String json) {
-                        loadSuccess("提交成功",false);
+                        loadSuccess("提交成功", false);
                         loadData();
                     }
 
@@ -195,7 +242,10 @@ public class ClubServiceDetailActivity extends BaseActivity {
             }
             break;
             case R.id.tv_refund:
-                showRefundDialog();
+                showRefundDialog(false);
+                break;
+            case R.id.tv_refund_appeal:
+                showRefundDialog(true);
                 break;
             case R.id.tv_evaluate:
                 Intent intent = new Intent(ClubServiceDetailActivity.this, EvaluateOrderActivity.class);
@@ -205,7 +255,7 @@ public class ClubServiceDetailActivity extends BaseActivity {
         }
     }
 
-    private void showRefundDialog() {
+    private void showRefundDialog(final boolean isAppeal) {
         View inflate = LayoutInflater.from(this).inflate(R.layout.dialog_edittext, null);
         final EditText editText = inflate.findViewById(R.id.edittext);
         editText.setHint("请输入退款理由");
@@ -219,12 +269,17 @@ public class ClubServiceDetailActivity extends BaseActivity {
                         mRefundDialog.dismiss();
                         showLoading("提交请求中...");
                         String refundReason = editText.getEditableText().toString();
-                        int opStatus = mOrderDetailBean.getStatus() == OrderDetailBean.STATE_PAYED ? UpdateOrderWithReasonParams.OPERATION_REFUND_PAYED : UpdateOrderWithReasonParams.OPERATION_REFUND_CLUB;
+                        int opStatus;
+                        if (isAppeal) {
+                            opStatus = UpdateOrderWithReasonParams.OPERATION_REFUND;
+                        } else {
+                            opStatus = mOrderDetailBean.getStatus() == OrderDetailBean.STATE_PAYED ? UpdateOrderWithReasonParams.OPERATION_REFUND_PAYED : UpdateOrderWithReasonParams.OPERATION_REFUND_CLUB;
+                        }
                         UpdateOrderWithReasonParams params = new UpdateOrderWithReasonParams(mOrderId, refundReason, opStatus);
                         HttpHelper.getInstance().updateOrderWithReason(params, new NetworkCallback() {
                             @Override
                             public void onSuccess(Call call, String json) {
-                                loadSuccess("提交成功");
+                                loadSuccess("提交成功", false);
                                 loadData();
                             }
 

@@ -50,72 +50,46 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/tv_delivery_type"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginBottom="@dimen/dp_6"
-                        android:singleLine="true"
-                        android:text="食堂就餐"
-                        android:textColor="@color/colorText1"
-                        android:textSize="@dimen/text_26px"/>
-
-                    <TextView
-                        android:id="@+id/tv_scheduled_time"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:ellipsize="end"
-                        android:maxLines="2"
-                        android:text="预约用餐时间"
-                        android:textColor="@color/colorText1"
-                        android:textSize="@dimen/text_26px"/>
-
                     <LinearLayout
-                        android:id="@+id/ll_address_container"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:visibility="gone">
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/iv_product_pic"
+                            android:layout_width="@dimen/dp_50"
+                            android:layout_height="@dimen/dp_50"
+                            android:src="@mipmap/ic_launcher_round"/>
 
                         <TextView
-                            android:id="@+id/tv_address"
+                            android:id="@+id/tv_product_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:ellipsize="end"
-                            android:maxLines="2"
-                            android:text="地址信息"
-                            android:textColor="@color/colorText1"
+                            android:layout_marginLeft="@dimen/dp_12"
+                            android:singleLine="true"
+                            android:text="商品名称"
+                            android:textColor="@color/colorText2"
                             android:textSize="@dimen/text_26px"/>
 
-                        <LinearLayout
+                        <Space
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"/>
+
+                        <TextView
+                            android:id="@+id/tv_product_score"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="@dimen/dp_6"
-                            android:layout_marginTop="@dimen/dp_6"
-                            android:orientation="horizontal">
+                            android:drawableLeft="@drawable/zy6"
+                            android:drawablePadding="@dimen/dp_2"
+                            android:text="80"
+                            android:textColor="#ED6C30"
+                            android:textSize="@dimen/text_26px"/>
 
-                            <TextView
-                                android:id="@+id/tv_name"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_vertical"
-                                android:text="姓名"
-                                android:textColor="@color/colorText1"
-                                android:textSize="@dimen/text_26px"/>
-
-                            <TextView
-                                android:id="@+id/tv_tel"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_vertical"
-                                android:layout_marginLeft="@dimen/dp_8"
-                                android:text="电话"
-                                android:textColor="@color/colorText1"
-                                android:textSize="@dimen/text_26px"/>
-                        </LinearLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -201,6 +175,23 @@
                                 android:visibility="gone"/>
 
                             <TextView
+                                android:id="@+id/tv_refund_appeal"
+                                android:layout_width="@dimen/dp_70"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="@dimen/dp_8"
+                                android:background="@drawable/bg_primary_solid_btn"
+                                android:gravity="center"
+                                android:paddingBottom="@dimen/dp_3"
+                                android:paddingLeft="@dimen/dp_6"
+                                android:paddingRight="@dimen/dp_6"
+                                android:paddingTop="@dimen/dp_3"
+                                android:text="退款申诉"
+                                android:textColor="@color/colorWhiteText1"
+                                android:textSize="@dimen/text_26px"
+                                android:visibility="gone"/>
+
+                            <TextView
                                 android:id="@+id/tv_refund"
                                 android:layout_width="@dimen/dp_70"
                                 android:layout_height="wrap_content"
@@ -235,82 +226,6 @@
                                 android:visibility="gone"/>
                         </LinearLayout>
                     </LinearLayout>
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
-
-            <android.support.v7.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dp_4"
-                android:layout_marginRight="@dimen/dp_4"
-                android:layout_marginTop="@dimen/dp_16"
-                app:cardBackgroundColor="@color/colorWhite"
-                app:cardCornerRadius="@dimen/dp_4"
-                app:contentPaddingBottom="@dimen/dp_6"
-                app:contentPaddingLeft="@dimen/dp_12"
-                app:contentPaddingRight="@dimen/dp_12"
-                app:contentPaddingTop="@dimen/dp_6">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/rv_food_list"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:overScrollMode="never"/>
-
-                    <include layout="@layout/include_divider"/>
-
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/dp_50"
-                        android:paddingLeft="@dimen/dp_12"
-                        android:paddingRight="@dimen/dp_12">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:text="合计"
-                            android:textColor="@color/colorText1"
-                            android:textSize="@dimen/text_28px"/>
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical|end"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:id="@+id/tv_amount_price"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:text="10"
-                                android:textColor="@color/colorDarkOrange"
-                                android:textSize="@dimen/text_28px"/>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="/"
-                                android:textColor="@color/colorText2"
-                                android:textSize="@dimen/text_30px"/>
-
-                            <TextView
-                                android:id="@+id/tv_amount_score"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:drawableLeft="@drawable/zy6"
-                                android:drawablePadding="@dimen/dp_2"
-                                android:text="80"
-                                android:textColor="#ED6C30"
-                                android:textSize="@dimen/text_28px"/>
-                        </LinearLayout>
-                    </FrameLayout>
                 </LinearLayout>
             </android.support.v7.widget.CardView>
 
@@ -396,36 +311,8 @@
                             android:textSize="@dimen/text_26px"/>
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_8"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="备注"
-                            android:textColor="@color/colorText1"
-                            android:textSize="@dimen/text_26px"/>
-
-                        <View
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"/>
-
-                        <TextView
-                            android:id="@+id/tv_order_note"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/dp_6"
-                            android:textColor="@color/colorText2"
-                            android:textSize="@dimen/text_26px"/>
-                    </LinearLayout>
                 </LinearLayout>
             </android.support.v7.widget.CardView>
-
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

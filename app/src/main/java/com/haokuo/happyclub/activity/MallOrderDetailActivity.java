@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -31,6 +32,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import me.zhanghai.android.materialratingbar.MaterialRatingBar;
 import okhttp3.Call;
 
 /**
@@ -70,6 +72,20 @@ public class MallOrderDetailActivity extends BaseActivity {
     TextView mTvRefund;
     @BindView(R.id.tv_evaluate)
     TextView mTvEvaluate;
+    @BindView(R.id.rb_order_score)
+    MaterialRatingBar mRbOrderScore;
+    @BindView(R.id.tv_order_score)
+    TextView mTvOrderScore;
+    @BindView(R.id.tv_evaluation_content)
+    TextView mTvEvaluationContent;
+    @BindView(R.id.tv_reply_content)
+    TextView mTvReplyContent;
+    @BindView(R.id.ll_reply_container)
+    LinearLayout mLlReplyContainer;
+    @BindView(R.id.ll_evaluate_container)
+    LinearLayout mLlEvaluateContainer;
+    @BindView(R.id.iv_evaluate_image)
+    ImageView mIvEvaluateImage;
     private long mOrderId;
     private OrderDetailBean mOrderDetailBean;
     private AlertDialog mRefundDialog;
@@ -146,6 +162,30 @@ public class MallOrderDetailActivity extends BaseActivity {
             default:
                 mLlBtnContainer.setVisibility(View.GONE);
         }
+        //设置评论
+        OrderDetailBean.EvaluationBean evaluation = mOrderDetailBean.getEvaluation();
+        if (evaluation == null) {
+            mLlEvaluateContainer.setVisibility(View.GONE);
+        } else {
+            mLlEvaluateContainer.setVisibility(View.VISIBLE);
+            mTvEvaluationContent.setText(evaluation.getEvaluation());
+            mRbOrderScore.setRating(evaluation.getStar());
+            mTvOrderScore.setText(String.format("%d分", evaluation.getStar()));
+            String imageUrl = evaluation.getImage();
+            if (TextUtils.isEmpty(imageUrl)) {
+                mIvEvaluateImage.setVisibility(View.GONE);
+            } else {
+                mIvEvaluateImage.setVisibility(View.VISIBLE);
+                Glide.with(this).load(UrlConfig.buildImageUrl(imageUrl)).into(mIvEvaluateImage);
+            }
+            String replay = evaluation.getReplay();
+            if (TextUtils.isEmpty(replay)) {
+                mLlReplyContainer.setVisibility(View.GONE);
+            } else {
+                mLlReplyContainer.setVisibility(View.VISIBLE);
+                mTvReplyContent.setText(replay);
+            }
+        }
     }
 
     @OnClick({R.id.tv_cancel_order, R.id.tv_pay_order, R.id.tv_show_qrcode, R.id.tv_complete, R.id.tv_refund, R.id.tv_evaluate})
@@ -186,7 +226,7 @@ public class MallOrderDetailActivity extends BaseActivity {
                 HttpHelper.getInstance().updateFoodOrder(params, new NetworkCallback() {
                     @Override
                     public void onSuccess(Call call, String json) {
-                        loadSuccess("提交成功",false);
+                        loadSuccess("提交成功", false);
                         loadData();
                     }
 
@@ -226,7 +266,7 @@ public class MallOrderDetailActivity extends BaseActivity {
                         HttpHelper.getInstance().updateOrderWithReason(params, new NetworkCallback() {
                             @Override
                             public void onSuccess(Call call, String json) {
-                                loadSuccess("提交成功");
+                                loadSuccess("提交成功", false);
                                 loadData();
                             }
 
