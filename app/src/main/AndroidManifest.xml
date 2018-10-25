@@ -129,6 +129,7 @@
         <activity android:name=".activity.EvaluateOrderActivity"/>
         <activity android:name=".activity.ConvenienceActivity"/>
         <activity android:name=".activity.MoreActionActivity"/>
+        <activity android:name=".activity.SignInActivity"/>
 
     </application>
 

@@ -74,6 +74,9 @@ public class UrlConfig {
     public static final String GET_NEWS_LIST = "/custom/app/getNewsList.do";
     public static final String GET_NEWS_INFO = "/custom/app/infoNews.do";
     public static final String GET_NEWS_SORT_LIST_URL = "/custom/app/getSortList.do";
+    //签到
+    public static final String SIGN_IN_URL = "/custom/app/insertSignin.do";
+    public static final String GET_MONTH_SIGN_IN_URL = "/custom/app/getMonthSignin.do";
 
     public static String buildImageUrl(String url) {
         return IMAGE_BASE_URL + url;

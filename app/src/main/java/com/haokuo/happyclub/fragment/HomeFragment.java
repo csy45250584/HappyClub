@@ -14,6 +14,7 @@ import com.haokuo.happyclub.activity.MoreActionActivity;
 import com.haokuo.happyclub.activity.MyScoreActivity;
 import com.haokuo.happyclub.activity.MyServeActivity;
 import com.haokuo.happyclub.activity.NewsListActivity;
+import com.haokuo.happyclub.activity.SignInActivity;
 import com.haokuo.happyclub.activity.VolunteerOrderActivity;
 import com.haokuo.happyclub.adapter.ActionAdapter;
 import com.haokuo.happyclub.base.BaseLazyLoadFragment;
@@ -115,7 +116,7 @@ public class HomeFragment extends BaseLazyLoadFragment {
 
     private void initActionAdapter() {
         ArrayList<ActionBean> actionBeans = new ArrayList<>();
-        actionBeans.add(new ActionBean("签到", R.drawable.q1));
+        actionBeans.add(new ActionBean("签到", R.drawable.q1, SignInActivity.class));
         actionBeans.add(new ActionBean("会所服务", R.drawable.q2, ClubServiceActivity.class));
         actionBeans.add(new ActionBean("党建学习", R.drawable.q3));
         actionBeans.add(new ActionBean("爱心便民", R.drawable.q4, ConvenienceActivity.class));

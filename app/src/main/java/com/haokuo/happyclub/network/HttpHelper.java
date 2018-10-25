@@ -565,4 +565,14 @@ public class HttpHelper {
     public void updateOrderWithReason(UpdateOrderWithReasonParams entity, NetworkCallback callback) {
         doPost(entity, UrlConfig.UPDATE_ORDER_WITH_REASON_URL, callback);
     }
+
+    /** 签到 **/
+    public void signIn(NetworkCallback callback) {
+        doPost(null, UrlConfig.SIGN_IN_URL, callback);
+    }
+
+    /** 获取该月签到信息 **/
+    public void getMonthSignIn(NetworkCallback callback) {
+        doPost(null, UrlConfig.GET_MONTH_SIGN_IN_URL, callback);
+    }
 }
