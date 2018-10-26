@@ -17,15 +17,19 @@ import com.haokuo.happyclub.activity.NewsListActivity;
 import com.haokuo.happyclub.activity.SignInActivity;
 import com.haokuo.happyclub.activity.VolunteerOrderActivity;
 import com.haokuo.happyclub.adapter.ActionAdapter;
+import com.haokuo.happyclub.adapter.ClubServiceAdapter;
 import com.haokuo.happyclub.base.BaseLazyLoadFragment;
 import com.haokuo.happyclub.bean.ActionBean;
 import com.haokuo.happyclub.bean.NewsBean;
+import com.haokuo.happyclub.bean.list.ClubServiceListBean;
 import com.haokuo.happyclub.bean.list.NewsListBean;
 import com.haokuo.happyclub.network.EntityCallback;
 import com.haokuo.happyclub.network.HttpHelper;
+import com.haokuo.happyclub.network.bean.GetHotServiceParams;
 import com.haokuo.happyclub.network.bean.GetNewsListParams;
 import com.haokuo.happyclub.util.GlideImageLoader;
 import com.haokuo.happyclub.util.utilscode.ToastUtils;
+import com.haokuo.happyclub.view.RecyclerViewDivider;
 import com.sunfusheng.marqueeview.MarqueeView;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
@@ -49,8 +53,11 @@ public class HomeFragment extends BaseLazyLoadFragment {
     RecyclerView mRvVolunteerAction;
     @BindView(R.id.marquee_view_news)
     MarqueeView mMarqueeViewNews;
+    @BindView(R.id.rv_hot_service)
+    RecyclerView mRvHotService;
     private ActionAdapter mActionAdapter;
     private ActionAdapter mVolunteerActionAdapter;
+    private ClubServiceAdapter mClubServiceAdapter;
 
     @Override
     protected int initContentLayout() {
@@ -69,6 +76,7 @@ public class HomeFragment extends BaseLazyLoadFragment {
         mBannerHome.setImages(bannerImages);
         mBannerHome.setBannerStyle(BannerConfig.NOT_INDICATOR);
         mBannerHome.start();
+        //按钮设置
         mRvAction.setLayoutManager(new GridLayoutManager(mContext, 4, LinearLayoutManager.VERTICAL, false));
         mActionAdapter = new ActionAdapter(R.layout.item_action);
         mRvAction.setAdapter(mActionAdapter);
@@ -77,6 +85,13 @@ public class HomeFragment extends BaseLazyLoadFragment {
         mRvVolunteerAction.setAdapter(mVolunteerActionAdapter);
         initActionAdapter();
         initVolunteerActionAdapter();
+        //热门服务设置
+        mRvHotService.setLayoutManager(new LinearLayoutManager(mContext));
+        int dividerHeight = (int) (getResources().getDimension(R.dimen.dp_1) + 0.5f);
+        mRvHotService.addItemDecoration(new RecyclerViewDivider(mContext, LinearLayoutManager.HORIZONTAL, dividerHeight, R.color.colorDivider,
+                0, 0));
+        mClubServiceAdapter = new ClubServiceAdapter(R.layout.item_hot_service);
+        mRvHotService.setAdapter(mClubServiceAdapter);
     }
 
     @Override
@@ -96,6 +111,18 @@ public class HomeFragment extends BaseLazyLoadFragment {
                     info.add(bean.getTitle());
                 }
                 mMarqueeViewNews.startWithList(info);
+            }
+        });
+        GetHotServiceParams getHotServiceParams = new GetHotServiceParams(5);
+        HttpHelper.getInstance().getHotService(getHotServiceParams, new EntityCallback<ClubServiceListBean>() {
+            @Override
+            public void onFailure(Call call, String message) {
+                ToastUtils.showShort("获取热门服务失败，" + message);
+            }
+
+            @Override
+            public void onSuccess(Call call, ClubServiceListBean result) {
+                mClubServiceAdapter.setNewData(result.getData());
             }
         });
     }
@@ -158,8 +185,6 @@ public class HomeFragment extends BaseLazyLoadFragment {
             }
         });
     }
-
-
 
     @OnClick(R.id.ll_news_container)
     public void onViewClicked() {

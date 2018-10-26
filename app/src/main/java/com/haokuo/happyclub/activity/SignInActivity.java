@@ -109,7 +109,7 @@ public class SignInActivity extends BaseActivity {
             HttpHelper.getInstance().signIn(new NetworkCallback() {
                 @Override
                 public void onSuccess(Call call, String json) {
-                    loadSuccess("签到成功",false);
+                    loadSuccess("签到成功,获得1积分",false);
                     signInToday();
                 }
 
