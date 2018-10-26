@@ -41,6 +41,7 @@
             </LinearLayout>
 
             <TextView
+                android:visibility="gone"
                 android:id="@+id/tv_recommend"
                 android:layout_width="@dimen/dp_62"
                 android:layout_height="@dimen/dp_32"
@@ -54,6 +55,7 @@
         </RelativeLayout>
 
         <LinearLayout
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_70"
             android:background="@color/colorWhite"

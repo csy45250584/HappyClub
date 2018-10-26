@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.haokuo.happyclub.R;
-import com.haokuo.happyclub.activity.ClubServiceDetailActivity;
+import com.haokuo.happyclub.activity.ClubServiceOrderDetailActivity;
 import com.haokuo.happyclub.activity.FoodOrderDetailActivity;
 import com.haokuo.happyclub.activity.MallOrderDetailActivity;
 import com.haokuo.happyclub.adapter.MyRefreshLoadMoreListener;
@@ -120,8 +120,8 @@ public class OrderFragment extends BaseLazyLoadFragment {
                 if (item != null) {
                     switch (item.getOrderType()) {
                         case OrderDetailBean.ORDER_TYPE_SERVICE: {
-                            Intent intent = new Intent(mContext, ClubServiceDetailActivity.class);
-                            intent.putExtra(ClubServiceDetailActivity.EXTRA_ORDER_ID, item.getId());
+                            Intent intent = new Intent(mContext, ClubServiceOrderDetailActivity.class);
+                            intent.putExtra(ClubServiceOrderDetailActivity.EXTRA_ORDER_ID, item.getId());
                             startActivity(intent);
                         }
                         break;

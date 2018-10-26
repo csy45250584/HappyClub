@@ -21,6 +21,7 @@ import com.haokuo.happyclub.network.bean.EvaluateOrderParams;
 import com.haokuo.happyclub.network.bean.GetAcceptedServeParams;
 import com.haokuo.happyclub.network.bean.GetBindTelCodeParams;
 import com.haokuo.happyclub.network.bean.GetClubServiceParams;
+import com.haokuo.happyclub.network.bean.GetHotServiceParams;
 import com.haokuo.happyclub.network.bean.GetMallProductParams;
 import com.haokuo.happyclub.network.bean.GetNewsListParams;
 import com.haokuo.happyclub.network.bean.GetOrderDetailParams;
@@ -574,5 +575,15 @@ public class HttpHelper {
     /** 获取该月签到信息 **/
     public void getMonthSignIn(NetworkCallback callback) {
         doPost(null, UrlConfig.GET_MONTH_SIGN_IN_URL, callback);
+    }
+
+    /** 根据id获取服务信息 **/
+    public void getServiceById(IdParams entity, NetworkCallback callback) {
+        doPost(entity, UrlConfig.GET_SERVICE_BY_ID_URL, callback);
+    }
+
+    /** 热销服务 **/
+    public void getHotService(GetHotServiceParams entity, NetworkCallback callback) {
+        doPost(entity, UrlConfig.GET_HOT_SERVICE_URL, callback);
     }
 }

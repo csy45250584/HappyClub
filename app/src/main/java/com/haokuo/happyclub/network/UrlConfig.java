@@ -60,6 +60,8 @@ public class UrlConfig {
     public static final String GET_SERVICE_TYPE_URL = "/custom/app/getAllServicelist.do";
     public static final String GET_CLUB_SERVICE_URL = "/custom/app/getAllService.do";
     public static final String INSERT_SERVICE_ORDER_URL = "/custom/app/insertServiceOrder.do";
+    public static final String GET_HOT_SERVICE_URL = "/custom/app/getHotService.do";
+    public static final String GET_SERVICE_BY_ID_URL = "/custom/app/getServiceById.do";
     //积分商城
     public static final String GET_MALL_LIST_URL = "/business/app/getAllProductlist.do";
     public static final String GET_ALL_MALL_PRODUCT_URL = "/custom/app/getAllProduct.do";

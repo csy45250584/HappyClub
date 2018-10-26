@@ -122,7 +122,7 @@
         <activity android:name=".activity.PayOrderActivity"/>
         <activity android:name=".activity.MallOrderDetailActivity"/>
         <activity android:name=".activity.OrderQrcodeActivity"/>
-        <activity android:name=".activity.ClubServiceDetailActivity"/>
+        <activity android:name=".activity.ClubServiceOrderDetailActivity"/>
         <activity android:name=".activity.NewsDetailActivity"/>
         <activity android:name=".activity.NewsListActivity"/>
         <activity android:name=".activity.MyScoreActivity"/>
@@ -130,6 +130,7 @@
         <activity android:name=".activity.ConvenienceActivity"/>
         <activity android:name=".activity.MoreActionActivity"/>
         <activity android:name=".activity.SignInActivity"/>
+        <activity android:name=".activity.ClubServiceDetailActivity"/>
 
     </application>
 

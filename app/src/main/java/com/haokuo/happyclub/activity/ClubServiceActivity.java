@@ -164,6 +164,15 @@ public class ClubServiceActivity extends BaseActivity {
 
     @Override
     protected void initListener() {
+        mClubServiceAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                long id = mClubServiceAdapter.getItem(position).getId();
+                Intent intent = new Intent(ClubServiceActivity.this, ClubServiceDetailActivity.class);
+                intent.putExtra(ClubServiceDetailActivity.EXTRA_SERVICE_ID, id);
+                startActivity(intent);
+            }
+        });
         mClubServiceAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
@@ -187,8 +196,8 @@ public class ClubServiceActivity extends BaseActivity {
                             loadSuccess("下单成功", new LoadingDialog.OnFinishListener() {
                                 @Override
                                 public void onFinish() {
-                                    Intent intent = new Intent(ClubServiceActivity.this, ClubServiceDetailActivity.class);
-                                    intent.putExtra(ClubServiceDetailActivity.EXTRA_ORDER_ID, result.getOrderId());
+                                    Intent intent = new Intent(ClubServiceActivity.this, ClubServiceOrderDetailActivity.class);
+                                    intent.putExtra(ClubServiceOrderDetailActivity.EXTRA_ORDER_ID, result.getOrderId());
                                     startActivity(intent);
                                 }
                             });
