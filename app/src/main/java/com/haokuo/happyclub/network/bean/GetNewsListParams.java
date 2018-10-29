@@ -11,8 +11,9 @@ import lombok.Data;
 public class GetNewsListParams extends PageParams {
     public static final int STATUS_NEWS = 0;
     public static final int STATUS_ACTIVITY = 1;
+    public static final int STATUS_PARTY = -1;
     private String title;
-    private Integer status; //头条:0 活动:1
+    private Integer status; //头条:0 活动:1 ,党建: -1
     private Long sortId; //只针对活动的分类字段(分类查询)
 
     public GetNewsListParams() {

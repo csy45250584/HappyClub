@@ -9,11 +9,13 @@ import android.view.View;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.haokuo.happyclub.R;
 import com.haokuo.happyclub.activity.ClubServiceActivity;
+import com.haokuo.happyclub.activity.ClubServiceDetailActivity;
 import com.haokuo.happyclub.activity.ConvenienceActivity;
 import com.haokuo.happyclub.activity.MoreActionActivity;
 import com.haokuo.happyclub.activity.MyScoreActivity;
 import com.haokuo.happyclub.activity.MyServeActivity;
 import com.haokuo.happyclub.activity.NewsListActivity;
+import com.haokuo.happyclub.activity.PartyListActivity;
 import com.haokuo.happyclub.activity.SignInActivity;
 import com.haokuo.happyclub.activity.VolunteerOrderActivity;
 import com.haokuo.happyclub.adapter.ActionAdapter;
@@ -145,7 +147,7 @@ public class HomeFragment extends BaseLazyLoadFragment {
         ArrayList<ActionBean> actionBeans = new ArrayList<>();
         actionBeans.add(new ActionBean("签到", R.drawable.q1, SignInActivity.class));
         actionBeans.add(new ActionBean("会所服务", R.drawable.q2, ClubServiceActivity.class));
-        actionBeans.add(new ActionBean("党建学习", R.drawable.q3));
+        actionBeans.add(new ActionBean("党建学习", R.drawable.q3, PartyListActivity.class));
         actionBeans.add(new ActionBean("爱心便民", R.drawable.q4, ConvenienceActivity.class));
         actionBeans.add(new ActionBean("幸福学堂", R.drawable.q5));
         actionBeans.add(new ActionBean("幸福养老", R.drawable.q6));
@@ -156,6 +158,15 @@ public class HomeFragment extends BaseLazyLoadFragment {
 
     @Override
     protected void initListener() {
+        mClubServiceAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                long id = mClubServiceAdapter.getItem(position).getId();
+                Intent intent = new Intent(mContext, ClubServiceDetailActivity.class);
+                intent.putExtra(ClubServiceDetailActivity.EXTRA_SERVICE_ID, id);
+                startActivity(intent);
+            }
+        });
         mActionAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {

@@ -19,6 +19,7 @@
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"/>
     <!--用于获取wifi的获取权限，wifi信息会用来进行网络定位-->
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
 
     <application
         android:name=".application.HappyClubApplication"
@@ -131,6 +132,7 @@
         <activity android:name=".activity.MoreActionActivity"/>
         <activity android:name=".activity.SignInActivity"/>
         <activity android:name=".activity.ClubServiceDetailActivity"/>
+        <activity android:name=".activity.PartyListActivity"/>
 
     </application>
 

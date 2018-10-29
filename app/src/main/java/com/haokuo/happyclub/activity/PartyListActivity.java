@@ -23,7 +23,7 @@ import butterknife.BindView;
 /**
  * Created by zjf on 2018/10/19.
  */
-public class NewsListActivity extends BaseActivity {
+public class PartyListActivity extends BaseActivity {
     @BindView(R.id.rv_news)
     RecyclerView mRvNews;
     @BindView(R.id.srl_news)
@@ -43,7 +43,7 @@ public class NewsListActivity extends BaseActivity {
         mRvNews.addItemDecoration(new RecyclerViewDivider(this, LinearLayoutManager.HORIZONTAL));
         mActivityAdapter = new ActivityAdapter(R.layout.item_activity);
         mRvNews.setAdapter(mActivityAdapter);
-        mParams = new GetNewsListParams(null, GetNewsListParams.STATUS_NEWS, null);
+        mParams = new GetNewsListParams(null, GetNewsListParams.STATUS_PARTY, null);
     }
 
     @Override
@@ -59,15 +59,15 @@ public class NewsListActivity extends BaseActivity {
                 NewsBean item = mActivityAdapter.getItem(position);
                 if (item != null) {
                     String url = mNewsBaseUrl + "?id=" + item.getId();
-                    Intent intent = new Intent(NewsListActivity.this, NewsDetailActivity.class);
+                    Intent intent = new Intent(PartyListActivity.this, NewsDetailActivity.class);
                     intent.putExtra(NewsDetailActivity.EXTRA_NEWS_URL, url);
-                    intent.putExtra(NewsDetailActivity.EXTRA_TITLE, "头条新闻");
+                    intent.putExtra(NewsDetailActivity.EXTRA_TITLE, "党建新闻");
                     startActivity(intent);
                 }
             }
         });
         mSrlNews.setOnRefreshLoadMoreListener(new MyRefreshLoadMoreListener<NewsBean>
-                (mSrlNews, mParams, mActivityAdapter, NewsListBean.class, "获取新闻列表失败") {
+                (mSrlNews, mParams, mActivityAdapter, NewsListBean.class, "获取党建学习列表失败") {
             @Override
             public void onSuccessResult(String json) {
                 if (mNewsBaseUrl == null) {

@@ -49,7 +49,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_6"
-                    android:text="服务商1"
                     android:textColor="@color/colorText1"
                     android:textSize="@dimen/text_30px"/>
 
@@ -57,15 +56,14 @@
                     android:id="@+id/tv_business_introduction"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_4"
-                    android:text="服务商是指在波士邦平台上参加竞标、销售项目服务、出售技能以及接受雇佣的用户。用户注册成为波士邦用户后，选择右上角的“服务商”，提交个人或企业账户资料，经过波士邦平台审核通过后，即可上传自己专业服务介绍到店铺上，也可以到“需求大街”寻找自己合适的项目进行交易服务"
+                    android:layout_marginTop="@dimen/dp_8"
                     android:textColor="@color/colorText2"
                     android:textSize="@dimen/text_26px"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_8"
+                    android:layout_marginTop="@dimen/dp_12"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
@@ -79,7 +77,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/dp_16"
-                        android:text="zhu"
                         android:textColor="@color/colorText1"
                         android:textSize="@dimen/text_26px"/>
 
@@ -88,7 +85,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/dp_8"
-                        android:text="15005789856"
                         android:textColor="@color/colorText2"
                         android:textSize="@dimen/text_26px"/>
                 </LinearLayout>
@@ -97,8 +93,8 @@
                     layout="@layout/include_divider"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_1"
-                    android:layout_marginBottom="@dimen/dp_12"
-                    android:layout_marginTop="@dimen/dp_8"
+                    android:layout_marginBottom="@dimen/dp_16"
+                    android:layout_marginTop="@dimen/dp_12"
                     />
 
                 <TextView
@@ -117,8 +113,7 @@
                     <ImageView
                         android:id="@+id/iv_service_pic"
                         android:layout_width="@dimen/dp_60"
-                        android:layout_height="@dimen/dp_60"
-                        android:src="@mipmap/ic_launcher_round"/>
+                        android:layout_height="@dimen/dp_60"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -131,7 +126,6 @@
                             android:id="@+id/tv_club_service_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="衣物会"
                             android:textColor="@color/colorText1"
                             android:textSize="@dimen/text_26px"/>
 
@@ -142,7 +136,6 @@
                             android:layout_marginTop="@dimen/dp_8"
                             android:drawableLeft="@drawable/zy6"
                             android:drawablePadding="@dimen/dp_2"
-                            android:text="80"
                             android:textColor="#ED6C30"
                             android:textSize="@dimen/text_24px"/>
                     </LinearLayout>
@@ -154,7 +147,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_4"
-                    android:text="服务商是指在波士邦平台上参加竞标、销售项目服务、出售技能以及接受雇佣的用户。用户注册成为波士邦用户后，选择右上角的“服务商”，提交个人或企业账户资料，经过波士邦平台审核通过后，即可上传自己专业服务介绍到店铺上，也可以到“需求大街”寻找自己合适的项目进行交易服务"
                     android:textColor="@color/colorText2"
                     android:textSize="@dimen/text_26px"/>
             </LinearLayout>

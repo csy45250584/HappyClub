@@ -1,6 +1,7 @@
 package com.haokuo.happyclub.activity;
 
 import android.content.Intent;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,6 +16,7 @@ import com.haokuo.happyclub.network.HttpHelper;
 import com.haokuo.happyclub.network.UrlConfig;
 import com.haokuo.happyclub.network.bean.base.IdParams;
 import com.haokuo.happyclub.util.GlideImageLoader;
+import com.haokuo.happyclub.util.utilscode.PhoneUtils;
 import com.haokuo.happyclub.util.utilscode.ToastUtils;
 import com.haokuo.midtitlebar.MidTitleBar;
 import com.rey.material.widget.Button;
@@ -93,7 +95,7 @@ public class ClubServiceDetailActivity extends BaseActivity {
         String[] splits = business.getImage().split(",");
         ArrayList<String> bannerImages = new ArrayList<>();
         for (String split : splits) {
-            bannerImages.add(UrlConfig.buildImageUrl(split));
+            bannerImages.add(UrlConfig.buildBaseImageUrl(split));
         }
         mBannerService.setImages(bannerImages);
         mBannerService.setBannerStyle(BannerConfig.NOT_INDICATOR);
@@ -108,32 +110,68 @@ public class ClubServiceDetailActivity extends BaseActivity {
         mTvClubServiceDescription.setText(service.getDescription());
     }
 
-    @OnClick(R.id.btn_exchange_service)
-    public void onViewClicked() {
-        showLoading("正在下单...");
-        //下单请求
-        FoodOrderBean foodOrderBean = new FoodOrderBean();
-        foodOrderBean.setIntegralSum(mClubServiceDetailBean.getService().getService_integral());
-        ArrayList<FoodOrderBean.CartFoodBean> cartFoodBeans = new ArrayList<>();
-        cartFoodBeans.add(new FoodOrderBean.CartFoodBean(mClubServiceDetailBean.getService().getId(), 1));
-        foodOrderBean.setOrderItems(cartFoodBeans);
-        HttpHelper.getInstance().insertServiceOrder(foodOrderBean, new EntityCallback<OrderResultBean>() {
-            @Override
-            public void onFailure(Call call, String message) {
-                loadFailed("下单失败，" + message);
-            }
-
-            @Override
-            public void onSuccess(Call call, final OrderResultBean result) {
-                loadSuccess("下单成功", new LoadingDialog.OnFinishListener() {
+    @OnClick({R.id.tv_provider_tel, R.id.btn_exchange_service})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.tv_provider_tel:
+                PhoneUtils.call(mTvProviderTel.getText().toString());
+                break;
+            case R.id.btn_exchange_service:
+                showLoading("正在下单...");
+                //下单请求
+                FoodOrderBean foodOrderBean = new FoodOrderBean();
+                foodOrderBean.setIntegralSum(mClubServiceDetailBean.getService().getService_integral());
+                ArrayList<FoodOrderBean.CartFoodBean> cartFoodBeans = new ArrayList<>();
+                cartFoodBeans.add(new FoodOrderBean.CartFoodBean(mClubServiceDetailBean.getService().getId(), 1));
+                foodOrderBean.setOrderItems(cartFoodBeans);
+                HttpHelper.getInstance().insertServiceOrder(foodOrderBean, new EntityCallback<OrderResultBean>() {
                     @Override
-                    public void onFinish() {
-                        Intent intent = new Intent(ClubServiceDetailActivity.this, ClubServiceOrderDetailActivity.class);
-                        intent.putExtra(ClubServiceOrderDetailActivity.EXTRA_ORDER_ID, result.getOrderId());
-                        startActivity(intent);
+                    public void onFailure(Call call, String message) {
+                        loadFailed("下单失败，" + message);
+                    }
+
+                    @Override
+                    public void onSuccess(Call call, final OrderResultBean result) {
+                        loadSuccess("下单成功", new LoadingDialog.OnFinishListener() {
+                            @Override
+                            public void onFinish() {
+                                Intent intent = new Intent(ClubServiceDetailActivity.this, ClubServiceOrderDetailActivity.class);
+                                intent.putExtra(ClubServiceOrderDetailActivity.EXTRA_ORDER_ID, result.getOrderId());
+                                startActivity(intent);
+                            }
+                        });
                     }
                 });
-            }
-        });
+                break;
+        }
     }
+
+    //    @OnClick(R.id.btn_exchange_service)
+    //    public void onViewClicked() {
+    //        showLoading("正在下单...");
+    //        //下单请求
+    //        FoodOrderBean foodOrderBean = new FoodOrderBean();
+    //        foodOrderBean.setIntegralSum(mClubServiceDetailBean.getService().getService_integral());
+    //        ArrayList<FoodOrderBean.CartFoodBean> cartFoodBeans = new ArrayList<>();
+    //        cartFoodBeans.add(new FoodOrderBean.CartFoodBean(mClubServiceDetailBean.getService().getId(), 1));
+    //        foodOrderBean.setOrderItems(cartFoodBeans);
+    //        HttpHelper.getInstance().insertServiceOrder(foodOrderBean, new EntityCallback<OrderResultBean>() {
+    //            @Override
+    //            public void onFailure(Call call, String message) {
+    //                loadFailed("下单失败，" + message);
+    //            }
+    //
+    //            @Override
+    //            public void onSuccess(Call call, final OrderResultBean result) {
+    //                loadSuccess("下单成功", new LoadingDialog.OnFinishListener() {
+    //                    @Override
+    //                    public void onFinish() {
+    //                        Intent intent = new Intent(ClubServiceDetailActivity.this, ClubServiceOrderDetailActivity.class);
+    //                        intent.putExtra(ClubServiceOrderDetailActivity.EXTRA_ORDER_ID, result.getOrderId());
+    //                        startActivity(intent);
+    //                    }
+    //                });
+    //            }
+    //        });
+    //    }
 }
