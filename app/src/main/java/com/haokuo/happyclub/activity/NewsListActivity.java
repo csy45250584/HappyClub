@@ -16,6 +16,7 @@ import com.haokuo.happyclub.bean.list.NewsListBean;
 import com.haokuo.happyclub.network.HttpHelper;
 import com.haokuo.happyclub.network.bean.GetNewsListParams;
 import com.haokuo.happyclub.view.RecyclerViewDivider;
+import com.haokuo.midtitlebar.MidTitleBar;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
 import butterknife.BindView;
@@ -28,6 +29,8 @@ public class NewsListActivity extends BaseActivity {
     RecyclerView mRvNews;
     @BindView(R.id.srl_news)
     SmartRefreshLayout mSrlNews;
+    @BindView(R.id.mid_title_bar)
+    MidTitleBar mMidTitleBar;
     private GetNewsListParams mParams;
     private ActivityAdapter mActivityAdapter;
     private String mNewsBaseUrl;
@@ -39,6 +42,7 @@ public class NewsListActivity extends BaseActivity {
 
     @Override
     protected void initData() {
+        mMidTitleBar.setMidTitle("新闻头条");
         mRvNews.setLayoutManager(new LinearLayoutManager(this));
         mRvNews.addItemDecoration(new RecyclerViewDivider(this, LinearLayoutManager.HORIZONTAL));
         mActivityAdapter = new ActivityAdapter(R.layout.item_activity);

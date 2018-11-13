@@ -24,6 +24,14 @@
             />
     </FrameLayout>
 
+    <TextView
+        android:background="@color/colorWhite"
+        android:padding="@dimen/dp_8"
+        android:textSize="@dimen/text_24px"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="这是会所简介这是会所简介这是会所简介这是会所简介这是会所简介这是会所简介这是会所简介这是会所简介这是会所简介"/>
+
     <com.yyydjk.library.DropDownMenu
         android:id="@+id/drop_down_menu"
         android:layout_width="match_parent"

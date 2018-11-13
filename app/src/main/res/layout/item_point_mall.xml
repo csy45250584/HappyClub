@@ -63,18 +63,18 @@
         </LinearLayout>
     </LinearLayout>
 
-    <!--<TextView-->
-        <!--android:id="@+id/tv_exchange"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_gravity="bottom|right"-->
-        <!--android:layout_marginBottom="@dimen/dp_8"-->
-        <!--android:layout_marginRight="@dimen/dp_24"-->
-        <!--android:background="@drawable/bg_primary_stoke_btn"-->
-        <!--android:paddingBottom="@dimen/dp_1"-->
-        <!--android:paddingLeft="@dimen/dp_3"-->
-        <!--android:paddingRight="@dimen/dp_3"-->
-        <!--android:paddingTop="@dimen/dp_1"-->
-        <!--android:text="兑换商品"-->
-        <!--android:textColor="@color/colorPrimary"/>-->
+    <TextView
+        android:id="@+id/tv_exchange"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_marginBottom="@dimen/dp_8"
+        android:layout_marginRight="@dimen/dp_24"
+        android:background="@drawable/bg_primary_stoke_btn"
+        android:paddingBottom="@dimen/dp_1"
+        android:paddingLeft="@dimen/dp_3"
+        android:paddingRight="@dimen/dp_3"
+        android:paddingTop="@dimen/dp_1"
+        android:text="兑换商品"
+        android:textColor="@color/colorPrimary"/>
 </FrameLayout>

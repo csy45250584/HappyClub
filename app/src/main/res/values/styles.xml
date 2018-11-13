@@ -50,7 +50,6 @@
     </style>
 
     <style name="MyDatePicker" parent="Material.App.Dialog.DatePicker.Light">
-        <item name="android:layout_height">@dimen/dp_500</item>
     </style>
     <style name="MaterialSearchViewStyle">
         <!-- Background for the search bar -->

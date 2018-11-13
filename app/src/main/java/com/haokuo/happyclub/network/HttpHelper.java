@@ -21,6 +21,7 @@ import com.haokuo.happyclub.network.bean.EvaluateOrderParams;
 import com.haokuo.happyclub.network.bean.GetAcceptedServeParams;
 import com.haokuo.happyclub.network.bean.GetBindTelCodeParams;
 import com.haokuo.happyclub.network.bean.GetClubServiceParams;
+import com.haokuo.happyclub.network.bean.GetCourseListParams;
 import com.haokuo.happyclub.network.bean.GetHotServiceParams;
 import com.haokuo.happyclub.network.bean.GetMallProductParams;
 import com.haokuo.happyclub.network.bean.GetNewsListParams;
@@ -31,6 +32,7 @@ import com.haokuo.happyclub.network.bean.GetVolunteerServeParams;
 import com.haokuo.happyclub.network.bean.LoginByTelParams;
 import com.haokuo.happyclub.network.bean.LoginParams;
 import com.haokuo.happyclub.network.bean.RegisterParams;
+import com.haokuo.happyclub.network.bean.CourseIdParams;
 import com.haokuo.happyclub.network.bean.ResetPasswordParams;
 import com.haokuo.happyclub.network.bean.UpdateOrderParams;
 import com.haokuo.happyclub.network.bean.UpdateOrderWithReasonParams;
@@ -585,5 +587,30 @@ public class HttpHelper {
     /** 热销服务 **/
     public void getHotService(GetHotServiceParams entity, NetworkCallback callback) {
         doPost(entity, UrlConfig.GET_HOT_SERVICE_URL, callback);
+    }
+
+    /** 课程分类列表 **/
+    public void getCourseListType(NetworkCallback callback) {
+        doPost(null, UrlConfig.GET_COURSE_LIST_TYPE_URL, callback);
+    }
+
+    /** 课程分类列表 **/
+    public void getCourseList(GetCourseListParams entity, NetworkCallback callback) {
+        doPost(entity, UrlConfig.GET_COURSE_LIST_URL, callback);
+    }
+
+    /** 用户课程预约 **/
+    public void reserveCourse(CourseIdParams entity, NetworkCallback callback) {
+        doPost(entity, UrlConfig.RESERVE_COURSE_URL, callback);
+    }
+
+    /** 用户取消课程预约 **/
+    public void cancelReserveCourse(CourseIdParams entity, NetworkCallback callback) {
+        doPost(entity, UrlConfig.CANCEL_RESERVE_COURSE_URL, callback);
+    }
+
+    /** 根据课程id查看详情 **/
+    public void getCourseById(CourseIdParams entity, NetworkCallback callback) {
+        doPost(entity, UrlConfig.GET_COURSE_BY_ID_URL, callback);
     }
 }

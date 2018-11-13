@@ -6,9 +6,12 @@ package com.haokuo.happyclub.network;
 
 public class UrlConfig {
     public static final String IMAGE_STRING_SPLIT = ",";
-    //    public static final String BASE_URL = "http://192.168.1.193:9088/xfhsi/";
-    public static final String BASE_URL = "http://18t69t8992.51mypc.cn:9088/xfhsi/";
-    public static final String IMAGE_BASE_URL = "http://18t69t8992.51mypc.cn:9088/xfhs/upload/";
+    //测试
+//        public static final String BASE_URL = "http://192.168.1.193:9088/xfhsi/";
+//        public static final String IMAGE_BASE_URL = "http://18t69t8992.51mypc.cn:9088/xfhs/upload/";
+    //公网
+    public static final String BASE_URL = "http://115.231.122.38:8080/xfhsi/";
+    public static final String IMAGE_BASE_URL = "http://115.231.122.38:8080/xfhs/upload/";
     //个人信息
     public static final String REGISTER_URL = "/custom/register.do";
     public static final String GET_LOGIN_VERIFY_CODE_URL = "/custom/loginVerificationCode.do";
@@ -79,6 +82,13 @@ public class UrlConfig {
     //签到
     public static final String SIGN_IN_URL = "/custom/app/insertSignin.do";
     public static final String GET_MONTH_SIGN_IN_URL = "/custom/app/getMonthSignin.do";
+
+    //学院课程
+    public static final String GET_COURSE_LIST_TYPE_URL = "/custom/app/getCourselistList.do";
+    public static final String GET_COURSE_LIST_URL = "/custom/app/getCourseList.do";
+    public static final String RESERVE_COURSE_URL = "/custom/app/reserveCourse.do";
+    public static final String CANCEL_RESERVE_COURSE_URL = "/custom/app/cancelReserveCourse.do";
+    public static final String GET_COURSE_BY_ID_URL = "/custom/app/getCourseById.do";
 
     public static String buildImageUrl(String url) {
         return IMAGE_BASE_URL + url;

@@ -1,7 +1,6 @@
 package com.haokuo.happyclub.activity;
 
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -128,7 +127,6 @@ public class SetPersonalInfoActivity extends BaseActivity implements Toolbar.OnM
                     break;
                 case TYPE_BIRTHDAY:
                     userInfo.setBirthday(mSivBirthday.getLeftText());
-                    Log.v("MY_CUSTOM_TAG", "SetPersonalInfoActivity onMenuItemClick()-->" + mSivBirthday.getLeftText());
                     userInfoOrignal.setBirthday(mSivBirthday.getLeftText());
                     break;
                 case TYPE_ID_CARD:
@@ -185,8 +183,7 @@ public class SetPersonalInfoActivity extends BaseActivity implements Toolbar.OnM
                 super.onNegativeActionClicked(fragment);
             }
         };
-        builder
-                .dateRange(0, TimeUtils.getNowMills())
+        builder.dateRange(0, TimeUtils.getNowMills())
                 .title("请选择出生日期")
                 .positiveAction("确定")
                 .negativeAction("取消");

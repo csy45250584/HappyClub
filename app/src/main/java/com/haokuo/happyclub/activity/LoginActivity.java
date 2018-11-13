@@ -214,6 +214,7 @@ public class LoginActivity extends BaseActivity {
                 applyUiByState();
                 break;
             case R.id.tv_forget_password:
+                startActivity(new Intent(LoginActivity.this,ForgetPasswordActivity.class));
                 break;
         }
     }

@@ -83,7 +83,7 @@ public class PointsMallActivity extends BaseActivity {
         int dividerHeight = (int) (getResources().getDimension(R.dimen.dp_1) + 0.5f);
         mRvPointsMall.addItemDecoration(new RecyclerViewDivider(this, LinearLayoutManager.HORIZONTAL, dividerHeight, R.color.colorDivider,
                 0, 0));
-        mPointsMallAdapter = new PointsMallAdapter(R.layout.item_club_service);
+        mPointsMallAdapter = new PointsMallAdapter(R.layout.item_point_mall);
         mRvPointsMall.setAdapter(mPointsMallAdapter);
 
         //初始化筛选器

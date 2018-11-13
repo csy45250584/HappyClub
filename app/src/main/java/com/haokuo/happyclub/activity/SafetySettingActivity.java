@@ -35,7 +35,7 @@ public class SafetySettingActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.siv_change_password:
-                startActivity(new Intent(SafetySettingActivity.this,ChangePasswordActivity.class));
+                startActivity(new Intent(SafetySettingActivity.this,ResetPasswordActivity.class));
                 break;
             case R.id.siv_bind_tel:
                 startActivity(new Intent(SafetySettingActivity.this,BindTelActivity.class));

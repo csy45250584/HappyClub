@@ -9,6 +9,6 @@ import lombok.Data;
  */
 @Data
 public class ListResultBean<T> {
-    protected int count;
-    protected List<T> data;
+    protected int count; //总共数据量
+    protected List<T> data; //数据
 }

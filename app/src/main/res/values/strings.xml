@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">HappyClub</string>
+    <string name="app_name">幸福会所客户端</string>
     <string-array name="report_repair_type">
         <item>水电</item>
         <item>煤气</item>

@@ -52,7 +52,6 @@ public class ActivityFragment extends BaseLazyLoadFragment {
         HttpHelper.getInstance().getNewsSortList(new EntityCallback<NewsTypeListBean>() {
             @Override
             public void onFailure(Call call, String message) {
-
                 ToastUtils.showShort("加载内容失败");
                 mContext.loadClose();
             }
