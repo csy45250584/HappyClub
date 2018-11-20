@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.haokuo.midtitlebar.MidTitleBar
+        android:id="@+id/mid_title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_56"
+        app:midTitle="会所服务"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:background="@color/colorWhite"
+        android:padding="@dimen/dp_8"
+        android:text="会所服务由八苑提供，一苑一主题，八苑共建幸福之家"
+        android:textSize="@dimen/text_24px"/>
+
+    <com.flyco.tablayout.SlidingTabLayout
+        android:id="@+id/indicator_club_service"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_48"
+        android:background="@color/colorWhite"
+        app:tl_divider_width="0dp"
+        app:tl_indicator_color="@color/colorPrimary"
+        app:tl_indicator_corner_radius="@dimen/dp_1_5"
+        app:tl_indicator_height="@dimen/dp_3"
+        app:tl_tab_space_equal="true"
+        app:tl_tab_width="@dimen/dp_70"
+        app:tl_textBold="NONE"
+        app:tl_textSelectColor="@color/colorPrimary"
+        app:tl_textUnselectColor="@color/colorText3"
+        app:tl_textsize="@dimen/text_24px"
+        app:tl_underline_color="@color/colorDivider"
+        app:tl_underline_height="1dp">
+    </com.flyco.tablayout.SlidingTabLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp__club_service"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+</LinearLayout>

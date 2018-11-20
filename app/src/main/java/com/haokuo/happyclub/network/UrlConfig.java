@@ -8,7 +8,7 @@ public class UrlConfig {
     public static final String IMAGE_STRING_SPLIT = ",";
     //测试
 //        public static final String BASE_URL = "http://192.168.1.193:9088/xfhsi/";
-//        public static final String IMAGE_BASE_URL = "http://18t69t8992.51mypc.cn:9088/xfhs/upload/";
+//        public static final String IMAGE_BASE_URL = "http://192.168.1.193:9088/xfhs/upload/";
     //公网
     public static final String BASE_URL = "http://115.231.122.38:8080/xfhsi/";
     public static final String IMAGE_BASE_URL = "http://115.231.122.38:8080/xfhs/upload/";
@@ -34,6 +34,8 @@ public class UrlConfig {
     public static final String UPDATE_ADDRESS_URL = "/custom/app/updateAddress.do";
     public static final String GET_MY_WALLET_URL = "/custom/app/getMyWallet.do";
     public static final String GET_MY_WALLET_DETAIL_URL = "/custom/app/getMyWalletOp.do";
+    public static final String GET_POINTS_TRANSFER_FLAG_URL = "/custom/app/creditTransferFlag.do";
+    public static final String TRANSFER_POINTS_URL = "/custom/app/creditTransfer.do";
     public static final String UPLOAD_ONE_FILE_URL = "/custom/app/uploadOneFile.do";
 
     //志愿者
@@ -65,6 +67,9 @@ public class UrlConfig {
     public static final String INSERT_SERVICE_ORDER_URL = "/custom/app/insertServiceOrder.do";
     public static final String GET_HOT_SERVICE_URL = "/custom/app/getHotService.do";
     public static final String GET_SERVICE_BY_ID_URL = "/custom/app/getServiceById.do";
+    public static final String GET_SERVICE_PROVIDER_LIST_URL = "/custom/app/getBusinessByAreaId.do";
+    public static final String GET_SERVICE_PROVIDER_DETAIL_URL = "/custom/app/getAboutBusinessById.do";
+
     //积分商城
     public static final String GET_MALL_LIST_URL = "/business/app/getAllProductlist.do";
     public static final String GET_ALL_MALL_PRODUCT_URL = "/custom/app/getAllProduct.do";

@@ -30,7 +30,7 @@
         android:textSize="@dimen/text_24px"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="这是会所简介这是会所简介这是会所简介这是会所简介这是会所简介这是会所简介这是会所简介这是会所简介这是会所简介"/>
+        android:text="会所服务由八苑提供，一苑一主题，八苑共建幸福之家"/>
 
     <com.yyydjk.library.DropDownMenu
         android:id="@+id/drop_down_menu"

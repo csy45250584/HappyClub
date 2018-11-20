@@ -41,7 +41,7 @@ public class ConvenienceActivity extends BaseActivity {
         ArrayList<ActionBean> actionBeans = new ArrayList<>();
         actionBeans.add(new ActionBean("物业报修", R.drawable.q12, ReportRepairActivity.class));
         actionBeans.add(new ActionBean("物业投诉", R.drawable.q11, ReportSuggestActivity.class));
-        actionBeans.add(new ActionBean("便民服务", R.drawable.q3));
+        actionBeans.add(new ActionBean("便民服务", R.drawable.tbb3));
         mActionAdapter.setNewData(actionBeans);
     }
 

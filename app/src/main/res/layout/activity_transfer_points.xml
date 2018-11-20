@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.haokuo.midtitlebar.MidTitleBar
+        android:id="@+id/mid_title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_56"
+        app:midTitle="积分转账"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/dp_32"
+        android:paddingRight="@dimen/dp_32"
+        android:paddingTop="@dimen/dp_16">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/iv_avatar"
+            android:layout_width="@dimen/dp_90"
+            android:layout_height="@dimen/dp_90"
+            android:layout_gravity="center_horizontal"
+            android:src="@mipmap/ic_launcher_round"/>
+
+        <TextView
+            android:id="@+id/tv_target_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/dp_8"
+            android:text="fdfd"
+            android:textColor="@color/colorText1"
+            android:textSize="@dimen/text_28px"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_16"
+            android:text="转账积分"
+            android:textSize="@dimen/text_22px"/>
+
+        <EditText
+            android:id="@+id/et_points"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请输入转账积分"
+            android:inputType="number"
+            android:textSize="@dimen/text_26px"/>
+
+        <com.rey.material.widget.Button
+            android:id="@+id/btn_confirm"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_height"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/dp_26"
+            android:background="@drawable/bg_login_button"
+            android:gravity="center"
+            android:text="确定"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/sp_18"
+            app:rd_style="@style/LoginButtonStyle"
+            />
+    </LinearLayout>
+</LinearLayout>

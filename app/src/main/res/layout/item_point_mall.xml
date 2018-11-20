@@ -16,6 +16,7 @@
         <ImageView
             android:id="@+id/iv_club_service_pic"
             android:layout_width="@dimen/dp_70"
+            android:scaleType="centerCrop"
             android:layout_height="@dimen/dp_70"
             android:src="@mipmap/ic_launcher_round"/>
 

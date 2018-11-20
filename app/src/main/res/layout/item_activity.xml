@@ -9,7 +9,8 @@
 
     <ImageView
         android:id="@+id/iv_pic_activity"
-        android:layout_width="90dp"
+        android:scaleType="centerCrop"
+        android:layout_width="@dimen/dp_90"
         android:layout_height="@dimen/dp_90"
         android:layout_gravity="center_vertical"
         android:src="@mipmap/ic_launcher_round"/>

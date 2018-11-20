@@ -13,7 +13,6 @@ public class ClubServiceDetailBean {
 
     @Data
     public static class BusinessBean {
-
         private String businessName;
         private long deptId;
         private long id;

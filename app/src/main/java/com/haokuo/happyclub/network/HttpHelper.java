@@ -17,6 +17,7 @@ import com.haokuo.happyclub.bean.UserInfoBean;
 import com.haokuo.happyclub.network.bean.BindUserTelParams;
 import com.haokuo.happyclub.network.bean.ChangeServeStatusParams;
 import com.haokuo.happyclub.network.bean.CheckIsNextParams;
+import com.haokuo.happyclub.network.bean.CourseIdParams;
 import com.haokuo.happyclub.network.bean.EvaluateOrderParams;
 import com.haokuo.happyclub.network.bean.GetAcceptedServeParams;
 import com.haokuo.happyclub.network.bean.GetBindTelCodeParams;
@@ -27,13 +28,16 @@ import com.haokuo.happyclub.network.bean.GetMallProductParams;
 import com.haokuo.happyclub.network.bean.GetNewsListParams;
 import com.haokuo.happyclub.network.bean.GetOrderDetailParams;
 import com.haokuo.happyclub.network.bean.GetOrderListParams;
+import com.haokuo.happyclub.network.bean.GetPointsTransferFlagParams;
 import com.haokuo.happyclub.network.bean.GetRecourseListParams;
+import com.haokuo.happyclub.network.bean.GetServiceProviderDetailParams;
+import com.haokuo.happyclub.network.bean.GetServiceProviderListParams;
 import com.haokuo.happyclub.network.bean.GetVolunteerServeParams;
 import com.haokuo.happyclub.network.bean.LoginByTelParams;
 import com.haokuo.happyclub.network.bean.LoginParams;
 import com.haokuo.happyclub.network.bean.RegisterParams;
-import com.haokuo.happyclub.network.bean.CourseIdParams;
 import com.haokuo.happyclub.network.bean.ResetPasswordParams;
+import com.haokuo.happyclub.network.bean.TransferPointsParams;
 import com.haokuo.happyclub.network.bean.UpdateOrderParams;
 import com.haokuo.happyclub.network.bean.UpdateOrderWithReasonParams;
 import com.haokuo.happyclub.network.bean.UpdatePasswordParams;
@@ -612,5 +616,25 @@ public class HttpHelper {
     /** 根据课程id查看详情 **/
     public void getCourseById(CourseIdParams entity, NetworkCallback callback) {
         doPost(entity, UrlConfig.GET_COURSE_BY_ID_URL, callback);
+    }
+
+    /** 根据模块区域id查找相应服务商 **/
+    public void getServiceProviderList(GetServiceProviderListParams entity, NetworkCallback callback) {
+        doPost(entity, UrlConfig.GET_SERVICE_PROVIDER_LIST_URL, callback);
+    }
+
+    /** 获取服务商详情及服务列表 **/
+    public void getServiceProviderDetail(GetServiceProviderDetailParams entity, NetworkCallback callback) {
+        doPost(entity, UrlConfig.GET_SERVICE_PROVIDER_DETAIL_URL, callback);
+    }
+
+    /** 用户积分转账标记(输入对方手机号,返回对方用户信息,提示后输入积分数转账) **/
+    public void getPointsTransferFlag(GetPointsTransferFlagParams entity, NetworkCallback callback) {
+        doPost(entity, UrlConfig.GET_POINTS_TRANSFER_FLAG_URL, callback);
+    }
+
+    /** 转账 **/
+    public void transferPoints(TransferPointsParams entity, NetworkCallback callback) {
+        doPost(entity, UrlConfig.TRANSFER_POINTS_URL, callback);
     }
 }

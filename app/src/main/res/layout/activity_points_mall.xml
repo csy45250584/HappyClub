@@ -13,7 +13,7 @@
             android:id="@+id/mid_title_bar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_56"
-            app:midTitle="积分商城"/>
+            app:midTitle="幸福积分"/>
 
         <com.miguelcatalan.materialsearchview.MaterialSearchView
             android:id="@+id/search_view"

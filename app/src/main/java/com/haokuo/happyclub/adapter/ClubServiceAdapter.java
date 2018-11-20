@@ -25,8 +25,8 @@ public class ClubServiceAdapter extends BaseQuickAdapter<ClubServiceBean, BaseVi
         helper.setText(R.id.tv_club_service_name, item.getService_name());
         helper.setText(R.id.tv_club_service_description, item.getDescription());
         helper.setText(R.id.tv_service_score, String.valueOf(item.getService_integral()));
-//        if (mLayoutResId != R.layout.item_hot_service) {
-//            helper.addOnClickListener(R.id.tv_exchange);
-//        }
+        if (mLayoutResId != R.layout.item_hot_service) {
+            helper.addOnClickListener(R.id.tv_exchange);
+        }
     }
 }

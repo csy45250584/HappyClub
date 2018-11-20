@@ -39,9 +39,9 @@ public class MoreActionActivity extends BaseActivity {
 
     private void initActionAdapter() {
         ArrayList<ActionBean> actionBeans = new ArrayList<>();
-        actionBeans.add(new ActionBean("积分商城", R.drawable.q4, PointsMallActivity.class));
-        actionBeans.add(new ActionBean("幸福食堂", R.drawable.q5, CanteenActivity.class));
-        actionBeans.add(new ActionBean("邮善邮乐", R.drawable.q3));
+        actionBeans.add(new ActionBean("幸福积分", R.drawable.q4, PointsMallActivity.class));
+        actionBeans.add(new ActionBean("党建学习", R.drawable.tbb4, PartyListActivity.class));
+        actionBeans.add(new ActionBean("邮善邮乐", R.drawable.tbb5));
         mActionAdapter.setNewData(actionBeans);
     }
 

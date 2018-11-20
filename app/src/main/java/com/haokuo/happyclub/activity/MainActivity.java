@@ -94,11 +94,11 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
 
     @Override
     public boolean onMenuItemClick(MenuItem menuItem) {
-        switch (menuItem.getItemId()) {
-            case R.id.item_edit_info:
-
-                break;
-        }
+//        switch (menuItem.getItemId()) {
+//            case R.id.item_edit_info:
+//
+//                break;
+//        }
         return true;
     }
 
@@ -143,7 +143,7 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
                     case 3:
                         mMidTitleBar.setMidTitle("我的");
                         mMidTitleBar.getMenu().clear();
-                        mMidTitleBar.getMenu().add(0, R.id.item_edit_info, 0, null).setIcon(R.drawable.xx1).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+//                        mMidTitleBar.getMenu().add(0, R.id.item_edit_info, 0, null).setIcon(R.drawable.xx1).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
                         break;
                 }
             }

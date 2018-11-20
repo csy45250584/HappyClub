@@ -160,7 +160,7 @@
         android:layout_gravity="center_horizontal"
         android:background="@color/colorPrimary"
         android:gravity="center"
-        android:text="兑换服务"
+        android:text="立即预约"
         android:textColor="@color/colorWhite"
         android:textSize="@dimen/sp_18"
         app:rd_style="@style/NoCornerButtonStyle"

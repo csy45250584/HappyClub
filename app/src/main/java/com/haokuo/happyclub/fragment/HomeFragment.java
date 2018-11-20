@@ -8,14 +8,15 @@ import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.haokuo.happyclub.R;
-import com.haokuo.happyclub.activity.ClubServiceActivity;
+import com.haokuo.happyclub.activity.CanteenActivity;
 import com.haokuo.happyclub.activity.ClubServiceDetailActivity;
+import com.haokuo.happyclub.activity.ClubServiceProviderActivity;
 import com.haokuo.happyclub.activity.ConvenienceActivity;
 import com.haokuo.happyclub.activity.MoreActionActivity;
 import com.haokuo.happyclub.activity.MyScoreActivity;
 import com.haokuo.happyclub.activity.MyServeActivity;
 import com.haokuo.happyclub.activity.NewsListActivity;
-import com.haokuo.happyclub.activity.PartyListActivity;
+import com.haokuo.happyclub.activity.NursingActivity;
 import com.haokuo.happyclub.activity.SchoolActivity;
 import com.haokuo.happyclub.activity.SignInActivity;
 import com.haokuo.happyclub.activity.VolunteerOrderActivity;
@@ -147,12 +148,12 @@ public class HomeFragment extends BaseLazyLoadFragment {
     private void initActionAdapter() {
         ArrayList<ActionBean> actionBeans = new ArrayList<>();
         actionBeans.add(new ActionBean("签到", R.drawable.q1, SignInActivity.class));
-        actionBeans.add(new ActionBean("会所服务", R.drawable.q2, ClubServiceActivity.class));
-        actionBeans.add(new ActionBean("党建学习", R.drawable.q3, PartyListActivity.class));
-        actionBeans.add(new ActionBean("爱心便民", R.drawable.q4, ConvenienceActivity.class));
-        actionBeans.add(new ActionBean("幸福学堂", R.drawable.q5,SchoolActivity.class));
-        actionBeans.add(new ActionBean("幸福养老", R.drawable.q6));
-        actionBeans.add(new ActionBean("志愿者服务", R.drawable.q7, VolunteerOrderActivity.class));
+        actionBeans.add(new ActionBean("会所服务", R.drawable.q2, ClubServiceProviderActivity.class));
+        actionBeans.add(new ActionBean("爱心便民", R.drawable.tbb1, ConvenienceActivity.class));
+        actionBeans.add(new ActionBean("幸福食堂", R.drawable.q5, CanteenActivity.class));
+        actionBeans.add(new ActionBean("幸福养老", R.drawable.q6,NursingActivity.class));
+        actionBeans.add(new ActionBean("幸福学堂", R.drawable.q7,SchoolActivity.class));
+        actionBeans.add(new ActionBean("志愿者服务", R.drawable.tbb2, VolunteerOrderActivity.class));
         actionBeans.add(new ActionBean("更多", R.drawable.q8, MoreActionActivity.class));
         mActionAdapter.setNewData(actionBeans);
     }
