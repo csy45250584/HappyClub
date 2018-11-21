@@ -20,6 +20,7 @@ import com.haokuo.happyclub.activity.NursingActivity;
 import com.haokuo.happyclub.activity.SchoolActivity;
 import com.haokuo.happyclub.activity.SignInActivity;
 import com.haokuo.happyclub.activity.VolunteerOrderActivity;
+import com.haokuo.happyclub.activity.VolunteerServeActivity;
 import com.haokuo.happyclub.adapter.ActionAdapter;
 import com.haokuo.happyclub.adapter.ClubServiceAdapter;
 import com.haokuo.happyclub.base.BaseLazyLoadFragment;
@@ -153,7 +154,7 @@ public class HomeFragment extends BaseLazyLoadFragment {
         actionBeans.add(new ActionBean("幸福食堂", R.drawable.q5, CanteenActivity.class));
         actionBeans.add(new ActionBean("幸福养老", R.drawable.q6,NursingActivity.class));
         actionBeans.add(new ActionBean("幸福学堂", R.drawable.q7,SchoolActivity.class));
-        actionBeans.add(new ActionBean("志愿者服务", R.drawable.tbb2, VolunteerOrderActivity.class));
+        actionBeans.add(new ActionBean("志愿者服务", R.drawable.tbb2, VolunteerServeActivity.class));
         actionBeans.add(new ActionBean("更多", R.drawable.q8, MoreActionActivity.class));
         mActionAdapter.setNewData(actionBeans);
     }

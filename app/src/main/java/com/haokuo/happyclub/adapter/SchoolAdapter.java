@@ -31,12 +31,11 @@ public class SchoolAdapter extends BaseQuickAdapter<CourseBean, BaseViewHolder> 
         helper.setText(R.id.tv_course_description, item.getDescription());
         helper.setText(R.id.tv_course_time, item.getStartTime() + "开课 " + item.getSchoolTime());
         //        helper.setText(R.id.tv_score, String.valueOf(item.getCredit()));
-        TextView tvSignUpCount = helper.getView(R.id.tv_sign_up_count);
         String count = String.valueOf(item.getCount());
         String userCount = String.valueOf(item.getUserCount());
         SpannableString spannableString = new SpannableString(userCount + "/" + count);
         spannableString.setSpan(new ForegroundColorSpan(ResUtils.getColor(R.color.colorPrimary)), 0, userCount.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
-        tvSignUpCount.setText(spannableString);
+        helper.setText(R.id.tv_sign_up_count, spannableString);
 //        TextView tvSignUp = helper.getView(R.id.tv_sign_up);
 //        GradientDrawable tvSignUpBackground = (GradientDrawable) tvSignUp.getBackground();
 //        if (item.getCount().equals(item.getUserCount())) {

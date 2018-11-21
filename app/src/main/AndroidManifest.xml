@@ -141,6 +141,9 @@
         <activity android:name=".activity.ClubServiceProviderDetailActivity"/>
         <activity android:name=".activity.TransferPointsActivity"/>
         <activity android:name=".activity.NursingActivity"/>
+        <activity android:name=".activity.VolunteerServeActivity"/>
+        <activity android:name=".activity.VolunteerActivityActivity"/>
+        <activity android:name=".activity.VActivityDetailActivity"/>
 
     </application>
 

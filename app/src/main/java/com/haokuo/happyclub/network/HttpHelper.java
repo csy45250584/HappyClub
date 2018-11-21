@@ -32,6 +32,8 @@ import com.haokuo.happyclub.network.bean.GetPointsTransferFlagParams;
 import com.haokuo.happyclub.network.bean.GetRecourseListParams;
 import com.haokuo.happyclub.network.bean.GetServiceProviderDetailParams;
 import com.haokuo.happyclub.network.bean.GetServiceProviderListParams;
+import com.haokuo.happyclub.network.bean.ActivityIdParams;
+import com.haokuo.happyclub.network.bean.GetVolunteerActivityParams;
 import com.haokuo.happyclub.network.bean.GetVolunteerServeParams;
 import com.haokuo.happyclub.network.bean.LoginByTelParams;
 import com.haokuo.happyclub.network.bean.LoginParams;
@@ -636,5 +638,25 @@ public class HttpHelper {
     /** 转账 **/
     public void transferPoints(TransferPointsParams entity, NetworkCallback callback) {
         doPost(entity, UrlConfig.TRANSFER_POINTS_URL, callback);
+    }
+
+    /** 获取志愿者活动列表 **/
+    public void getVolunteerActivityList(GetVolunteerActivityParams entity, NetworkCallback callback) {
+        doPost(entity, UrlConfig.GET_VOLUNTEER_ACTIVITY_LIST_URL, callback);
+    }
+
+    /** 根据id获取志愿者活动详情 **/
+    public void getVolunteerActivityById(ActivityIdParams entity, NetworkCallback callback) {
+        doPost(entity, UrlConfig.GET_VOLUNTEER_ACTIVITY_BY_ID_URL, callback);
+    }
+
+    /** 志愿者参加活动 **/
+    public void joinVolunteerActivity(ActivityIdParams entity, NetworkCallback callback) {
+        doPost(entity, UrlConfig.JOIN_VOLUNTEER_ACTIVITY_URL, callback);
+    }
+
+    /** 志愿者取消活动预参加 **/
+    public void cancelJoinVolunteerActivity(ActivityIdParams entity, NetworkCallback callback) {
+        doPost(entity, UrlConfig.CANCEL_JOIN_VOLUNTEER_ACTIVITY_URL, callback);
     }
 }

@@ -138,12 +138,23 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     public void loadFailed() {
-        getLoadingDialog().loadFailed();
-        mLoadingDialog = null;
+        loadFailed("");
     }
 
     public void loadFailed(String failedText) {
+        loadFailed(failedText, false);
+    }
+
+    public void loadFailed(String failedText, boolean isFinish) {
         getLoadingDialog().setFailedText(failedText);
+        if (isFinish) {
+            getLoadingDialog().setOnFinishListener(new LoadingDialog.OnFinishListener() {
+                @Override
+                public void onFinish() {
+                    finish();
+                }
+            });
+        }
         getLoadingDialog().loadFailed();
         mLoadingDialog = null;
     }

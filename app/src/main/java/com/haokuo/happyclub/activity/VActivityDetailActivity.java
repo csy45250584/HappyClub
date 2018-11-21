@@ -11,13 +11,13 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.haokuo.happyclub.R;
 import com.haokuo.happyclub.base.BaseActivity;
-import com.haokuo.happyclub.bean.CourseBean;
-import com.haokuo.happyclub.bean.CourseDetailBean;
+import com.haokuo.happyclub.bean.VolunteerActivityBean;
+import com.haokuo.happyclub.bean.VolunteerActivityDetailBean;
 import com.haokuo.happyclub.network.EntityCallback;
 import com.haokuo.happyclub.network.HttpHelper;
 import com.haokuo.happyclub.network.NetworkCallback;
 import com.haokuo.happyclub.network.UrlConfig;
-import com.haokuo.happyclub.network.bean.CourseIdParams;
+import com.haokuo.happyclub.network.bean.ActivityIdParams;
 import com.haokuo.happyclub.util.ResUtils;
 import com.haokuo.happyclub.util.utilscode.ToastUtils;
 import com.rey.material.widget.Button;
@@ -27,69 +27,63 @@ import butterknife.OnClick;
 import okhttp3.Call;
 
 /**
- * Created by zjf on 2018/11/9.
+ * Created by zjf on 2018/11/21.
  */
-public class SchoolDetailActivity extends BaseActivity {
-    public static final String EXTRA_COURSE_ID = "com.haokuo.happyclub.extra.EXTRA_COURSE_ID";
-    @BindView(R.id.iv_course_pic)
-    ImageView mIvCoursePic;
-    @BindView(R.id.tv_course_name)
-    TextView mTvCourseName;
-    @BindView(R.id.tv_course_open_date)
-    TextView mTvCourseOpenDate;
-    @BindView(R.id.tv_course_time)
-    TextView mTvCourseTime;
-    @BindView(R.id.tv_course_type)
-    TextView mTvCourseType;
-    @BindView(R.id.tv_course_count)
-    TextView mTvCourseCount;
-    @BindView(R.id.tv_course_description)
-    TextView mTvCourseDescription;
-    @BindView(R.id.tv_course_address)
-    TextView mTvCourseAddress;
+public class VActivityDetailActivity extends BaseActivity {
+    public static final String EXTRA_ACTIVITY_ID = "com.haokuo.happyclub.extra.EXTRA_ACTIVITY_ID";
+    @BindView(R.id.iv_activity_pic)
+    ImageView mIvActivityPic;
+    @BindView(R.id.tv_activity_name)
+    TextView mTvActivityName;
+    @BindView(R.id.tv_activity_time)
+    TextView mTvActivityTime;
+    @BindView(R.id.tv_activity_count)
+    TextView mTvActivityCount;
+    @BindView(R.id.tv_activity_description)
+    TextView mTvActivityDescription;
+    @BindView(R.id.tv_activity_address)
+    TextView mTvActivityAddress;
     @BindView(R.id.btn_sign_in)
     Button mBtnSignIn;
-    private CourseIdParams mParams;
-    private CourseDetailBean mResult;
+    private ActivityIdParams mParams;
+    private VolunteerActivityDetailBean mResult;
 
     @Override
     protected int initContentLayout() {
-        return R.layout.activity_school_detail;
+        return R.layout.actitivty_v_activity_detail;
     }
 
     @Override
     protected void initData() {
-        long courseId = getIntent().getLongExtra(EXTRA_COURSE_ID, -1);
-        mParams = new CourseIdParams(courseId);
+        long activityId = getIntent().getLongExtra(EXTRA_ACTIVITY_ID, -1);
+        mParams = new ActivityIdParams(activityId);
     }
 
     @Override
     protected void loadData() {
-        showLoading("课程加载中...");
-        HttpHelper.getInstance().getCourseById(mParams, new EntityCallback<CourseDetailBean>() {
+        showLoading("活动加载中...");
+        HttpHelper.getInstance().getVolunteerActivityById(mParams, new EntityCallback<VolunteerActivityDetailBean>() {
             @Override
             public void onFailure(Call call, String message) {
-                loadFailed("加载课程失败，" + message,true);
+                loadFailed("加载活动失败，" + message, true);
             }
 
             @Override
-            public void onSuccess(Call call, CourseDetailBean result) {
+            public void onSuccess(Call call, VolunteerActivityDetailBean result) {
                 loadClose();
                 mResult = result;
-                CourseBean course = mResult.getCourse();
+                VolunteerActivityBean activity = mResult.getActivity();
                 //加载数据
-                Glide.with(SchoolDetailActivity.this).load(UrlConfig.buildImageUrl(course.getCourseImage())).into(mIvCoursePic);
-                mTvCourseName.setText(course.getCourseName());
-                mTvCourseOpenDate.setText(course.getStartTime() + "至" + course.getEndTime());
-                mTvCourseTime.setText(course.getSchoolTime());
-                mTvCourseType.setText(course.getCourselistName());
-                setCountInfo(course);
-                mTvCourseDescription.setText(course.getDescription());
-                mTvCourseAddress.setText(course.getPlace());
-                if (result.isReserve()) {
+                Glide.with(VActivityDetailActivity.this).load(UrlConfig.buildImageUrl(activity.getImage())).into(mIvActivityPic);
+                mTvActivityName.setText(activity.getActivityName());
+                mTvActivityTime.setText(activity.getStartTime() + "至" + activity.getEndTime());
+                setCountInfo(activity);
+                mTvActivityDescription.setText(activity.getDescription());
+                mTvActivityAddress.setText(activity.getAddress());
+                if (result.isJoin()) {
                     mBtnSignIn.setText("取消预约");
                     mBtnSignIn.setBackgroundColor(ResUtils.getColor(R.color.colorPrimary));
-                } else if (course.getCount().equals(course.getUserCount())) {
+                } else if (activity.getCount().equals(activity.getJoinCount())) {
                     mBtnSignIn.setText("预约已满");
                     mBtnSignIn.setBackgroundColor(ResUtils.getColor(R.color.colorDivider));
                 } else {
@@ -100,31 +94,31 @@ public class SchoolDetailActivity extends BaseActivity {
         });
     }
 
-    private void setCountInfo(CourseBean course) {
-        String count = String.valueOf(course.getCount());
-        String userCount = String.valueOf(course.getUserCount());
-        SpannableString spannableString = new SpannableString(userCount + "/" + count);
-        spannableString.setSpan(new ForegroundColorSpan(ResUtils.getColor(R.color.colorPrimary)), 0, userCount.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
-        mTvCourseCount.setText(spannableString);
+    private void setCountInfo(VolunteerActivityBean activity) {
+        String count = String.valueOf(activity.getCount());
+        String joinCount = String.valueOf(activity.getJoinCount());
+        SpannableString spannableString = new SpannableString(joinCount + "/" + count);
+        spannableString.setSpan(new ForegroundColorSpan(ResUtils.getColor(R.color.colorPrimary)), 0, joinCount.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+        mTvActivityCount.setText(spannableString);
     }
 
     @OnClick(R.id.btn_sign_in)
     public void onViewClicked() {
-        final CourseBean course = mResult.getCourse();
-        if (mResult.isReserve()) {//取消预约
-            showCancelReserveDialog();
-        } else if (course.getCount().equals(course.getUserCount())) { //预约已满
+        final VolunteerActivityBean activity = mResult.getActivity();
+        if (mResult.isJoin()) {//取消预约
+            showCancelJoinDialog();
+        } else if (activity.getCount().equals(activity.getJoinCount())) { //预约已满
             ToastUtils.showShort("预约人数已满，无法预约！");
         } else { //立即预约
-            CourseIdParams params = new CourseIdParams(course.getId());
+            ActivityIdParams params = new ActivityIdParams(activity.getId());
             showLoading("预约中...");
-            HttpHelper.getInstance().reserveCourse(params, new NetworkCallback() {
+            HttpHelper.getInstance().joinVolunteerActivity(params, new NetworkCallback() {
                 @Override
                 public void onSuccess(Call call, String json) {
                     loadSuccess("预约成功", false);
-                    mResult.setReserve(true);
-                    course.setUserCount(course.getUserCount() + 1);
-                    setCountInfo(course);
+                    mResult.setJoin(true);
+                    activity.setJoinCount(activity.getJoinCount() + 1);
+                    setCountInfo(activity);
                     mBtnSignIn.setText("取消预约");
                     mBtnSignIn.setBackgroundColor(ResUtils.getColor(R.color.colorPrimary));
                     setResult(RESULT_OK);
@@ -138,25 +132,23 @@ public class SchoolDetailActivity extends BaseActivity {
         }
     }
 
-
-
-    private void showCancelReserveDialog() {
+    private void showCancelJoinDialog() {
         new AlertDialog.Builder(this)
-                .setMessage("是否取消预约该课程？")
+                .setMessage("是否取消预约该活动？")
                 .setNegativeButton("否", null)
                 .setPositiveButton("是", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //取消预约
                         showLoading("取消预约中...");
-                        HttpHelper.getInstance().cancelReserveCourse(mParams, new NetworkCallback() {
+                        HttpHelper.getInstance().cancelJoinVolunteerActivity(mParams, new NetworkCallback() {
                             @Override
                             public void onSuccess(Call call, String json) {
                                 loadSuccess("取消成功", false);
-                                mResult.setReserve(false);
-                                CourseBean course = mResult.getCourse();
-                                course.setUserCount(course.getUserCount() - 1);
-                                setCountInfo(course);
+                                mResult.setJoin(false);
+                                VolunteerActivityBean activity = mResult.getActivity();
+                                activity.setJoinCount(activity.getJoinCount() - 1);
+                                setCountInfo(activity);
                                 mBtnSignIn.setText("立即预约");
                                 mBtnSignIn.setBackgroundColor(ResUtils.getColor(R.color.colorPrimary));
                                 setResult(RESULT_OK);

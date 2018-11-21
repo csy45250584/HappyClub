@@ -7,11 +7,11 @@ package com.haokuo.happyclub.network;
 public class UrlConfig {
     public static final String IMAGE_STRING_SPLIT = ",";
     //测试
-//        public static final String BASE_URL = "http://192.168.1.193:9088/xfhsi/";
-//        public static final String IMAGE_BASE_URL = "http://192.168.1.193:9088/xfhs/upload/";
+        public static final String BASE_URL = "http://192.168.1.193:9088/xfhsi/";
+        public static final String IMAGE_BASE_URL = "http://192.168.1.193:9088/xfhs/upload/";
     //公网
-    public static final String BASE_URL = "http://115.231.122.38:8080/xfhsi/";
-    public static final String IMAGE_BASE_URL = "http://115.231.122.38:8080/xfhs/upload/";
+//    public static final String BASE_URL = "http://115.231.122.38:8080/xfhsi/";
+//    public static final String IMAGE_BASE_URL = "http://115.231.122.38:8080/xfhs/upload/";
     //个人信息
     public static final String REGISTER_URL = "/custom/register.do";
     public static final String GET_LOGIN_VERIFY_CODE_URL = "/custom/loginVerificationCode.do";
@@ -50,6 +50,10 @@ public class UrlConfig {
     public static final String VOLUNTEER_SERVE_LIST_URL = "/custom/app/volunteerServer.do";
     public static final String ACCEPT_SERVE_URL = "/custom/app/getVolunteerServe.do";
     public static final String APPLY_2BE_VOLUNTEER_URL = "/custom/app/insertVolunteer.do";
+    public static final String GET_VOLUNTEER_ACTIVITY_LIST_URL = "/custom/app/getActivityList.do";
+    public static final String GET_VOLUNTEER_ACTIVITY_BY_ID_URL = "/custom/app/getActivityById.do";
+    public static final String JOIN_VOLUNTEER_ACTIVITY_URL = "/custom/app/joinActivity.do";
+    public static final String CANCEL_JOIN_VOLUNTEER_ACTIVITY_URL = "/custom/app/cancelJoinActivity.do";
     //食堂
     public static final String GET_ALL_FOOD_LIST_URL = "/custom/app/getAllFoodlist.do";
     public static final String INSERT_FOOD_ORDER_URL = "/custom/app/insertFoodOrder.do";
