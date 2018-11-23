@@ -129,6 +129,7 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
     //    private void startScanQrcode() {
     //        startActivity(new Intent(MainActivity.this, ScanQrcodeActivity.class));
     //    }
+    private long backPressFirstTime = 0;
 
     @Override
     public void onBackPressed() {
@@ -136,7 +137,13 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
         if (mOrderFragment.getUserVisibleHint() && mOrderFragment.isMenuShowing()) {
             mOrderFragment.closeMenu();
         } else {
-            super.onBackPressed();
+            long secondTime = System.currentTimeMillis();
+            if (secondTime - backPressFirstTime > 2000) {
+                ToastUtils.showShort("再按一次退出应用");
+                backPressFirstTime = secondTime;
+            } else {
+                super.onBackPressed();
+            }
         }
     }
 
