@@ -16,36 +16,27 @@
             android:layout_height="@dimen/dp_56"
             app:midTitle="会所服务"/>
 
-        <com.miguelcatalan.materialsearchview.MaterialSearchView
-            android:id="@+id/search_view"
-            style="@style/MaterialSearchViewStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            />
     </FrameLayout>
 
     <TextView
-        android:background="@color/colorWhite"
-        android:padding="@dimen/dp_8"
-        android:textSize="@dimen/text_24px"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="会所服务由八苑提供，一苑一主题，八苑共建幸福之家"/>
-
-    <com.yyydjk.library.DropDownMenu
-        android:id="@+id/drop_down_menu"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:dddividerColor="@color/colorDivider"
-        app:ddmaskColor="@color/mask_color"
-        app:ddmenuBackgroundColor="@color/colorWhite"
-        app:ddmenuMenuHeightPercent="0.5"
-        app:ddmenuSelectedIcon="@drawable/sj1"
-        app:ddmenuTextSize="13sp"
-        app:ddmenuUnselectedIcon="@drawable/sj2"
-        app:ddtextSelectedColor="@color/colorPrimary"
-        app:ddtextUnselectedColor="@color/colorText2"
-        app:ddunderlineColor="@color/colorDivider"
-        />
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        android:gravity="center"
+        android:padding="@dimen/dp_8"
+        android:text="会所服务由八苑提供，一苑一主题，八苑共建幸福之家"
+        android:textSize="@dimen/text_24px"/>
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/srl_club_service"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_club_service"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
 </LinearLayout>

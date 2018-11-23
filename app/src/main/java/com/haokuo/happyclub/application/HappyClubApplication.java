@@ -22,6 +22,8 @@ import com.xiasuhuei321.loadingdialog.view.LoadingDialog;
 
 import org.litepal.LitePal;
 
+import cn.jpush.android.api.JPushInterface;
+
 /**
  * Created by zjf on 2018-07-16.
  */
@@ -49,6 +51,7 @@ public class HappyClubApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        JPushInterface.init(this);
         //初始化工具类
         Utils.init(getApplicationContext());
         //创建文件夹

@@ -10,5 +10,7 @@ public class NewsTypeBean {
     private long id;
     private Integer state;
     private String sortName;
+    private String description;
+    private String image;
 
 }
