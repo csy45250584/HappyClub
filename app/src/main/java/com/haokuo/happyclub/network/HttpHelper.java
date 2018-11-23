@@ -14,6 +14,7 @@ import com.haokuo.happyclub.bean.RepairBean;
 import com.haokuo.happyclub.bean.SuccessBean;
 import com.haokuo.happyclub.bean.SuggestBean;
 import com.haokuo.happyclub.bean.UserInfoBean;
+import com.haokuo.happyclub.network.bean.ActivityIdParams;
 import com.haokuo.happyclub.network.bean.BindUserTelParams;
 import com.haokuo.happyclub.network.bean.ChangeServeStatusParams;
 import com.haokuo.happyclub.network.bean.CheckIsNextParams;
@@ -25,6 +26,7 @@ import com.haokuo.happyclub.network.bean.GetClubServiceParams;
 import com.haokuo.happyclub.network.bean.GetCourseListParams;
 import com.haokuo.happyclub.network.bean.GetHotServiceParams;
 import com.haokuo.happyclub.network.bean.GetMallProductParams;
+import com.haokuo.happyclub.network.bean.GetMyActivityParams;
 import com.haokuo.happyclub.network.bean.GetNewsListParams;
 import com.haokuo.happyclub.network.bean.GetOrderDetailParams;
 import com.haokuo.happyclub.network.bean.GetOrderListParams;
@@ -32,7 +34,6 @@ import com.haokuo.happyclub.network.bean.GetPointsTransferFlagParams;
 import com.haokuo.happyclub.network.bean.GetRecourseListParams;
 import com.haokuo.happyclub.network.bean.GetServiceProviderDetailParams;
 import com.haokuo.happyclub.network.bean.GetServiceProviderListParams;
-import com.haokuo.happyclub.network.bean.ActivityIdParams;
 import com.haokuo.happyclub.network.bean.GetVolunteerActivityParams;
 import com.haokuo.happyclub.network.bean.GetVolunteerServeParams;
 import com.haokuo.happyclub.network.bean.LoginByTelParams;
@@ -40,6 +41,7 @@ import com.haokuo.happyclub.network.bean.LoginParams;
 import com.haokuo.happyclub.network.bean.RegisterParams;
 import com.haokuo.happyclub.network.bean.ResetPasswordParams;
 import com.haokuo.happyclub.network.bean.TransferPointsParams;
+import com.haokuo.happyclub.network.bean.UpdateActivitySignParams;
 import com.haokuo.happyclub.network.bean.UpdateOrderParams;
 import com.haokuo.happyclub.network.bean.UpdateOrderWithReasonParams;
 import com.haokuo.happyclub.network.bean.UpdatePasswordParams;
@@ -658,5 +660,15 @@ public class HttpHelper {
     /** 志愿者取消活动预参加 **/
     public void cancelJoinVolunteerActivity(ActivityIdParams entity, NetworkCallback callback) {
         doPost(entity, UrlConfig.CANCEL_JOIN_VOLUNTEER_ACTIVITY_URL, callback);
+    }
+
+    /** 获取我的活动 **/
+    public void getMyActivityList(GetMyActivityParams entity, NetworkCallback callback) {
+        doPost(entity, UrlConfig.GET_MY_ACTIVITY_LIST_URL, callback);
+    }
+
+    /** 志愿者活动签到/签退 **/
+    public void updateActivitySign(UpdateActivitySignParams entity, NetworkCallback callback) {
+        doPost(entity, UrlConfig.UPDATE_ACTIVITY_SIGN_URL, callback);
     }
 }

@@ -54,6 +54,8 @@ public class UrlConfig {
     public static final String GET_VOLUNTEER_ACTIVITY_BY_ID_URL = "/custom/app/getActivityById.do";
     public static final String JOIN_VOLUNTEER_ACTIVITY_URL = "/custom/app/joinActivity.do";
     public static final String CANCEL_JOIN_VOLUNTEER_ACTIVITY_URL = "/custom/app/cancelJoinActivity.do";
+    public static final String GET_MY_ACTIVITY_LIST_URL = "/custom/app/getUserActivityList.do";
+    public static final String UPDATE_ACTIVITY_SIGN_URL = "/custom/app/updateSign.do";
     //食堂
     public static final String GET_ALL_FOOD_LIST_URL = "/custom/app/getAllFoodlist.do";
     public static final String INSERT_FOOD_ORDER_URL = "/custom/app/insertFoodOrder.do";

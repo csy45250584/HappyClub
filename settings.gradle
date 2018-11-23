@@ -1,1 +1,1 @@
-include ':app','MidTitleBar','labels','popwindow','libzxing','libsign'
+include ':app', 'MidTitleBar', 'labels', 'popwindow', 'libzxing', 'libsign', ':ZxingDemo'

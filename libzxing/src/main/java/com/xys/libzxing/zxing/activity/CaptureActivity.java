@@ -15,7 +15,6 @@
  */
 package com.xys.libzxing.zxing.activity;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -31,6 +30,7 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.google.zxing.Result;
@@ -63,7 +63,7 @@ public final class CaptureActivity extends AppCompatActivity implements SurfaceH
     private BeepManager beepManager;
 
     private SurfaceView scanPreview = null;
-    private RelativeLayout scanContainer;
+    private LinearLayout scanContainer;
     private RelativeLayout scanCropView;
     private ImageView scanLine;
 
@@ -87,7 +87,7 @@ public final class CaptureActivity extends AppCompatActivity implements SurfaceH
         setContentView(R.layout.activity_capture);
 
         scanPreview = (SurfaceView) findViewById(R.id.capture_preview);
-        scanContainer = (RelativeLayout) findViewById(R.id.capture_container);
+        scanContainer = (LinearLayout) findViewById(R.id.capture_container);
         scanCropView = (RelativeLayout) findViewById(R.id.capture_crop_view);
         scanLine = (ImageView) findViewById(R.id.capture_scan_line);
 

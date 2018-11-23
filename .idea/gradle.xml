@@ -9,6 +9,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/MidTitleBar" />
+            <option value="$PROJECT_DIR$/ZxingDemo" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/labels" />
             <option value="$PROJECT_DIR$/libsign" />

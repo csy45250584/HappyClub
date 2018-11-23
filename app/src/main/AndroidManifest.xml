@@ -144,6 +144,8 @@
         <activity android:name=".activity.VolunteerServeActivity"/>
         <activity android:name=".activity.VolunteerActivityActivity"/>
         <activity android:name=".activity.VActivityDetailActivity"/>
+        <activity android:name=".activity.MyActivityActivity"/>
+        <activity android:name=".activity.ScanQrcodeActivity"/>
 
     </application>
 

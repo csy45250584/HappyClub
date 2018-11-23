@@ -5,6 +5,7 @@ import android.support.v7.app.AlertDialog;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -31,6 +32,7 @@ import okhttp3.Call;
  */
 public class VActivityDetailActivity extends BaseActivity {
     public static final String EXTRA_ACTIVITY_ID = "com.haokuo.happyclub.extra.EXTRA_ACTIVITY_ID";
+    public static final String EXTRA_DISMISS_BUTTON = "com.haokuo.happyclub.extra.EXTRA_DISMISS_BUTTON";
     @BindView(R.id.iv_activity_pic)
     ImageView mIvActivityPic;
     @BindView(R.id.tv_activity_name)
@@ -56,6 +58,10 @@ public class VActivityDetailActivity extends BaseActivity {
     @Override
     protected void initData() {
         long activityId = getIntent().getLongExtra(EXTRA_ACTIVITY_ID, -1);
+        boolean isDismissButton = getIntent().getBooleanExtra(EXTRA_DISMISS_BUTTON, false);
+        if (isDismissButton) {
+            mBtnSignIn.setVisibility(View.GONE);
+        }
         mParams = new ActivityIdParams(activityId);
     }
 
