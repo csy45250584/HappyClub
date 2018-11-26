@@ -100,6 +100,7 @@ public class UrlConfig {
     public static final String RESERVE_COURSE_URL = "/custom/app/reserveCourse.do";
     public static final String CANCEL_RESERVE_COURSE_URL = "/custom/app/cancelReserveCourse.do";
     public static final String GET_COURSE_BY_ID_URL = "/custom/app/getCourseById.do";
+    public static final String GET_MY_COURSE_LIST = "/custom/app/getUserCourseList.do";
 
     public static String buildImageUrl(String url) {
         return IMAGE_BASE_URL + url;

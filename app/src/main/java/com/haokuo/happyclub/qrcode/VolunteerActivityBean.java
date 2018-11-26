@@ -18,4 +18,7 @@ public class VolunteerActivityBean extends OperationBean {
         this.activityId = activityId;
         this.signType = signType;
     }
+
+    public VolunteerActivityBean() {
+    }
 }

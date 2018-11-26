@@ -158,6 +158,7 @@
         <activity android:name=".activity.MyActivityActivity"/>
         <activity android:name=".activity.ScanQrcodeActivity"/>
         <activity android:name=".activity.ClubServiceActivity"/>
+        <activity android:name=".activity.MyCourseActivity"/>
 
     </application>
 

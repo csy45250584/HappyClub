@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.haokuo.happyclub.R;
 import com.haokuo.happyclub.activity.MyActivityActivity;
+import com.haokuo.happyclub.activity.MyCourseActivity;
 import com.haokuo.happyclub.activity.MyRecourseActivity;
 import com.haokuo.happyclub.activity.MyScoreActivity;
 import com.haokuo.happyclub.activity.MyServeActivity;
@@ -91,13 +92,16 @@ public class MeFragment extends BaseLazyLoadFragment {
         mTvUserName.setText(userInfo.getUserName());
     }
 
-    @OnClick({R.id.siv_activity, R.id.siv_my_info, R.id.siv_apply_volunteer, R.id.tv_recommend, R.id.ll_collection, R.id.ll_evaluation, R.id.ll_coupon, R.id.siv_points, R.id.siv_service, R.id.siv_help, R.id.siv_safety_setting, R.id.siv_system_setting})
+    @OnClick({R.id.siv_course, R.id.siv_activity, R.id.siv_my_info, R.id.siv_apply_volunteer, R.id.tv_recommend, R.id.ll_collection, R.id.ll_evaluation, R.id.ll_coupon, R.id.siv_points, R.id.siv_service, R.id.siv_help, R.id.siv_safety_setting, R.id.siv_system_setting})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_recommend:
                 break;
             case R.id.siv_activity:
                 startActivity(new Intent(mContext, MyActivityActivity.class));
+                break;
+            case R.id.siv_course:
+                startActivity(new Intent(mContext, MyCourseActivity.class));
                 break;
             case R.id.ll_collection:
                 break;

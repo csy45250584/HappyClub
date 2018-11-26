@@ -282,7 +282,7 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
                                     HttpHelper.getInstance().updateActivitySign(params, new NetworkCallback() {
                                         @Override
                                         public void onSuccess(Call call, String json) {
-                                            loadSuccess(typeString + "成功");
+                                            loadSuccess(typeString + "成功",false);
                                         }
 
                                         @Override

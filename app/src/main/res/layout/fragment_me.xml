@@ -177,6 +177,14 @@
             app:rightIcon="@drawable/v"/>
 
         <com.haokuo.happyclub.view.SettingItemView
+            android:id="@+id/siv_course"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_54"
+            android:layout_marginTop="@dimen/dp_1"
+            app:leftText="我的课程"
+            app:rightIcon="@drawable/v"/>
+
+        <com.haokuo.happyclub.view.SettingItemView
             android:id="@+id/siv_activity"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_54"

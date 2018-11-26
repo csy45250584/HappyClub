@@ -622,6 +622,11 @@ public class HttpHelper {
         doPost(entity, UrlConfig.GET_COURSE_BY_ID_URL, callback);
     }
 
+    /** 获取我的课程 **/
+    public void getMyCourseList(PageParams entity, NetworkCallback callback) {
+        doPost(entity, UrlConfig.GET_MY_COURSE_LIST, callback);
+    }
+
     /** 根据模块区域id查找相应服务商 **/
     public void getServiceProviderList(GetServiceProviderListParams entity, NetworkCallback callback) {
         doPost(entity, UrlConfig.GET_SERVICE_PROVIDER_LIST_URL, callback);
