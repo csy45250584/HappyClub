@@ -38,7 +38,6 @@ public class ClubServiceProviderFragment extends BaseLazyLoadFragment {
     protected void initData() {
         if (getArguments() != null) {
             mSortId = getArguments().getLong(KEY_SORT_ID);
-            Log.v("MY_CUSTOM_TAG", "ClubServiceProviderFragment initData()-->" + mSortId);
         }
         mRvClubService.setLayoutManager(new LinearLayoutManager(mContext));
         mRvClubService.addItemDecoration(new RecyclerViewDivider(mContext, LinearLayoutManager.HORIZONTAL));

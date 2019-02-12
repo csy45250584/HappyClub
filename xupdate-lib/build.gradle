@@ -1,0 +1,29 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 28
+
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion 28
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+}
+ext {
+    libSupportVersion = '28.0.0'
+}
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "com.android.support:appcompat-v7:${libSupportVersion}"
+    implementation "com.android.support:recyclerview-v7:${libSupportVersion}"
+    implementation "com.android.support:design:${libSupportVersion}"
+    implementation "com.android.support:support-v4:${libSupportVersion}"
+    implementation "com.android.support:cardview-v7:${libSupportVersion}"
+    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'com.alibaba:fastjson:1.2.47'
+}
+

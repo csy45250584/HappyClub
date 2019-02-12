@@ -1,9 +1,7 @@
 package com.haokuo.happyclub.activity;
 
-import android.net.Uri;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,17 +16,13 @@ import com.haokuo.happyclub.bean.UploadPicResultBean;
 import com.haokuo.happyclub.network.EntityCallback;
 import com.haokuo.happyclub.network.HttpHelper;
 import com.haokuo.happyclub.network.NetworkCallback;
+import com.haokuo.happyclub.network.UrlConfig;
 import com.haokuo.happyclub.network.bean.UploadFileParams;
-import com.haokuo.happyclub.util.DirUtil;
 import com.haokuo.happyclub.util.MySpUtil;
 import com.haokuo.happyclub.util.utilscode.ToastUtils;
 import com.haokuo.happyclub.view.TitleEditorView;
 import com.haokuo.midtitlebar.MidTitleBar;
-import com.jph.takephoto.compress.CompressConfig;
-import com.jph.takephoto.model.CropOptions;
 import com.jph.takephoto.model.TResult;
-import com.rey.material.app.BottomSheetDialog;
-import com.rey.material.widget.Button;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -89,6 +83,7 @@ public class ReportSuggestActivity extends BaseTakePhotoActivity {
                     SuggestBean suggestBean = new SuggestBean();
                     suggestBean.setUserId(MySpUtil.getInstance().getUserId());
                     suggestBean.setUserName(name);
+                    suggestBean.setTelphone(tel);
                     suggestBean.setReportContent(content);
                     suggestBean.setPictureurl(mReportImagePath);
                     showLoading("提交投诉中...");
@@ -115,43 +110,12 @@ public class ReportSuggestActivity extends BaseTakePhotoActivity {
         switch (view.getId()) {
             case R.id.iv_suggest_image:
                 //选择图片
-                showBottomSheet();
+                showTakePhotoDialog();
                 break;
         }
     }
 
-    private void showBottomSheet() {
-        final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this, R.style.BottomSheetDialog);
-        View v = LayoutInflater.from(this).inflate(R.layout.view_take_photo, null);
-        Button btnGallery = v.findViewById(R.id.btn_gallery);
-        btnGallery.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                File outFile = new File(DirUtil.getImageDir(), MySpUtil.getInstance().getUserId() + "_" + System.currentTimeMillis() + ".jpg");
-                Uri uri = Uri.fromFile(outFile);
-                CropOptions cropOptions = new CropOptions.Builder().setAspectX(1).setAspectY(1).setWithOwnCrop(true).create();
-                CompressConfig compressConfig = new CompressConfig.Builder().setMaxSize(1024 * 1024).setMaxPixel(1024).create();
-                getTakePhoto().onEnableCompress(compressConfig, true);
-                getTakePhoto().onPickFromGalleryWithCrop(uri, cropOptions);
-                bottomSheetDialog.dismiss();
-            }
-        });
-        Button btnCapture = v.findViewById(R.id.btn_capture);
-        btnCapture.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                File outFile = new File(DirUtil.getImageDir(), MySpUtil.getInstance().getUserId() + "_" + System.currentTimeMillis() + ".jpg");
-                Uri uri = Uri.fromFile(outFile);
-                CropOptions cropOptions = new CropOptions.Builder().setAspectX(1).setAspectY(1).setWithOwnCrop(true).create();
-                CompressConfig compressConfig = new CompressConfig.Builder().setMaxSize(1024 * 1024).setMaxPixel(1024).create();
-                getTakePhoto().onEnableCompress(compressConfig, true);
-                getTakePhoto().onPickFromCaptureWithCrop(uri, cropOptions);
-                bottomSheetDialog.dismiss();
-            }
-        });
-        bottomSheetDialog.contentView(v)
-                .show();
-    }
+
 
     @Override
     public void takeSuccess(TResult result) {
@@ -173,7 +137,7 @@ public class ReportSuggestActivity extends BaseTakePhotoActivity {
                     @Override
                     public void onSuccess(Call call, UploadPicResultBean result) {
                         mReportImagePath = result.getSrc();
-                        Glide.with(ReportSuggestActivity.this).load(mReportImagePath).into(mIvSuggestImage);
+                        Glide.with(ReportSuggestActivity.this).load(UrlConfig.buildImageUrl(mReportImagePath)).into(mIvSuggestImage);
                         loadSuccess("上传成功", false);
                     }
                 });

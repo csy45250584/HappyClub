@@ -272,7 +272,6 @@ public class VolunteerOrderActivity extends BaseActivity {
                 @Override
                 public void onDistanceSearched(DistanceResult distanceResult, int errorCode) {
                     if (errorCode == 1000) {
-                        Log.v("MY_CUSTOM_TAG", "VolunteerOrderActivity onDistanceSearched()-->");
                         for (int i = 0; i < distanceResult.getDistanceResults().size(); i++) {
                             RecourseBean recourseBean = mVolunteerServeAdapter.getData().get(i);
                             if (recourseBean != null) {

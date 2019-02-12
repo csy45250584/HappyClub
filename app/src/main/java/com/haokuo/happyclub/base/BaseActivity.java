@@ -1,6 +1,7 @@
 package com.haokuo.happyclub.base;
 
 import android.app.Activity;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -20,6 +21,11 @@ import org.greenrobot.eventbus.EventBus;
 import butterknife.ButterKnife;
 
 /**
+ * 使用了自定义 LoadingDialog
+ * 使用了自定义 MidTitleBar
+ * 使用了 EventBus
+ * 使用了 ButterKnife
+ *
  * Created by zjf on 2018-07-18.
  */
 
@@ -53,6 +59,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //保持屏幕为竖屏
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(initContentLayout());
         ButterKnife.bind(this);
         initToolbar();

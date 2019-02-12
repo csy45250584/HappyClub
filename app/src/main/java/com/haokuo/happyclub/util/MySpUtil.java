@@ -43,7 +43,6 @@ public class MySpUtil {
     public void saveUserInfo(UserInfoBean userInfoBean) {
         mPersonInfoSp.put(SpConsts.KEY_USER_NAME, userInfoBean.getUserName());
         mPersonInfoSp.put(SpConsts.KEY_BIRTHDAY, userInfoBean.getBirthday());
-        Log.v("MY_CUSTOM_TAG", "MySpUtil saveUserInfo()-->" + userInfoBean.getBirthday());
         mPersonInfoSp.put(SpConsts.KEY_HEAD_PHOTO, userInfoBean.getHeadPhoto());
         mPersonInfoSp.put(SpConsts.KEY_ID_CARD, userInfoBean.getIdCard());
         mPersonInfoSp.put(SpConsts.KEY_REAL_NAME, userInfoBean.getRealname());
@@ -70,10 +69,16 @@ public class MySpUtil {
     public String geTel() {
         return mPersonInfoSp.getString(SpConsts.KEY_TEL);
     }
+
     public void saveTel(String tel) {
-         mPersonInfoSp.put(SpConsts.KEY_TEL,tel);
+        mPersonInfoSp.put(SpConsts.KEY_TEL, tel);
     }
+
     public int getVolunteerStatus() {
         return mPersonInfoSp.getInt(SpConsts.KEY_VOLUNTEER_STATUS);
+    }
+
+    public void saveUpdatePath(String path) {
+        //        mPersonInfoSp.put(SpConsts.KEY_TEL);
     }
 }

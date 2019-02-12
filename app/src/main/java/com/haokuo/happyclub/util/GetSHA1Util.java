@@ -12,7 +12,11 @@ import java.util.Locale;
  * Created by zjf on 2018/8/24.
  */
 public class GetSHA1Util {
-
+    /**
+     * 返回SHA1字符串
+     * @param context
+     * @return
+     */
     public static String sHA1(Context context) {
         try {
             PackageInfo info = context.getPackageManager().getPackageInfo(

@@ -1,0 +1,92 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.xuexiang.xaop' //引用xaop插件
+
+android {
+    compileSdkVersion 28
+
+    defaultConfig {
+        applicationId "com.xuexiang.xupdatedemo"
+        minSdkVersion 19
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+//
+//    if (isNeedPackage.toBoolean()) {
+//        signingConfigs {
+//            release {
+//                storeFile file(app_release.storeFile)
+//                storePassword app_release.storePassword
+//                keyAlias app_release.keyAlias
+//                keyPassword app_release.keyPassword
+//            }
+//        }
+//    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//            if (isNeedPackage.toBoolean()) {
+//                signingConfig signingConfigs.release
+//            }
+        }
+    }
+
+//    if (isNeedPackage.toBoolean()) {
+//        applicationVariants.all { variant ->
+//            variant.outputs.all {
+//                if (variant.buildType.name.equals('release')) {
+//                    outputFileName = "xupdate_demo_${defaultConfig.versionName}.apk"
+//                }
+//            }
+//        }
+//    }
+
+    lintOptions {
+        abortOnError false
+    }
+}
+ext {
+    libSupportVersion = '28.0.0'
+}
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation project(':xupdate-lib')
+    implementation "com.android.support:appcompat-v7:${libSupportVersion}"
+    implementation "com.android.support:recyclerview-v7:${libSupportVersion}"
+    implementation "com.android.support:design:${libSupportVersion}"
+    implementation "com.android.support:support-v4:${libSupportVersion}"
+    implementation "com.android.support:cardview-v7:${libSupportVersion}"
+//    implementation 'com.github.xuexiangjys:XUpdate:1.0.1'
+
+    implementation 'com.github.xuexiangjys.XUtil:xutil-core:1.1.4'
+    implementation 'com.github.xuexiangjys.XUtil:xutil-sub:1.1.4'
+    implementation 'com.github.xuexiangjys.XAOP:xaop-runtime:1.0.1'  //添加依赖
+
+    //XPage
+    implementation 'com.github.xuexiangjys.XPage:xpage-lib:2.2.2'
+    annotationProcessor 'com.github.xuexiangjys.XPage:xpage-compiler:2.2.2'
+    //butterknife的sdk
+    implementation 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    //如果开启了内存泄漏监测leak,就需要加上这个依赖
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
+    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
+    testImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
+
+    //网络请求的实现一
+    implementation 'com.qianwen:okhttp-utils:3.8.0'
+
+    //网络请求的实现二
+    implementation 'com.github.xuexiangjys:XHttp2:1.0.1'
+    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.12'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
+}

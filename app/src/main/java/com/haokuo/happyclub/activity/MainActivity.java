@@ -27,11 +27,14 @@ import com.haokuo.happyclub.fragment.MeFragment;
 import com.haokuo.happyclub.fragment.OrderFragment;
 import com.haokuo.happyclub.network.HttpHelper;
 import com.haokuo.happyclub.network.NetworkCallback;
+import com.haokuo.happyclub.network.UrlConfig;
 import com.haokuo.happyclub.network.bean.UpdateActivitySignParams;
 import com.haokuo.happyclub.qrcode.OperationBean;
 import com.haokuo.happyclub.qrcode.VolunteerActivityBean;
+import com.haokuo.happyclub.update.CustomUpdateParser;
 import com.haokuo.happyclub.util.utilscode.ToastUtils;
 import com.haokuo.midtitlebar.MidTitleBar;
+import com.xuexiang.xupdate.XUpdate;
 import com.xys.libzxing.zxing.activity.CaptureActivity;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -79,6 +82,17 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
         mViewPager.setAdapter(adapter);
         mViewPager.setOffscreenPageLimit(fragments.size()); //设置缓存fragment数量，防止fragment生命周期多次调用
         mViewPager.setCurrentItem(DEFAULT_TAB_POSITION); //设置初始化的位置
+
+    }
+
+    @Override
+    protected void loadData() {
+        //检查软件更新
+        XUpdate.newBuild(this)
+                .updateUrl(UrlConfig.BASE_URL+UrlConfig.GET_VERSION_INFO_URL)
+                .supportBackgroundUpdate(true)
+                .updateParser(new CustomUpdateParser())
+                .update();
     }
 
     @Override
@@ -282,7 +296,7 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
                                     HttpHelper.getInstance().updateActivitySign(params, new NetworkCallback() {
                                         @Override
                                         public void onSuccess(Call call, String json) {
-                                            loadSuccess(typeString + "成功",false);
+                                            loadSuccess(typeString + "成功", false);
                                         }
 
                                         @Override

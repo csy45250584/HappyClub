@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 
 import com.haokuo.happyclub.util.SafeHandler;
 
+import org.greenrobot.eventbus.EventBus;
+
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
@@ -27,6 +29,7 @@ public abstract class BaseFragment extends Fragment {
     private boolean isLazyLoad;
     protected boolean loadDataFinished;
     protected Unbinder unbinder;
+    private boolean mRegisterEventBus;
     protected BaseActivity mContext;
     private Handler.Callback mCallback = new Handler.Callback() {
         @Override
@@ -35,6 +38,10 @@ public abstract class BaseFragment extends Fragment {
             return true;
         }
     };
+
+    protected boolean getRegisterEventBus() {
+        return false;
+    }
 
     /**
      * handler的信息处理，如果使用handler必须重写该方法。
@@ -57,6 +64,9 @@ public abstract class BaseFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(initContentLayout(), null);
         unbinder = ButterKnife.bind(this, rootView);
+        if (mRegisterEventBus) {
+            EventBus.getDefault().register(this);
+        }
         loadDataFinished = false;
         return rootView;
     }
@@ -83,8 +93,6 @@ public abstract class BaseFragment extends Fragment {
 
     protected abstract int initContentLayout();
 
-
-
     /**
      * 是否启用懒加载，此方法仅对BaseLazyLoadFragment有效
      */
@@ -101,6 +109,9 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        if (mRegisterEventBus) {
+            EventBus.getDefault().unregister(this);
+        }
         unbinder.unbind();
     }
 }

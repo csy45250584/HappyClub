@@ -36,7 +36,6 @@ public class MyServeAdapter extends BaseQuickAdapter<RecourseBean, BaseViewHolde
                 helper.setText(R.id.tv_right_button, "去服务");
                 break;
             case 22:
-                Log.v("MY_CUSTOM_TAG", "MyServeAdapter convert()-->" );
                 helper.setText(R.id.tv_review_state, "服务中");
                 helper.setTextColor(R.id.tv_review_state, ContextCompat.getColor(mContext, R.color.colorPrimary));
                 helper.setGone(R.id.tv_right_button, true);

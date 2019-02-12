@@ -9,12 +9,14 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/MidTitleBar" />
+            <option value="$PROJECT_DIR$/XUpdate" />
             <option value="$PROJECT_DIR$/ZxingDemo" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/labels" />
             <option value="$PROJECT_DIR$/libsign" />
             <option value="$PROJECT_DIR$/libzxing" />
             <option value="$PROJECT_DIR$/popwindow" />
+            <option value="$PROJECT_DIR$/xupdate-lib" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

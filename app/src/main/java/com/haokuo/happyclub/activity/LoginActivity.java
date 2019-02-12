@@ -16,15 +16,18 @@ import com.haokuo.happyclub.consts.SpConsts;
 import com.haokuo.happyclub.network.EntityCallback;
 import com.haokuo.happyclub.network.HttpHelper;
 import com.haokuo.happyclub.network.NetworkCallback;
+import com.haokuo.happyclub.network.UrlConfig;
 import com.haokuo.happyclub.network.bean.LoginByTelParams;
 import com.haokuo.happyclub.network.bean.LoginParams;
 import com.haokuo.happyclub.network.bean.base.TelPhoneParams;
+import com.haokuo.happyclub.update.CustomUpdateParser;
 import com.haokuo.happyclub.util.MySpUtil;
 import com.haokuo.happyclub.util.utilscode.RegexUtils;
 import com.haokuo.happyclub.util.utilscode.SPUtils;
 import com.haokuo.happyclub.util.utilscode.ToastUtils;
 import com.rey.material.widget.Button;
 import com.xiasuhuei321.loadingdialog.view.LoadingDialog;
+import com.xuexiang.xupdate.XUpdate;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -135,6 +138,17 @@ public class LoginActivity extends BaseActivity {
     //    }
 
     @Override
+    protected void loadData() {
+        super.loadData();
+        //检查软件更新
+        XUpdate.newBuild(this)
+                .updateUrl(UrlConfig.BASE_URL + UrlConfig.GET_VERSION_INFO_URL)
+                .supportBackgroundUpdate(true)
+                .updateParser(new CustomUpdateParser())
+                .update();
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && data != null) {// 注册成功
@@ -214,7 +228,7 @@ public class LoginActivity extends BaseActivity {
                 applyUiByState();
                 break;
             case R.id.tv_forget_password:
-                startActivity(new Intent(LoginActivity.this,ForgetPasswordActivity.class));
+                startActivity(new Intent(LoginActivity.this, ForgetPasswordActivity.class));
                 break;
         }
     }

@@ -435,7 +435,6 @@ public class CanteenActivity extends BaseActivity implements BaseQuickAdapter.On
                 //        }
         );
         CartFoodsAdapter cartFoodsAdapter = new CartFoodsAdapter(R.layout.item_cart_food);
-        //        ((DefaultItemAnimator) rvCartFoods.getItemAnimator()).setSupportsChangeAnimations(false);
         DefaultItemAnimator itemAnimator = (DefaultItemAnimator) mRvCartFoods.getItemAnimator();
         if (itemAnimator != null) {
             itemAnimator.setSupportsChangeAnimations(false);

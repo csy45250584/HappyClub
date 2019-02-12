@@ -25,11 +25,13 @@ import com.haokuo.happyclub.adapter.ActionAdapter;
 import com.haokuo.happyclub.adapter.ClubServiceAdapter;
 import com.haokuo.happyclub.base.BaseLazyLoadFragment;
 import com.haokuo.happyclub.bean.ActionBean;
+import com.haokuo.happyclub.bean.BannerImagesBean;
 import com.haokuo.happyclub.bean.NewsBean;
 import com.haokuo.happyclub.bean.list.ClubServiceListBean;
 import com.haokuo.happyclub.bean.list.NewsListBean;
 import com.haokuo.happyclub.network.EntityCallback;
 import com.haokuo.happyclub.network.HttpHelper;
+import com.haokuo.happyclub.network.UrlConfig;
 import com.haokuo.happyclub.network.bean.GetHotServiceParams;
 import com.haokuo.happyclub.network.bean.GetNewsListParams;
 import com.haokuo.happyclub.util.GlideImageLoader;
@@ -73,12 +75,12 @@ public class HomeFragment extends BaseLazyLoadFragment {
     protected void initData() {
         //banner设置
         mBannerHome.setImageLoader(new GlideImageLoader());
-        ArrayList<Integer> bannerImages = new ArrayList<>();
-        bannerImages.add(R.drawable.tp1);
-        bannerImages.add(R.drawable.tp2);
-        bannerImages.add(R.drawable.tp3);
-        bannerImages.add(R.drawable.tp4);
-        mBannerHome.setImages(bannerImages);
+        //        ArrayList<Integer> bannerImages = new ArrayList<>();
+        //        bannerImages.add(R.drawable.tp1);
+        //        bannerImages.add(R.drawable.tp2);
+        //        bannerImages.add(R.drawable.tp3);
+        //        bannerImages.add(R.drawable.tp4);
+        //        mBannerHome.setImages(bannerImages);
         mBannerHome.setBannerStyle(BannerConfig.NOT_INDICATOR);
         mBannerHome.start();
         //按钮设置
@@ -101,6 +103,21 @@ public class HomeFragment extends BaseLazyLoadFragment {
 
     @Override
     protected void loadData() {
+        HttpHelper.getInstance().getBannerImages(new EntityCallback<BannerImagesBean>() {
+            @Override
+            public void onFailure(Call call, String message) {
+                ToastUtils.showShort("加载滚动图片失败，" + message);
+            }
+
+            @Override
+            public void onSuccess(Call call, BannerImagesBean result) {
+                ArrayList<String> images = new ArrayList<>();
+                for (String s : result.getImages()) {
+                    images.add(UrlConfig.buildImageUrl(s));
+                }
+                mBannerHome.update(images);
+            }
+        });
         GetNewsListParams params = new GetNewsListParams(null, GetNewsListParams.STATUS_NEWS, null);
         HttpHelper.getInstance().getNewsList(params, new EntityCallback<NewsListBean>() {
             @Override
@@ -152,8 +169,8 @@ public class HomeFragment extends BaseLazyLoadFragment {
         actionBeans.add(new ActionBean("会所服务", R.drawable.q2, ClubServiceActivity.class));
         actionBeans.add(new ActionBean("爱心便民", R.drawable.tbb1, ConvenienceActivity.class));
         actionBeans.add(new ActionBean("幸福食堂", R.drawable.q5, CanteenActivity.class));
-        actionBeans.add(new ActionBean("幸福养老", R.drawable.q6,NursingActivity.class));
-        actionBeans.add(new ActionBean("幸福学堂", R.drawable.q7,SchoolActivity.class));
+        actionBeans.add(new ActionBean("幸福养老", R.drawable.q6, NursingActivity.class));
+        actionBeans.add(new ActionBean("幸福学堂", R.drawable.q7, SchoolActivity.class));
         actionBeans.add(new ActionBean("志愿者服务", R.drawable.tbb2, VolunteerServeActivity.class));
         actionBeans.add(new ActionBean("更多", R.drawable.q8, MoreActionActivity.class));
         mActionAdapter.setNewData(actionBeans);

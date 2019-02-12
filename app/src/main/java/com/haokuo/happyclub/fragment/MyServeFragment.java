@@ -43,7 +43,6 @@ public class MyServeFragment extends BaseLazyLoadFragment {
         if (getArguments() != null) {
             mStatus = (Integer) getArguments().getSerializable(KEY_STATUS);
         }
-        EventBus.getDefault().register(this);
         mRvMyServe.setLayoutManager(new LinearLayoutManager(mContext));
         mRvMyServe.addItemDecoration(new RecyclerViewDivider(mContext, LinearLayoutManager.HORIZONTAL));
         mMyServeAdapter = new MyServeAdapter(R.layout.item_my_serve);
@@ -52,9 +51,8 @@ public class MyServeFragment extends BaseLazyLoadFragment {
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
-        EventBus.getDefault().unregister(this);
+    protected boolean getRegisterEventBus() {
+        return true;
     }
 
     @Subscribe

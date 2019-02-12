@@ -676,4 +676,9 @@ public class HttpHelper {
     public void updateActivitySign(UpdateActivitySignParams entity, NetworkCallback callback) {
         doPost(entity, UrlConfig.UPDATE_ACTIVITY_SIGN_URL, callback);
     }
+
+    /** 获取首页图片 **/
+    public void getBannerImages(NetworkCallback callback) {
+        doPost(null, UrlConfig.GET_BANNER_IMAGES_URL, callback);
+    }
 }

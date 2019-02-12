@@ -1,8 +1,6 @@
 package com.haokuo.happyclub.activity;
 
-import android.net.Uri;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,16 +19,10 @@ import com.haokuo.happyclub.network.NetworkCallback;
 import com.haokuo.happyclub.network.UrlConfig;
 import com.haokuo.happyclub.network.bean.EvaluateOrderParams;
 import com.haokuo.happyclub.network.bean.UploadFileParams;
-import com.haokuo.happyclub.util.DirUtil;
-import com.haokuo.happyclub.util.MySpUtil;
 import com.haokuo.happyclub.util.utilscode.TimeUtils;
 import com.haokuo.happyclub.util.utilscode.ToastUtils;
 import com.haokuo.midtitlebar.MidTitleBar;
-import com.jph.takephoto.compress.CompressConfig;
-import com.jph.takephoto.model.CropOptions;
 import com.jph.takephoto.model.TResult;
-import com.rey.material.app.BottomSheetDialog;
-import com.rey.material.widget.Button;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -136,7 +128,7 @@ public class EvaluateOrderActivity extends BaseTakePhotoActivity {
         switch (view.getId()) {
             case R.id.iv_evaluate_image:
                 //选择图片
-                showBottomSheet();
+                showTakePhotoDialog();
                 break;
             case R.id.iv_delete_image:
                 //选择图片
@@ -147,38 +139,7 @@ public class EvaluateOrderActivity extends BaseTakePhotoActivity {
         }
     }
 
-    private void showBottomSheet() {
-        final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this, R.style.BottomSheetDialog);
-        View v = LayoutInflater.from(this).inflate(R.layout.view_take_photo, null);
-        Button btnGallery = v.findViewById(R.id.btn_gallery);
-        btnGallery.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                File outFile = new File(DirUtil.getImageDir(), MySpUtil.getInstance().getUserId() + "_" + System.currentTimeMillis() + ".jpg");
-                Uri uri = Uri.fromFile(outFile);
-                CropOptions cropOptions = new CropOptions.Builder().setAspectX(1).setAspectY(1).setWithOwnCrop(true).create();
-                CompressConfig compressConfig = new CompressConfig.Builder().setMaxSize(1024 * 1024).setMaxPixel(1024).create();
-                getTakePhoto().onEnableCompress(compressConfig, true);
-                getTakePhoto().onPickFromGalleryWithCrop(uri, cropOptions);
-                bottomSheetDialog.dismiss();
-            }
-        });
-        Button btnCapture = v.findViewById(R.id.btn_capture);
-        btnCapture.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                File outFile = new File(DirUtil.getImageDir(), MySpUtil.getInstance().getUserId() + "_" + System.currentTimeMillis() + ".jpg");
-                Uri uri = Uri.fromFile(outFile);
-                CropOptions cropOptions = new CropOptions.Builder().setAspectX(1).setAspectY(1).setWithOwnCrop(true).create();
-                CompressConfig compressConfig = new CompressConfig.Builder().setMaxSize(1024 * 1024).setMaxPixel(1024).create();
-                getTakePhoto().onEnableCompress(compressConfig, true);
-                getTakePhoto().onPickFromCaptureWithCrop(uri, cropOptions);
-                bottomSheetDialog.dismiss();
-            }
-        });
-        bottomSheetDialog.contentView(v)
-                .show();
-    }
+
 
     @Override
     public void takeSuccess(TResult result) {
