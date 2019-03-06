@@ -181,7 +181,8 @@ public class OKHttpUpdateHttpService implements IUpdateHttpService {
 
             @Override
             public void onProgress(Call call, long progress, long total) {
-                callback.onProgress(progress, total);
+                float rate = progress*1f/total;
+                callback.onProgress(rate, total);
             }
 
             @Override

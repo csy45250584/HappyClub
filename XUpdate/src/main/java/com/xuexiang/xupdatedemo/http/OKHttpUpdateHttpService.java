@@ -18,7 +18,6 @@ package com.xuexiang.xupdatedemo.http;
 
 import android.support.annotation.NonNull;
 
-
 import com.xuexiang.xupdate.proxy.IUpdateHttpService;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.FileCallBack;

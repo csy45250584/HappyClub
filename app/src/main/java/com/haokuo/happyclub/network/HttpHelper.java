@@ -678,7 +678,7 @@ public class HttpHelper {
     }
 
     /** 获取首页图片 **/
-    public void getBannerImages(NetworkCallback callback) {
-        doPost(null, UrlConfig.GET_BANNER_IMAGES_URL, callback);
+    public void getBannerImages(PageParams entity,NetworkCallback callback) {
+        doPost(entity, UrlConfig.GET_BANNER_IMAGES_URL, callback);
     }
 }

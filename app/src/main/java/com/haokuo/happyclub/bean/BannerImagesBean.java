@@ -1,7 +1,5 @@
 package com.haokuo.happyclub.bean;
 
-import java.util.List;
-
 import lombok.Data;
 
 /**
@@ -9,5 +7,5 @@ import lombok.Data;
  */
 @Data
 public class BannerImagesBean {
-    private List<String> images;
+    private String image;
 }

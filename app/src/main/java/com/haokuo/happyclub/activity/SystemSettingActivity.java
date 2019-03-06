@@ -45,6 +45,7 @@ public class SystemSettingActivity extends BaseActivity {
             case R.id.siv_clear_cache:
                 break;
             case R.id.siv_about_us:
+                startActivity(new Intent(SystemSettingActivity.this,AboutActivity.class));
                 break;
             case R.id.btn_logout:
                 clearAllData();

@@ -27,6 +27,7 @@ import com.haokuo.happyclub.base.BaseLazyLoadFragment;
 import com.haokuo.happyclub.bean.ActionBean;
 import com.haokuo.happyclub.bean.BannerImagesBean;
 import com.haokuo.happyclub.bean.NewsBean;
+import com.haokuo.happyclub.bean.list.BannerImageListBean;
 import com.haokuo.happyclub.bean.list.ClubServiceListBean;
 import com.haokuo.happyclub.bean.list.NewsListBean;
 import com.haokuo.happyclub.network.EntityCallback;
@@ -34,6 +35,7 @@ import com.haokuo.happyclub.network.HttpHelper;
 import com.haokuo.happyclub.network.UrlConfig;
 import com.haokuo.happyclub.network.bean.GetHotServiceParams;
 import com.haokuo.happyclub.network.bean.GetNewsListParams;
+import com.haokuo.happyclub.network.bean.base.PageParams;
 import com.haokuo.happyclub.util.GlideImageLoader;
 import com.haokuo.happyclub.util.utilscode.ToastUtils;
 import com.haokuo.happyclub.view.RecyclerViewDivider;
@@ -103,17 +105,18 @@ public class HomeFragment extends BaseLazyLoadFragment {
 
     @Override
     protected void loadData() {
-        HttpHelper.getInstance().getBannerImages(new EntityCallback<BannerImagesBean>() {
+        PageParams bannerParams = new PageParams(6);
+        HttpHelper.getInstance().getBannerImages(bannerParams,new EntityCallback<BannerImageListBean>() {
             @Override
             public void onFailure(Call call, String message) {
                 ToastUtils.showShort("加载滚动图片失败，" + message);
             }
 
             @Override
-            public void onSuccess(Call call, BannerImagesBean result) {
+            public void onSuccess(Call call, BannerImageListBean result) {
                 ArrayList<String> images = new ArrayList<>();
-                for (String s : result.getImages()) {
-                    images.add(UrlConfig.buildImageUrl(s));
+                for (BannerImagesBean s : result.getData()) {
+                    images.add(UrlConfig.buildImageUrl(s.getImage()));
                 }
                 mBannerHome.update(images);
             }
