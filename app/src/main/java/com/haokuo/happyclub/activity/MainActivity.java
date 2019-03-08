@@ -89,7 +89,7 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
     protected void loadData() {
         //检查软件更新
         XUpdate.newBuild(this)
-                .updateUrl(UrlConfig.BASE_URL+UrlConfig.GET_VERSION_INFO_URL)
+                .updateUrl(UrlConfig.BASE_URL + UrlConfig.GET_VERSION_INFO_URL)
                 .supportBackgroundUpdate(true)
                 .updateParser(new CustomUpdateParser())
                 .update();

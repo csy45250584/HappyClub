@@ -310,7 +310,6 @@ public class DownloadService extends Service {
                 if (mOnFileDownloadListener != null) {
                     mOnFileDownloadListener.onProgress(progress, total);
                 }
-
                 if (mBuilder != null) {
                     mBuilder.setContentTitle(getString(R.string.xupdate_lab_downloading) + UpdateUtils.getAppName(DownloadService.this))
                             .setContentText(rate + "%")

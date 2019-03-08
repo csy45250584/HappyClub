@@ -25,8 +25,8 @@ import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.RequiresPermission;
 import android.support.v4.content.FileProvider;
+import android.util.Log;
 
-import com.xuexiang.xupdate.XUpdate;
 import com.xuexiang.xupdate._XUpdate;
 import com.xuexiang.xupdate.utils.ShellUtils.CommandResult;
 
@@ -221,6 +221,7 @@ public final class ApkInstallUtils {
                 return true;
             }
         } catch (Exception e) {
+            Log.v("MY_CUSTOM_TAG", "ApkInstallUtils installNormal()-->" + e.getMessage());
             _XUpdate.onUpdateError(INSTALL_FAILED, "使用系统的意图进行apk安装失败！");
         }
         return false;
@@ -239,10 +240,11 @@ public final class ApkInstallUtils {
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 //区别于 FLAG_GRANT_READ_URI_PERMISSION 跟 FLAG_GRANT_WRITE_URI_PERMISSION， URI权限会持久存在即使重启，直到明确的用 revokeUriPermission(Uri, int) 撤销。 这个flag只提供可能持久授权。但是接收的应用必须调用ContentResolver的takePersistableUriPermission(Uri, int)方法实现
-                intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
+                intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION|Intent.FLAG_ACTIVITY_NEW_TASK);
                 Uri fileUri = FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".updateFileProvider", appFile);
                 intent.setDataAndType(fileUri, "application/vnd.android.package-archive");
             } else {
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.setDataAndType(Uri.fromFile(appFile), "application/vnd.android.package-archive");
             }
             return intent;

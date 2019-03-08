@@ -16,6 +16,8 @@
 
 package com.haokuo.happyclub.update;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.NonNull;
 
 import com.haokuo.happyclub.network.OkDownloadCallBack;
@@ -46,9 +48,11 @@ import okhttp3.Response;
 public class OKHttpUpdateHttpService implements IUpdateHttpService {
 
     private OkHttpClient mClient;
+    private Handler mHandler;
 
     public OKHttpUpdateHttpService() {
         mClient = new OkHttpClient();
+        mHandler = new Handler(Looper.getMainLooper());
     }
 
     @NonNull
@@ -180,9 +184,14 @@ public class OKHttpUpdateHttpService implements IUpdateHttpService {
             }
 
             @Override
-            public void onProgress(Call call, long progress, long total) {
-                float rate = progress*1f/total;
-                callback.onProgress(rate, total);
+            public void onProgress(Call call, long progress, final long total) {
+                final float rate = progress * 1f / total;
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        callback.onProgress(rate, total);
+                    }
+                });
             }
 
             @Override
