@@ -10,8 +10,8 @@ public class UrlConfig {
     //        public static final String BASE_URL = "http://192.168.1.193:9088/xfhsi/";
     //        public static final String IMAGE_BASE_URL = "http://192.168.1.193:9088/xfhs/upload/";
     //公网
-    public static final String BASE_URL = "http://221.12.159.146:9088/xfhsi";
-    public static final String IMAGE_BASE_URL = "http://221.12.159.146:9088/xfhs/upload";
+    public static final String BASE_URL = "http://221.12.159.146:9088/xfhsi/";
+    public static final String IMAGE_BASE_URL = "http://221.12.159.146:9088/xfhs/upload/";
     //花生壳
     //    public static final String BASE_URL = "http://18t69t8992.51mypc.cn:9088/xfhsi/";
     //    public static final String IMAGE_BASE_URL = "http://18t69t8992.51mypc.cn:9088/xfhs/upload/";
